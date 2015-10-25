@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <h1>Hello, Flask!</h1>
+    <h2>Murşit</h2>
+    <h2>Javid</h2>
+	<h2>Ira Shyti</h2>
+	<h2>Ahmet Türk</h2>
+	<ul>
+		<li><a href = "/tournaments">Tournaments List</a>
+		<li><a href = "/history">History</a>
+		<li><a href = "/rules">Rules of Game</a>
+	</ul>
+    <footer>
+      <div id="datetime">{{ current_time }}</div>
+    </footer>
+  </body>
+</html>
