@@ -1,16 +1,17 @@
 import datetime
-import os
 import json
-import re
+import os
 import psycopg2 as dbapi2
+import re
 
 from flask import Flask
-from flask import render_template
 from flask import redirect
+from flask import render_template
 from flask.helpers import url_for
 
 
 app = Flask(__name__)
+
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -22,17 +23,19 @@ def get_elephantsql_dsn(vcap_services):
              dbname='{}'""".format(user, password, host, port, dbname)
     return dsn
 
+
 @app.route('/')
 def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
+
 
 @app.route('/initdb')
 def initialize_database():
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
 
-        query = """DROP TABLE IF EXITS COUNTER"""
+        query = """DROP TABLE IF EXISTS COUNTER"""
         cursor.execute(query)
 
         query = """CREATE TABLE COUNTER (N INTEGER)"""
@@ -43,6 +46,7 @@ def initialize_database():
 
         connection.commit()
     return redirect(url_for('home_page'))
+
 
 @app.route('/count')
 def counter_page():
@@ -58,9 +62,6 @@ def counter_page():
         count = cursor.fetchone()[0]
     return "This page was accessed %d times." % count
 
-@app.route('/tournaments')
-def tournaments_page():
-    return render_template('tournaments.html')
 
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
@@ -74,6 +75,6 @@ if __name__ == '__main__':
         app.config['dsn'] = get_elephantsql_dsn(VCAP_SERVICES)
     else:
         app.config['dsn'] = """user='vagrant' password='vagrant'
-                               host='localhost' port=54321 dbname='itucsdb'"""
+                               host='localhost' port=5432 dbname='itucsdb'"""
 
     app.run(host='0.0.0.0', port=port, debug=debug)
