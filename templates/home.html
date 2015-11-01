@@ -6,17 +6,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <h1>Hello, Flask!</h1>
+  	<nav>
+		<li><a href = "/tournaments">Tournaments List</a></li>
+		<li><a href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+		<li><a href = "/history">History</a></li>
+		<li><a href = "/rules">Rules of Game</a></li>
+		<li><a href = "/count">Count</a></li>
+	</nav>
     <h2>Murşit</h2>
     <h2>Javid</h2>
 	<h2>Ira Shyti</h2>
-	<h2>Ahmet Türk</h2>
-	<ul>
-		<li><a href = "/tournaments">Tournaments List</a>
-		<li><a href = "/history">History</a>
-		<li><a href = "/rules">Rules of Game</a>
-		<li><a href = "/count">Count</a>
-	</ul>
+	<a id="firstname" href = "{{ url_for('localtour_page') }}"><h2>Ahmet Türk</h2></a>
     <footer>
       <div id="datetime">{{ current_time }}</div>
     </footer>

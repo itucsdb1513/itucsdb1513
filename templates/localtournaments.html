@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Local Tournaments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+  	<nav>
+		<li><a href = "{{ url_for('home_page') }}">Home</a></li>
+		<li><a href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+	</nav>
+	<h1>Local Tournaments</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+    		<th>Name</th>
+    		<th>Surname</th>
+    		<th>Win</th>
+    		<th>Lose</th>
+  		</tr>
+		{% for id, name, surname, win, lose in players %}
+		<tr>
+			<td>{{ id }}</td>
+			<td>{{ name }}</td>
+			<td>{{ surname }}</td>
+			<td>{{ win }}</td>
+			<td>{{ lose }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
+		<table>
+			<tr>
+				<th>Name:</th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Win:</th>
+				<td>
+					<input type="text" name="win"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Lose:</th>
+				<td>
+					<input type="text" name="lose"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Add Player" name="addplayer" type="submit"/>
+	</form>
+
+	<div id="divturkah">
+	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+		<table>
+			<tr>
+				<th>Name:</th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Player" name="deleteplayer" type="submit"/>
+	</form>
+
+	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+		<table>
+			<tr>
+				<th>ID:</th>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Player" name="deleteplayerwithid" type="submit"/>
+	</form>
+	</div>
+
+	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
+  </body>
+</html>

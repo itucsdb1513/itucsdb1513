@@ -4,9 +4,11 @@ import os
 import psycopg2 as dbapi2
 import re
 
+from turkah import Turkah
 from flask import Flask
 from flask import redirect
 from flask import render_template
+from flask import request
 from flask.helpers import url_for
 
 
@@ -62,6 +64,28 @@ def counter_page():
         count = cursor.fetchone()[0]
     return "This page was accessed %d times." % count
 
+@app.route('/localtournaments', methods=['GET', 'POST'])
+def localtour_page():
+    page = Turkah(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        win = request.form['win']
+        lose = request.form['lose']
+        return page.add_player(name, surname, win, lose)
+    elif 'deleteplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.delete_player(name, surname)
+    elif 'deleteplayerwithid' in request.form:
+        id = request.form['id']
+        return page.delete_player_with_id(id)
+    else:
+        return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
