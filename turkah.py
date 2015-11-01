@@ -12,6 +12,14 @@ class Turkah:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
+            query = """CREATE TABLE IF NOT EXISTS localplayers (
+                        id serial PRIMARY KEY,
+                        name text NOT NULL,
+                        surname text NOT NULL,
+                        win integer DEFAULT 0,
+                        lose integer DEFAULT 0)"""
+            cursor.execute(query)
+
             query = "SELECT * FROM localplayers"
             cursor.execute(query)
             players = cursor.fetchall()
