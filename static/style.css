@@ -19,3 +19,32 @@ div#datetime {
   font-size: 80%;
   text-align: right;
 }
+
+nav li {
+	display: inline;
+	margin-right: 1em;
+	font-size: 80%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+#firstname {
+	color: #E9601A;
+	text-decoration: underline;
+}
+
+#addturkah {
+	margin-top: 20px;
+	display: inline-table;
+}
+
+#divturkah {
+	display: inline-table;
+	margin-left: 20px;
+}
+
+#delturkah {
+	margin-top: 20px;
+}
