@@ -10,6 +10,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask.helpers import url_for
+from player import Player
 
 
 app = Flask(__name__)
@@ -30,6 +31,14 @@ def get_elephantsql_dsn(vcap_services):
 def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
+
+@app.route('/rankings')
+def rankings_page():
+    player1 = Player('Magnus', 'Carlsen', 'Norway', 'OS Baden Baden', '2850', '1', '25', 'male')
+    player2 = Player('Teymour', 'Radjabov', 'Azerbaijan', 'SOCAR BAKU', '2739', '22', '28', 'male')
+    players = [(1, player1), (2, player2)]
+    now = datetime.datetime.now()
+    return render_template('rankings.html', players = players, current_time = now.ctime())
 
 
 @app.route('/initdb')

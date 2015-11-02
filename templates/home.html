@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body>
-  	<nav>
-		<li><a href = "/tournaments">Tournaments List</a></li>
-		<li><a href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
-		<li><a href = "/history">History</a></li>
-		<li><a href = "/rules">Rules of Game</a></li>
-		<li><a href = "/count">Count</a></li>
-	</nav>
-    <h2>Murşit Sezen</h2>
-    <h2>Javid</h2>
-	<h2>Ira Shyti</h2>
-	<h2>ahmet gülüm</h2>
-	<a id="firstname" href = "{{ url_for('localtour_page') }}"><h2>Ahmet Türk</h2></a>
-    <footer>
-      <div id="datetime">{{ current_time }}</div>
-    </footer>
-  </body>
-</html>
+{%extends "layout.html"%}
+
+{%block title%}Home{%endblock%}
+
+{%block content%}
+        <h1>Home</h1>
+{%endblock%}
