@@ -5,6 +5,15 @@
 {%block content%}
         <h1>Rankings</h1>
         <table>
+        <tr>
+        	<td> Name </td>
+        	<td> Surname </td>
+        	<td> Country </td>
+        	<td> Club </td>
+        	<td> Age </td>
+        	<td> Rating </td>
+        	<td> World Ranking </td>
+        </tr>
         	{% for key, player in players %}
         	<tr>
         		<td>{{player.name}} </td>
