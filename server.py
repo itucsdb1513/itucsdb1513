@@ -111,8 +111,8 @@ def upcoming_events():
         player2 = request.form['player2']
         return page.addevent(date, place, player1, player2)
     elif 'deleteevent' in request.form:
-        date = request.form['date']
-        return page.delete_event(date)
+        number = request.form['number']
+        return page.deleteevent(number)
     else:
         return redirect(url_for('home_page'))
 
