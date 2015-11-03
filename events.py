@@ -48,6 +48,8 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
+
+
     def addevent(self, date, place, player1, player2):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
