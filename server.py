@@ -13,6 +13,7 @@ from flask import request
 from flask.helpers import url_for
 from player import Player
 from rules import Rules
+from ranking import Ranking
 
 
 app = Flask(__name__)
@@ -34,13 +35,32 @@ def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
 
-@app.route('/rankings')
+@app.route('/rankings', methods=['GET', 'POST'])
 def rankings_page():
-    player1 = Player('Magnus', 'Carlsen', 'Norway', 'OS Baden Baden', '2850', '1', '25', 'male')
-    player2 = Player('Teymour', 'Radjabov', 'Azerbaijan', 'SOCAR BAKU', '2739', '22', '28', 'male')
-    players = [(1, player1), (2, player2)]
-    now = datetime.datetime.now()
-    return render_template('rankings.html', players = players, current_time = now.ctime())
+    page = Ranking(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        rating = request.form['rating']
+        ranking = request.form['ranking']
+        age = request.form['age']
+        gender = request.form['gender']
+        return page.add_player(name, surname, country, club, rating, ranking, age, gender)
+    elif 'deleteplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.delete_player(name, surname)
+    elif 'deleteplayerwithid' in request.form:
+        id = request.form['id']
+        return page.delete_player_with_id(id)
+    else:
+        return redirect(url_for('home_page'))
 
 
 @app.route('/initdb')
