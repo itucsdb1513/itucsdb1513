@@ -10,7 +10,7 @@
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
 
-        
+
         <table>
         <tr>
         	<th> ID </th>
@@ -21,6 +21,7 @@
         	<th> Age </th>
         	<th> Rating </th>
         	<th> World Ranking </th>
+        	<th> Gender </th>
         </tr>
         	{% for id, name, surname,country, club, rating, ranking, age, gender in players %}
         	<tr>
@@ -32,6 +33,7 @@
         		<td> {{age}} </td>
         		<td> {{rating}}</td>
         		<td> {{ranking}}</td>
+        		<td> {{gender}}</td>
         	</tr>
         	{%endfor%}
         </table>
@@ -157,5 +159,5 @@
 		<input value="Delete Player" name="deleteplayerwithid" type="submit"/>
 	</form>
 	</div>
-	
+
 {%endblock%}
