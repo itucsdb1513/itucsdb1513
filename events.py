@@ -61,14 +61,18 @@ class event:
         return redirect(url_for('upcoming_events'))
 
 
-    def deleteevent(self, number):
+    def deleteevent(self, date):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DELETE FROM events WHERE number = %s """ % (number)
+            query = """DELETE FROM events WHERE date = '%s' """ % (date)
             cursor.execute(query)
 
             connection.commit()
         return redirect(url_for('upcoming_events'))
+
+
+
+
 
 
