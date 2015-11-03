@@ -53,3 +53,24 @@ table, th, td {
 	margin-top: 25px;
 	display: inline-table;
 }
+
+
+#rules {
+	color: #E9601A;
+	margin-top: 50px;
+
+}
+
+#divrules {
+	color: #00CC00;
+	display: inline-table;
+	margin-left: 100px;
+}
+
+#delrules {
+	color: #00CC00;
+	margin-top: 100px;
+}
+#thecolor {
+	color: #00CC00;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Rules of Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+  	<nav>
+		<a href = "{{ url_for('home_page') }}">Home</a>
+		<li><a href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+		<li><a href = "{{ url_for('rankings_page') }}">Rankings</a></li>
+		<li><a href = "/tournaments">Tournaments List</a></li>
+		<li><a href = "/history">History</a></li>
+		<li><a href = "{{ url_for('rules_page') }}">Rules of Game</a></li>
+		<li><a href = "/count">Count</a></li>
+
+	</nav>
+	<h1>Pieces</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Piece Name</th>
+    		<th>Piece Rule</th>
+    		<th>Special Move</th>
+
+  		</tr>
+		{% for id, piece_name, piece_rule, special_move in rules %}
+		<tr>
+			<td>{{ id }}</td>
+			<td>{{ piece_name }}</td>
+			<td>{{ piece_rule }}</td>
+			<td>{{ special_move }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<form id="rules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>Piece Name:</th>
+				<td>
+					<input type="text" name="piece_name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Piece Rule:</th>
+				<td>
+					<input type="text" name="piece_rule"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Special Move</th>
+				<td>
+					<input type="text" name="special_move"/>
+				</td>
+			</tr>
+
+		</table>
+		<input value="Add Piece" name="addpiece" type="submit"/>
+	</form>
+
+	<div id="divrules">
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>Piece Name:</th>
+				<td>
+					<input type="text" name="piece_name"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Piece" name="deletepiece" type="submit"/>
+	</form>
+
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>ID:</th>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Piece" name="deletepiecewithid" type="submit"/>
+	</form>
+	</div>
+
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
+
+	<footer>
+<div id="datetime">{{ current_time }}</div> </footer>
+
+  </body>
+</html>

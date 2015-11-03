@@ -12,6 +12,7 @@ from flask import render_template
 from flask import request
 from flask.helpers import url_for
 from player import Player
+from rules import Rules
 
 
 app = Flask(__name__)
@@ -58,6 +59,31 @@ def initialize_database():
 
         connection.commit()
     return redirect(url_for('home_page'))
+
+
+
+@app.route('/rules', methods=['GET', 'POST'])
+def rules_page():
+    page = Rules(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addpiece' in request.form:
+        piece_name = request.form['piece_name']
+        piece_rule = request.form['piece_rule']
+        special_move = request.form['special_move']
+        return page.add_piece(piece_name, piece_rule, special_move)
+    elif 'deletepiece' in request.form:
+        piece_name = request.form['piece_name']
+        return page.delete_piece(piece_name)
+    elif 'deletepiecewithid' in request.form:
+        id = request.form['id']
+        return page.delete_piece_with_id(id)
+    else:
+        return redirect(url_for('home_page'))
+
+
 
 
 @app.route('/count')
