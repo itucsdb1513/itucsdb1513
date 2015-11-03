@@ -89,5 +89,3 @@ class Ranking:
 
             connection.commit()
         return redirect(url_for('rankings_page'))
-        
-        
