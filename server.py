@@ -5,6 +5,7 @@ import psycopg2 as dbapi2
 import re
 
 from turkah import Turkah
+from events import event
 from flask import Flask
 from flask import redirect
 from flask import render_template
@@ -93,6 +94,25 @@ def localtour_page():
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
+    else:
+        return redirect(url_for('home_page'))
+
+@app.route('/upcoming_events', methods=['GET', 'POST'])
+def upcoming_events():
+    page = event(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addevent' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        player1 = request.form['player1']
+        player2 = request.form['player2']
+        return page.addevent(date, place, player1, player2)
+    elif 'deleteevent' in request.form:
+        number = request.form['number']
+        return page.delete_event(number)
     else:
         return redirect(url_for('home_page'))
 

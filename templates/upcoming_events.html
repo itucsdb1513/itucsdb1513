@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Upcoming Events</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+  	<nav>
+		<a href = "{{ url_for('home_page') }}">Home</a>
+  	 	<a href = "{{ url_for('localtour_page') }}">Local Tournaments</a>
+  		 <a href = "{{ url_for('rankings_page') }}">Rankings</a>
+  		 <a href = "{{ url_for('upcoming_events') }}">Upcoming Events</a>
+  		 <a href = "/tournaments">Tournaments List</a>
+  		 <a href = "/count">Count</a>
+	</nav>
+	<h1>Upcoming Events</h1>
+	<table>
+		<tr>
+			<th>Number</th>
+			<th>Date</th>
+    		<th>Place</th>
+    		<th>Player 1</th>
+    		<th>Player 2</th>
+  		</tr>
+		{% for number, date, place, player1, player2 in events %}
+		<tr>
+			<td>{{ number }}</td>
+			<td>{{ date }}</td>
+			<td>{{ place }}</td>
+			<td>{{ player1 }}</td>
+			<td>{{ player2 }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<form id="addira" action="{{ url_for('upcoming_events') }}" method="post">
+		<table>
+			<tr>
+				<th>Date:</th>
+				<td>
+					<input type="text" name="date"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Place:</th>
+				<td>
+					<input type="text" name="place"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Player1:</th>
+				<td>
+					<input type="text" name="player1"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Player2:</th>
+				<td>
+					<input type="text" name="player2"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Add Event" name="addevent" type="submit"/>
+	</form>
+
+	<div id="divturkah">
+
+	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+		<table>
+			<tr>
+				<th>Number:</th>
+				<td>
+					<input type="text" name="number"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Event" name="deleteevent" type="submit"/>
+	</form>
+	</div>
+
+	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
+  </body>
+</html>
