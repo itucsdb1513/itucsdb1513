@@ -124,7 +124,10 @@ def counter_page():
 def localtour_page():
     page = Turkah(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_page()
+        try:
+            return page.open_page()
+        except:
+            return page.init_table()
     elif 'initializeTable' in request.form:
         return page.init_table()
     elif 'addplayer' in request.form:
@@ -132,7 +135,13 @@ def localtour_page():
         surname = request.form['surname']
         win = request.form['win']
         lose = request.form['lose']
-        return page.add_player(name, surname, win, lose)
+        draw = request.form['draw']
+        return page.add_player(name, surname, win, lose, draw)
+    elif 'addgame' in request.form:
+        playerone = request.form['playerone']
+        playertwo = request.form['playertwo']
+        result = request.form['result']
+        return page.add_game(playerone, playertwo, result)
     elif 'deleteplayer' in request.form:
         name = request.form['name']
         surname = request.form['surname']
@@ -140,6 +149,9 @@ def localtour_page():
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
+    elif 'deletegame' in request.form:
+        id = request.form['id']
+        return page.delete_game(id)
     else:
         return redirect(url_for('home_page'))
 

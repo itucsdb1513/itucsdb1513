@@ -11,25 +11,20 @@ class Turkah:
     def open_page(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
-            query = """CREATE TABLE IF NOT EXISTS localplayers (
-                        id serial PRIMARY KEY,
-                        name text NOT NULL,
-                        surname text NOT NULL,
-                        win integer DEFAULT 0,
-                        lose integer DEFAULT 0)"""
-            cursor.execute(query)
-
             query = "SELECT * FROM localplayers"
             cursor.execute(query)
             players = cursor.fetchall()
-        return render_template('localtournaments.html', players = players)
+            query = "SELECT * FROM localgames"
+            cursor.execute(query)
+            games = cursor.fetchall()
+        return render_template('localtournaments.html', players = players, games = games)
 
     def init_table(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS localplayers"""
+            query = """DROP TABLE IF EXISTS localgames;
+                       DROP TABLE IF EXISTS localplayers;"""
             cursor.execute(query)
 
             query = """CREATE TABLE localplayers (
@@ -37,26 +32,49 @@ class Turkah:
                         name text NOT NULL,
                         surname text NOT NULL,
                         win integer DEFAULT 0,
-                        lose integer DEFAULT 0)"""
+                        lose integer DEFAULT 0,
+                        draw integer DEFAULt 0);
+                       CREATE TABLE localgames (
+                        id serial PRIMARY KEY,
+                        playerone integer NOT NULL references localplayers(id),
+                        playertwo integer NOT NULL references localplayers(id),
+                        result integer NOT NULL);"""
             cursor.execute(query)
 
-            query = """INSERT INTO localplayers (name, surname, win, lose)
-                        VALUES
-                        ('MUSTAFA', 'ALP', 3, 1),
-                        ('EKMEL', 'UYAR', 2, 2),
-                        ('MERT', 'BAYKARA', 1, 3)"""
+            query = """INSERT INTO localplayers (name, surname, win, lose, draw)
+                         VALUES
+                          ('MUSTAFA', 'ALP', 23, 12, 4),
+                          ('EKMEL', 'UYAR', 36, 2, 1),
+                          ('MERT', 'BAYKARA', 10, 26, 3);
+                       INSERT INTO localgames (playerone, playertwo, result)
+                         VALUES
+                          (1, 2, 1),
+                          (2, 3, 2),
+                          (1, 3, 0);"""
             cursor.execute(query)
 
             connection.commit()
         return redirect(url_for('localtour_page'))
 
-    def add_player(self, name, surname, win, lose):
+    def add_player(self, name, surname, win, lose, draw):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """INSERT INTO localplayers (name, surname, win, lose)
+            query = """INSERT INTO localplayers (name, surname, win, lose, draw)
                         VALUES
-                        ('%s', '%s', %s, %s)""" % (name, surname, win, lose)
+                        ('%s', '%s', %s, %s, %s)""" % (name, surname, win, lose, draw)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('localtour_page'))
+    
+    def add_game(self, playerone, playertwo, result):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO localgames (playerone, playertwo, result)
+                        VALUES
+                        (%s, %s, %s)""" % (playerone, playertwo, result)
             cursor.execute(query)
 
             connection.commit()
@@ -77,7 +95,17 @@ class Turkah:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DELETE FROM localplayers WHERE id = '%s' """ % (id)
+            query = """DELETE FROM localplayers WHERE id = %s """ % (id)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('localtour_page'))
+    
+    def delete_game(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """DELETE FROM localgames WHERE id = %s """ % (id)
             cursor.execute(query)
 
             connection.commit()
