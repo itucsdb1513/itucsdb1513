@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Local Tournaments</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body>
-  	<nav>
-		<li><a href = "{{ url_for('home_page') }}">Home</a></li>
-		<li><a href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
-	</nav>
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
 	<h1>Local Tournaments</h1>
 	<h2>Local Players</h2>
 	<table>
@@ -161,5 +152,4 @@
 	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
-  </body>
-</html>
+{% endblock %}
