@@ -121,6 +121,12 @@ def rules_page():
         made_by = request.form['made_by']
         date = request.form['date']
         return page.update_rules(id, the_rule, made_by, date)
+    elif 'updatepieces' in request.form:
+        id = request.form['id']
+        piece_name = request.form['piece_name']
+        piece_rule = request.form['piece_rule']
+        special_move = request.form['special_move']
+        return page.update_pieces(id, piece_name, piece_rule, special_move)
     else:
         return redirect(url_for('home_page'))
 

@@ -138,3 +138,18 @@ class Rules:
 
 
         return redirect(url_for('rules_page'))
+
+    def update_pieces(self, id, piece_name, piece_rule, special_move):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE pieces
+                        SET piece_name = '%s', piece_rule = '%s',
+                            special_move = %s
+                        WHERE id = %s""" % (piece_name, piece_rule, special_move, id)
+
+            cursor.execute(query)
+            connection.commit()
+
+
+        return redirect(url_for('rules_page'))

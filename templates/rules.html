@@ -87,6 +87,41 @@
 	</form>
 	</div>
 
+
+	<div>
+		  <form id="divrules" action="{{ url_for('rules_page') }}" method="post" >
+		  <table>
+			<tr>
+				<th>ID:</th>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Piece Name:</th>
+				<td>
+					<input type="text" name="piece_name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Rule</th>
+				<td>
+					<input type="text" name="piece_rule"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Special Move</th>
+				<td>
+					<input type="text" name=special_move/>
+				</td>
+			</tr>
+		</table>
+		<input value="Update" name="updatepieces" type="submit"/>
+		  </form>
+
+		</div>
+
+
 	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
@@ -163,7 +198,7 @@
 	</div>
 
 	<div>
-		  <form id="delrules" action="{{ url_for('rules_page') }}" method="post" >
+		  <form id="divrules" action="{{ url_for('rules_page') }}" method="post" >
 		  <table>
 			<tr>
 				<th>ID:</th>
