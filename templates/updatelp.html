@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
+	<form id="addturkah" action="{{ url_for('updatelp_page', key=player[0]) }}" method="post">
+		<table>
+			<tr>
+				<th>Name:</th>
+				<td>
+					<input type="text" name="name" value="{{ player[1] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname" value="{{ player[2] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Win:</th>
+				<td>
+					<input type="text" name="win" value="{{ player[3] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Lose:</th>
+				<td>
+					<input type="text" name="lose" value="{{ player[4] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Draw:</th>
+				<td>
+					<input type="text" name="draw" value="{{ player[5] }}"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Update Player" name="updateplayer" type="submit"/>
+	</form>
+{% endblock %}

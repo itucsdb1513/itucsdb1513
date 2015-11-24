@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Win</th>
+				<th>Lose</th>
+				<th>Draw</th>
+			</tr>
+			{% for id, name, surname, win, lose, draw in player %}
+			<tr>
+				<td>{{ id }}</td>
+				<td><a href="{{ url_for('updatelp_page', key=id) }}">{{ name }}</a></td>
+				<td>{{ surname }}</td>
+				<td>{{ win }}</td>
+				<td>{{ lose }}</td>
+				<td>{{ draw }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endblock %}

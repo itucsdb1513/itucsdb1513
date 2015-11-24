@@ -37,12 +37,12 @@ table, th, td {
 
 #addturkah {
 	margin-top: 20px;
+	margin-right: 10px;
 	display: inline-table;
 }
 
 #divturkah {
 	display: inline-table;
-	margin-left: 20px;
 }
 
 #delturkah {

@@ -135,9 +135,20 @@ def counter_page():
     return "This page was accessed %d times." % count
 
 @app.route('/localtournaments', methods=['GET', 'POST'])
-def localtour_page():
+@app.route('/localtournaments/<int:key>/', methods=['GET', 'POST'])
+def localtour_page(key = None):
     page = Turkah(dsn = app.config['dsn'])
-    if request.method == 'GET':
+    if key == 1:
+        return page.open_page("name")
+    elif key == 2:
+        return page.open_page("surname")
+    elif key == 3:
+        return page.open_page("win DESC")
+    elif key == 4:
+        return page.open_page("lose DESC")
+    elif key == 5:
+        return page.open_page("draw DESC")
+    elif request.method == 'GET':
         try:
             return page.open_page()
         except:
@@ -166,9 +177,50 @@ def localtour_page():
     elif 'deletegame' in request.form:
         id = request.form['id']
         return page.delete_game(id)
+    elif 'findplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.find_player(name, surname)
+    elif 'findplayerwithid' in request.form:
+        id = request.form['id']
+        return page.find_player_with_id(id)
+    elif 'findgamebyid' in request.form:
+        id = request.form['id']
+        return page.find_game_by_id(id)
+    elif 'findgamebyplayer' in request.form:
+        id = request.form['id']
+        return page.find_game_by_player(id)
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/updatelp/<int:key>/', methods=['GET', 'POST'])
+def updatelp_page(key = None):
+    page = Turkah(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatelp(id = key)
+    elif 'updateplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        win = request.form['win']
+        lose = request.form['lose']
+        draw = request.form['draw']
+        return page.update_player(key, name, surname, win, lose, draw)
+    else:
+        return redirect(url_for('home_page'))
+    
+@app.route('/updatelg/<int:key>/', methods=['GET', 'POST'])
+def updatelg_page(key = None):
+    page = Turkah(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatelg(id = key)
+    elif 'updategame' in request.form:
+        playerone = request.form['playerone']
+        playertwo = request.form['playertwo']
+        result = request.form['result']
+        return page.update_game(key, playerone, playertwo, result)
+    else:
+        return redirect(url_for('home_page'))
+    
 @app.route('/upcoming_events', methods=['GET', 'POST'])
 def upcoming_events():
     page = event(dsn = app.config['dsn'])
@@ -222,3 +274,4 @@ if __name__ == '__main__':
                                host='localhost' port=5432 dbname='itucsdb'"""
 
     app.run(host='0.0.0.0', port=port, debug=debug)
+    
