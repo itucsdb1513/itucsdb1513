@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
+	<form id="addturkah" action="{{ url_for('updatelg_page', key=game[0]) }}" method="post">
+		<table>
+			<tr>
+				<th>PlayerOne:</th>
+				<td>
+					<select name="playerone">
+		        		{% for id, name, surname in players %}
+		        		<option {% if game[1] == id %}selected{% endif %}
+		        		value="{{ id }}">{{ id }} {{ name }} {{ surname }}</option>
+		       			{% endfor %}
+          			</select>
+				</td>
+			</tr>
+			<tr>
+				<th>PlayerTwo:</th>
+				<td>
+					<select name="playertwo">
+		        		{% for id, name, surname in players %}
+		        		<option {% if game[2] == id %}selected{% endif %}
+		        		value="{{ id }}">{{ id }} {{ name }} {{ surname }}</option>
+		       			{% endfor %}
+          			</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Result:</th>
+				<td>
+					<select name="result">
+           				<option {% if game[3] == 1 %}selected{% endif %} value="1">PlayerOne Wins</option>
+           				<option {% if game[3] == 2 %}selected{% endif %} value="2">PlayerTwo Wins</option>
+           				<option {% if game[3] == 3 %}selected{% endif %} value="0">Draw</option>
+           			</select>
+				</td>
+			</tr>
+		</table>
+		<input value="Update Game" name="updategame" type="submit"/>
+	</form>
+{% endblock %}

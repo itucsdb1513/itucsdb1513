@@ -1,155 +1,196 @@
 {% extends "layout.html" %}
 {% block title %}Local Tournaments{% endblock %}
 {% block content %}
-	<h1>Local Tournaments</h1>
-	<h2>Local Players</h2>
-	<table>
-		<tr>
-			<th>ID</th>
-    		<th>Name</th>
-    		<th>Surname</th>
-    		<th>Win</th>
-    		<th>Lose</th>
-    		<th>Draw</th>
-  		</tr>
-		{% for id, name, surname, win, lose, draw in players %}
-		<tr>
-			<td>{{ id }}</td>
-			<td>{{ name }}</td>
-			<td>{{ surname }}</td>
-			<td>{{ win }}</td>
-			<td>{{ lose }}</td>
-			<td>{{ draw }}</td>
-		</tr>
-		{% endfor %}
-	</table>
+  <h1>Local Tournaments</h1>
+  <div style="display: table; margin: 0 auto;">
+  <div style="display: inline-flex; width: 100%">
+  <div style="float:left;">
+  <h2>Local Players</h2>
+  <p>Click on the name of player to update<br></p>
+  <p>Find player by name or surname or both or id</p>
+  <table>
+    <tr>
+      <th>ID</th>
+        <th><a href="{{ url_for('localtour_page', key=1) }}">Name</a></th>
+        <th><a href="{{ url_for('localtour_page', key=2) }}">Surname</a></th>
+        <th><a href="{{ url_for('localtour_page', key=3) }}">Win</a></th>
+        <th><a href="{{ url_for('localtour_page', key=4) }}">Lose</a></th>
+        <th><a href="{{ url_for('localtour_page', key=5) }}">Draw</a></th>
+      </tr>
+    {% for id, name, surname, win, lose, draw in players %}
+    <tr>
+      <td>{{ id }}</td>
+      <td><a href="{{ url_for('updatelp_page', key=id) }}">{{ name }}</a></td>
+      <td>{{ surname }}</td>
+      <td>{{ win }}</td>
+      <td>{{ lose }}</td>
+      <td>{{ draw }}</td>
+    </tr>
+    {% endfor %}
+  </table>
 
-	<form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<table>
-			<tr>
-				<th>Name:</th>
-				<td>
-					<input type="text" name="name"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Surname:</th>
-				<td>
-					<input type="text" name="surname"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Win:</th>
-				<td>
-					<input type="text" name="win"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Lose:</th>
-				<td>
-					<input type="text" name="lose"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Draw:</th>
-				<td>
-					<input type="text" name="draw"/>
-				</td>
-			</tr>
-		</table>
-		<input value="Add Player" name="addplayer" type="submit"/>
-	</form>
+  <form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>Name:</th>
+        <td>
+          <input type="text" name="name"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Surname:</th>
+        <td>
+          <input type="text" name="surname"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Win:</th>
+        <td>
+          <input type="text" name="win"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Lose:</th>
+        <td>
+          <input type="text" name="lose"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Draw:</th>
+        <td>
+          <input type="text" name="draw"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Add Player" name="addplayer" type="submit"/>
+  </form>
 
-	<div id="divturkah">
-	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<table>
-			<tr>
-				<th>Name:</th>
-				<td>
-					<input type="text" name="name"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Surname:</th>
-				<td>
-					<input type="text" name="surname"/>
-				</td>
-			</tr>
-		</table>
-		<input value="Delete Player" name="deleteplayer" type="submit"/>
-	</form>
+  <div id="divturkah">
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>Name:</th>
+        <td>
+          <input type="text" name="name"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Surname:</th>
+        <td>
+          <input type="text" name="surname"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Delete Player" name="deleteplayer" type="submit"/>
+    <input value="Find Player" name="findplayer" type="submit"/>
+  </form>
 
-	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<table>
-			<tr>
-				<th>ID:</th>
-				<td>
-					<input type="text" name="id"/>
-				</td>
-			</tr>
-		</table>
-		<input value="Delete Player" name="deleteplayerwithid" type="submit"/>
-	</form>
-	</div>
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>ID:</th>
+        <td>
+          <input type="text" name="id"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Delete Player" name="deleteplayerwithid" type="submit"/>
+    <input value="Find Player" name="findplayerwithid" type="submit"/>
+  </form>
+  </div>
+  </div>
 	
-	<h2>Local Games</h2>
-	<p>1 = PlayerOne Wins<br>2 = PlayerTwo Wins<br>0 = Draw</p>
-	<table>
-		<tr>
-			<th>ID</th>
-    		<th>PlayerOne</th>
-    		<th>PlayerTwo</th>
-    		<th>Result</th>
-  		</tr>
-		{% for id, playerone, playertwo, result in games %}
-		<tr>
-			<td>{{ id }}</td>
-			<td>{{ playerone }}</td>
-			<td>{{ playertwo }}</td>
-			<td>{{ result }}</td>
-		</tr>
-		{% endfor %}
-	</table>
+  <div style="background-color: #E9601A; width: 1px; margin-left:5px; margin-right:5px;"></div>
 	
-	<form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<table>
-			<tr>
-				<th>PlayerOne:</th>
-				<td>
-					<input type="text" name="playerone"/>
-				</td>
-			</tr>
-			<tr>
-				<th>PlayerTwo:</th>
-				<td>
-					<input type="text" name="playertwo"/>
-				</td>
-			</tr>
-			<tr>
-				<th>Result:</th>
-				<td>
-					<input type="text" name="result"/>
-				</td>
-			</tr>
-		</table>
-		<input value="Add Game" name="addgame" type="submit"/>
-	</form>
+  <div style="float:right;">
+  <h2>Local Games</h2>
+  <p>Click on the id of game to update<br></p>
+  <p>1 = PlayerOne Wins, 2 = PlayerTwo Wins, 0 = Draw</p>
+  <div style="display: flex;">
+    <table >
+      <tr>
+        <th>ID</th>
+          <th>PlayerOne</th>
+          <th>PlayerTwo</th>
+          <th>Result</th>
+        </tr>
+      {% for id, playerone, playertwo, result in games %}
+      <tr>
+        <td><a href="{{ url_for('updatelg_page', key=id) }}">{{ id }}</td>
+        <td>{{ playerone }}</td>
+        <td>{{ playertwo }}</td>
+        <td>{{ result }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-	<div id="divturkah">
-	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<table>
-			<tr>
-				<th>ID:</th>
-				<td>
-					<input type="text" name="id"/>
-				</td>
-			</tr>
-		</table>
-		<input value="Delete Game" name="deletegame" type="submit"/>
-	</form>
-	</div>
+  <form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>PlayerOne:</th>
+        <td>
+          <select name="playerone">
+	        {% for id, name, surname, win, lose, draw in players %}
+	        <option value="{{ id }}">{{ id }} {{ name }} {{ surname }}</option>
+	        {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>PlayerTwo:</th>
+        <td>
+          <select name="playertwo">
+          	{% for id, name, surname, win, lose, draw in players %}
+           	<option value="{{ id }}">{{ id }} {{ name }} {{ surname }}</option>
+            {% endfor %}
+           </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Result:</th>
+        <td>
+          <select name="result">
+           	<option value="1">PlayerOne Wins</option>
+           	<option value="2">PlayerTwo Wins</option>
+           	<option value="0">Draw</option>
+           </select>
+        </td>
+      </tr>
+    </table>
+    <input value="Add Game" name="addgame" type="submit"/>
+  </form>
 
-	<form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-		<input value="Initialize Table" name="initializeTable" type="submit"/>
-	</form>
+  <div id="divturkah">
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>Game ID:</th>
+        <td>
+          <input type="text" name="id"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Delete Game" name="deletegame" type="submit"/>
+    <input value="Find Game" name="findgamebyid" type="submit"/>
+  </form>
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>Player ID:</th>
+        <td>
+          <input type="text" name="id"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Find Game" name="findgamebyplayer" type="submit"/>
+  </form>
+  </div>
+  </div>
+  </div>
+  
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <input value="Initialize Table" name="initializeTable" type="submit"/>
+  </form>
+  </div>
 {% endblock %}
