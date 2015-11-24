@@ -17,6 +17,7 @@
 
 	</nav>
 	<h1>Pieces</h1>
+	<h2>Add, Delete Pieces</h2>
 	<table>
 		<tr>
 			<th>ID</th>
@@ -50,7 +51,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>Special Move</th>
+				<th>Special Move:</th>
 				<td>
 					<input type="text" name="special_move"/>
 				</td>
@@ -89,6 +90,82 @@
 	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
+
+
+		<h2>History of Rules of Chess</h2>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>The Rule</th>
+    		<th>Made by</th>
+    		<th>Date</th>
+
+  		</tr>
+		{% for id, the_rule, made_by, date in the_rules %}
+		<tr>
+			<td>{{ id }}</td>
+			<td>{{ the_rule }}</td>
+			<td>{{ made_by }}</td>
+			<td>{{ date }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<form id="rules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>The Rule:</th>
+				<td>
+					<input type="text" name="the_rule"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Made by:</th>
+				<td>
+					<input type="text" name="made_by"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Date:</th>
+				<td>
+					<input type="text" name="date"/>
+				</td>
+			</tr>
+
+		</table>
+		<input value="Add Rule" name="addrule" type="submit"/>
+	</form>
+
+	<div id="divrules">
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>The Rule:</th>
+				<td>
+					<input type="text" name="the_rule"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Rule" name="deleterule" type="submit"/>
+	</form>
+
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<table>
+			<tr>
+				<th>ID:</th>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Rule" name="deleterulewithid" type="submit"/>
+	</form>
+	</div>
+
+	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
+
 
 	<footer>
 <div id="datetime">{{ current_time }}</div> </footer>
