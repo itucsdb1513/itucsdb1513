@@ -149,7 +149,10 @@ def localtour_page(key = None):
     elif key == 5:
         return page.open_page("draw DESC")
     elif request.method == 'GET':
-        return page.open_page()
+        try:
+            return page.open_page()
+        except:
+            return page.init_table()
     elif 'initializeTable' in request.form:
         return page.init_table()
     elif 'addplayer' in request.form:
