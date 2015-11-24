@@ -15,7 +15,7 @@ from player import Player
 from rules import Rules
 from ranking import Ranking
 from history import facts
-
+from player_info import Player_info
 
 app = Flask(__name__)
 
@@ -63,6 +63,34 @@ def rankings_page():
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/worldplayers_info', methods=['GET', 'POST'])
+def players_page():
+    page = Player_info(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        best_rating = request.form['best_rating']
+        best_ranking = request.form['best_ranking']
+        best_tournament = request.form['best_tournament']
+        best_tournament_result = request.form['best_tournament_result']
+        curr_rating = request.form['curr_rating']
+        curr_ranking = request.form['curr_ranking']
+        return page.add_player(name, surname, country, club, best_rating, best_ranking, best_tournament_result, curr_rating, curr_ranking)
+    elif 'deleteplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.delete_player(name, surname)
+    elif 'deleteplayerwithid' in request.form:
+        id = request.form['id']
+        return page.delete_player_with_id(id)
+    else:
+        return redirect(url_for('home_page'))
 
 @app.route('/initdb')
 def initialize_database():
