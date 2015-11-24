@@ -297,6 +297,11 @@ def history():
     elif 'deletefact' in request.form:
         number = request.form['number']
         return page.deletefact(number)
+    elif 'updaterfact' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        fact = request.form['fact']
+        return page.update_rules(date, place, fact)
     else:
         return redirect(url_for('home_page'))
 

@@ -70,3 +70,15 @@ class facts:
 
             connection.commit()
         return redirect(url_for('history'))
+
+    def updatefact(self, date, place, fact):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE history
+                        SET date = '%s', place = '%s',
+                            fact = %s
+                        WHERE id = %s""" % (date, place, fact)
+
+            cursor.execute(query)
+            connection.commit()
