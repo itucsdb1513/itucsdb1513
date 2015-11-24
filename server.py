@@ -86,7 +86,10 @@ def initialize_database():
 def rules_page():
     page = Rules(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_page()
+        try:
+            return page.open_page()
+        except:
+            return page.init_table()
     elif 'initializeTable' in request.form:
         return page.init_table()
     elif 'addpiece' in request.form:
@@ -94,12 +97,23 @@ def rules_page():
         piece_rule = request.form['piece_rule']
         special_move = request.form['special_move']
         return page.add_piece(piece_name, piece_rule, special_move)
+    elif 'addrule' in request.form:
+        the_rule = request.form['the_rule']
+        made_by = request.form['made_by']
+        date = request.form['date']
+        return page.add_rule(the_rule, made_by, date)
     elif 'deletepiece' in request.form:
         piece_name = request.form['piece_name']
         return page.delete_piece(piece_name)
     elif 'deletepiecewithid' in request.form:
         id = request.form['id']
         return page.delete_piece_with_id(id)
+    elif 'deleterule' in request.form:
+        the_rule = request.form['the_rule']
+        return page.delete_rule(the_rule)
+    elif 'deleterulewithid' in request.form:
+        id = request.form['id']
+        return page.delete_rule_with_id(id)
     else:
         return redirect(url_for('home_page'))
 
