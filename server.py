@@ -115,8 +115,15 @@ def rules_page():
     elif 'deleterulewithid' in request.form:
         id = request.form['id']
         return page.delete_rule_with_id(id)
+    elif 'updaterules' in request.form:
+        id = request.form['id']
+        the_rule = request.form['the_rule']
+        made_by = request.form['made_by']
+        date = request.form['date']
+        return page.update_rules(id, the_rule, made_by, date)
     else:
         return redirect(url_for('home_page'))
+
 
 
 

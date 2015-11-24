@@ -120,3 +120,21 @@ class Rules:
 
             connection.commit()
         return redirect(url_for('rules_page'))
+
+
+
+
+    def update_rules(self, id, the_rule, made_by, date):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE rules_items
+                        SET the_rule = '%s', made_by = '%s',
+                            date = %s
+                        WHERE id = %s""" % (the_rule, made_by, date, id)
+
+            cursor.execute(query)
+            connection.commit()
+
+
+        return redirect(url_for('rules_page'))

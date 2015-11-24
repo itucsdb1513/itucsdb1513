@@ -162,6 +162,39 @@
 	</form>
 	</div>
 
+	<div>
+		  <form id="delrules" action="{{ url_for('rules_page') }}" method="post" >
+		  <table>
+			<tr>
+				<th>ID:</th>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Rule:</th>
+				<td>
+					<input type="text" name="the_rule"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Made by</th>
+				<td>
+					<input type="text" name="made_by"/>
+				</td>
+			</tr>
+			<tr>
+				<th>New Date</th>
+				<td>
+					<input type="text" name="date"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Update" name="updaterules" type="submit"/>
+		  </form>
+
+		</div>
+
 	<form id="delrules" action="{{ url_for('rules_page') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
