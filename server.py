@@ -14,7 +14,7 @@ from flask.helpers import url_for
 from player import Player
 from rules import Rules
 from ranking import Ranking
-from histroy import facts
+from history import facts
 
 
 app = Flask(__name__)
