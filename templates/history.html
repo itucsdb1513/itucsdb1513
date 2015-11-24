@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>History of Chess</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+  	<nav>
+		<a href = "{{ url_for('home_page') }}">Home</a>
+  	 	<a href = "{{ url_for('localtour_page') }}">Local Tournaments</a>
+  		 <a href = "{{ url_for('rankings_page') }}">Rankings</a>
+  		 <a href = "{{ url_for('upcoming_events') }}">Upcoming Events</a>
+  		 <a href = "{{ url_for('history') }}">History</a>
+  		 <a href = "/tournaments">Tournaments List</a>
+  		 <a href = "/count">Count</a>
+	</nav>
+	<h1>History of Chess</h1>
+	<table>
+		<tr>
+			<th>Number</th>
+			<th>Date</th>
+    		<th>Place</th>
+    		<th>Fact</th>
+
+  		</tr>
+		{% for  number, date, place, fact in history %}
+		<tr>
+			<td>{{ number }}</td>
+			<td>{{ date }}</td>
+			<td>{{ place }}</td>
+			<td>{{ fact }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<form id="addira" action="{{ url_for('history') }}" method="post">
+		<table>
+			<tr>
+				<th>Date:</th>
+				<td>
+					<input type="text" name="date"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Place:</th>
+				<td>
+					<input type="text" name="place"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Fact:</th>
+				<td>
+					<input type="text" name="fact"/>
+				</td>
+			</tr>
+
+		</table>
+		<input value="Add Fact" name="addfact" type="submit"/>
+	</form>
+
+	<div id="divturkah">
+
+	<form id="delturkah" action="{{ url_for('history') }}" method="post">
+		<table>
+			<tr>
+				<th>number:</th>
+				<td>
+					<input type="text" name="number"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Delete Fact" name="deletefact" type="submit"/>
+	</form>
+	</div>
+
+	<form id="delturkah" action="{{ url_for('history') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
+  </body>
+</html>
