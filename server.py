@@ -14,6 +14,7 @@ from flask.helpers import url_for
 from player import Player
 from rules import Rules
 from ranking import Ranking
+from histroy import facts
 
 
 app = Flask(__name__)
@@ -207,7 +208,7 @@ def updatelp_page(key = None):
         return page.update_player(key, name, surname, win, lose, draw)
     else:
         return redirect(url_for('home_page'))
-    
+
 @app.route('/updatelg/<int:key>/', methods=['GET', 'POST'])
 def updatelg_page(key = None):
     page = Turkah(dsn = app.config['dsn'])
@@ -220,7 +221,7 @@ def updatelg_page(key = None):
         return page.update_game(key, playerone, playertwo, result)
     else:
         return redirect(url_for('home_page'))
-    
+
 @app.route('/upcoming_events', methods=['GET', 'POST'])
 def upcoming_events():
     page = event(dsn = app.config['dsn'])
@@ -259,6 +260,25 @@ def history():
         return redirect(url_for('home_page'))
 
 
+@app.route('/history', methods=['GET', 'POST'])
+def history():
+    page = facts(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addfact' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        fact = request.form['fact']
+        return page.addfact(date, place, fact)
+    elif 'deletefact' in request.form:
+        number = request.form['number']
+        return page.deletefact(number)
+    else:
+        return redirect(url_for('home_page'))
+
+
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
@@ -274,4 +294,4 @@ if __name__ == '__main__':
                                host='localhost' port=5432 dbname='itucsdb'"""
 
     app.run(host='0.0.0.0', port=port, debug=debug)
-    
+
