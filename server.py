@@ -260,23 +260,6 @@ def history():
         return redirect(url_for('home_page'))
 
 
-@app.route('/history', methods=['GET', 'POST'])
-def history():
-    page = facts(dsn = app.config['dsn'])
-    if request.method == 'GET':
-        return page.open_page()
-    elif 'initializeTable' in request.form:
-        return page.init_table()
-    elif 'addfact' in request.form:
-        date = request.form['date']
-        place = request.form['place']
-        fact = request.form['fact']
-        return page.addfact(date, place, fact)
-    elif 'deletefact' in request.form:
-        number = request.form['number']
-        return page.deletefact(number)
-    else:
-        return redirect(url_for('home_page'))
 
 
 if __name__ == '__main__':
