@@ -13,20 +13,20 @@
 
         <table>
         <tr>
-        	<th> ID </th>
-        	<th> Name </th>
-        	<th> Surname </th>
-        	<th> Country </th>
-        	<th> Club </th>
-        	<th> Age </th>
-        	<th> Rating </th>
-        	<th> World Ranking </th>
-        	<th> Gender </th>
+        	<th>ID </th>
+        	<th><a href="{{ url_for('localtour_page', key=1) }}"> Name </a></th>
+        	<th><a href="{{ url_for('localtour_page', key=2) }}"> Surname </a></th>
+        	<th><a href="{{ url_for('localtour_page', key=3) }}"> Country </a></th>
+        	<th><a href="{{ url_for('localtour_page', key=4) }}"> Club</a> </th>
+        	<th><a href="{{ url_for('localtour_page', key=5) }}"> Age</a> </th>
+        	<th><a href="{{ url_for('localtour_page', key=6) }}"> Rating</a> </th>
+        	<th><a href="{{ url_for('localtour_page', key=7) }}"> World Ranking</a> </th>
+        	<th><a href="{{ url_for('localtour_page', key=8) }}"> Gender</a> </th>
         </tr>
         	{% for id, name, surname,country, club, rating, ranking, age, gender in players %}
         	<tr>
         		<td>{{id}} </td>
-        		<td>{{name}} </td>
+        		<td><a href="{{ url_for('update_ranking_page', key=id) }}">{{name}}</a> </td>
         		<td> {{surname}} </td>
         		<td> {{country}} </td>
         		<td> {{club}} </td>
@@ -109,19 +109,19 @@
 			</tr>
 			</table>
 		<input value="Delete Player" name="deleteplayer" type="submit"/>
+		<input value="Find Player" name="findplayer" type="submit"/>
 	</form>
 
 	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
-	<table>
-		<tr>
-				<th>ID:</th>
-				<td>
-					<input type="text" name="id"/>
-				</td>
-		</tr>
-	</table>
-		<input value="Delete Player" name="deleteplayerwithid" type="submit"/>
-	</form>
-	</div>
+    <table>
+      <tr>
+        <th>Player ID:</th>
+        <td>
+          <input type="text" name="id"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Find Player" name="findplayerbyrating" type="submit"/>
+  </form>
 
 {%endblock%}

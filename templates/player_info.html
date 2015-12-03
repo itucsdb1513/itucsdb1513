@@ -107,6 +107,75 @@
 			</table>
 		<input value="Add Player" name="addplayer" type="submit"/>
 	</form>
+	
+	<div>
+	 <form id="updateplayerinfo" action="{{ url_for('players_page') }}" method="post">
+        	<table>
+        		<tr>
+				<th>Name: </th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Country:</th>
+				<td>
+					<input type="text" name="country"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Club:</th>
+				<td>
+					<input type="text" name="club"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Rating: </th>
+				<td>
+					<input type="text" name="best_rating"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Ranking:</th>
+				<td>
+					<input type="text" name="best_ranking"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament:</th>
+				<td>
+					<input type="text" name="best_tournament"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament Result:</th>
+				<td>
+					<input type="text" name="best_tournament_result"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Rating:</th>
+				<td>
+					<input type="text" name="current_rating"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Ranking:</th>
+				<td>
+					<input type="text" name="current_ranking"/>
+				</td>
+			</tr>
+			</table>
+		<input value="Update Player" name="updateplayer" type="submit"/>
+	</form>
+	</div>
+	
 
 	<div id="divjav">
 	<form id="deljav" action="{{ url_for('players_page') }}" method="post">
@@ -158,5 +227,7 @@
 			</table>
 		<input value="Find Player" name="findplayer" type="submit"/>
 	</form>
+	
+	
 
 {%endblock%}

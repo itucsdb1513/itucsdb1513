@@ -91,3 +91,20 @@ class Player_info:
             connection.commit()
         return redirect(url_for('players_page'))
 
+    def update_player(self, id, name, surname,country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+             
+            query = """UPDATE player_info
+                        SET name = '%s', surname = '%s', country = '%s', club = '%s', best_rating = '%s', 
+                             best_ranking = '%s', best_tournament = '%s', best_tournament_result = '%s',
+                             curr_rating = '%s', curr_ranking = '%s'
+                            
+                        WHERE id = %s""" % (name, surname,country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+                        
+            cursor.execute(query)
+            connection.commit()  
+        
+        return redirect(url_for('players_page'))
+         
+                         

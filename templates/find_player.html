@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
+		<table>
+			<tr>
+				<th> ID </th>
+        		<th> Name </th>
+        		<th> Surname </th>
+        		<th> Country </th>
+        		<th> Club </th>
+        		<th> Age </th>
+        		<th> Rating </th>
+        		<th> World Ranking </th>
+        		<th> Gender </th>
+			</tr>
+			{% for id, name, surname,country, club, rating, ranking, age, gender in player %}
+			<tr>
+				<td>{{id}} </td>
+        		<td><a href="{{ url_for('update_ranking_page', key=id) }}">{{ name }}</a></td>
+        		<td> {{surname}} </td>
+        		<td> {{country}} </td>
+        		<td> {{club}} </td>
+        		<td> {{age}} </td>
+        		<td> {{rating}}</td>
+        		<td> {{ranking}}</td>
+        		<td> {{gender}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endblock %}

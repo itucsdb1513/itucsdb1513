@@ -37,9 +37,26 @@ def home_page():
     return render_template('home.html', current_time=now.ctime())
 
 @app.route('/rankings', methods=['GET', 'POST'])
-def rankings_page():
+@app.route('/rankings/<int:key>/', methods=['GET', 'POST'])
+def rankings_page(key = None):
     page = Ranking(dsn = app.config['dsn'])
-    if request.method == 'GET':
+    if key == 1:
+       return page.open_page("name")
+    elif key == 2:
+        return page.open_page("surname")
+    elif key == 3:
+        return page.open_page("country")
+    elif key == 4:
+        return page.open_page("club")
+    elif key == 5:
+        return page.open_page("age")
+    elif key == 6:
+        return page.open_page("rating")
+    elif key == 7:
+        return page.open_page("ranking")
+    elif key == 8:
+        return page.open_page("gender")
+    elif request.method == 'GET':
         return page.open_page()
     elif 'initializeTable' in request.form:
         return page.init_table()
@@ -60,8 +77,36 @@ def rankings_page():
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
+    elif 'findplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.find_player(name, surname)
+    elif 'findplayerbyrating' in request.form:
+        rating = request.form['rating']
+        return page.find_player_by_rating(rating)
     else:
         return redirect(url_for('home_page'))
+
+@app.route('/update_ranking/<int:key>/', methods=['GET', 'POST'])
+def update_ranking_page(key = None):
+    page = Ranking(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_update_player(id = key)
+    elif 'updateplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        rating = request.form['rating']
+        ranking = request.form['ranking']
+        age = request.form['age']
+        gender = request.form['gender']
+        return page.update_player(key, name, surname, country, club, rating, ranking, age, gender)
+    else:
+        return redirect(url_for('home_page'))
+
+
+
 
 @app.route('/worldplayers_info', methods=['GET', 'POST'])
 def players_page():
@@ -89,6 +134,19 @@ def players_page():
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
+    elif 'updateplayer' in request.form:
+        id = request.form['id']
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        best_rating = request.form['best_rating']
+        best_ranking = request.form['best_ranking']
+        best_tournament = request.form['best_tournament']
+        best_tournament_result = request.form['best_tournament_result']
+        curr_rating = request.form['curr_rating']
+        curr_ranking = request.form['curr_ranking']
+        return page.update_player(id, name, surname, country, club, best_rating, best_ranking, best_tournament_result, curr_rating, curr_ranking)
     else:
         return redirect(url_for('home_page'))
 
