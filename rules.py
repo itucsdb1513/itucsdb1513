@@ -57,7 +57,7 @@ class Rules:
                         id serial PRIMARY KEY,
                         the_rule text NOT NULL,
                         made_by text NOT NULL,
-                        date integer NOT NULL),
+                        date integer NOT NULL,
                         UNIQUE (the_rule));"""
             cursor.execute(query)
 
