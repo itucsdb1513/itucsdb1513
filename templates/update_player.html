@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Local Tournaments{% endblock %}
+{% block title %}Player Ranking{% endblock %}
 {% block content %}
 	<form id="addplayer" action="{{ url_for('update_ranking_page', key = player[0]) }}" method="post">
 		<table>

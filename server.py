@@ -105,13 +105,31 @@ def update_ranking_page(key = None):
     else:
         return redirect(url_for('home_page'))
 
-
-
-
 @app.route('/worldplayers_info', methods=['GET', 'POST'])
-def players_page():
+@app.route('/worldplayers_info/<int:key>/', methods=['GET', 'POST'])
+def players_page(key = None):
     page = Player_info(dsn = app.config['dsn'])
-    if request.method == 'GET':
+    if key == 1:
+        return page.open_page("name")
+    elif key == 2:
+        return page.open_page("surname")
+    elif key == 3:
+        return page.open_page("country")
+    elif key == 4:
+        return page.open_page("club")
+    elif key == 5:
+        return page.open_page("best_rating")
+    elif key == 6:
+        return page.open_page("best_ranking")
+    elif key == 7:
+        return page.open_page("best_tournament")
+    elif key == 8:
+        return page.open_page("best_tournament_result")
+    elif key == 9:
+        return page.open_page("curr_rating")
+    elif key == 10:
+        return page.open_page("curr_ranking")
+    elif request.method == 'GET':
         return page.open_page()
     elif 'initializeTable' in request.form:
         return page.init_table()
@@ -126,7 +144,7 @@ def players_page():
         best_tournament_result = request.form['best_tournament_result']
         curr_rating = request.form['curr_rating']
         curr_ranking = request.form['curr_ranking']
-        return page.add_player(name, surname, country, club, best_rating, best_ranking, best_tournament_result, curr_rating, curr_ranking)
+        return page.add_player(name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
     elif 'deleteplayer' in request.form:
         name = request.form['name']
         surname = request.form['surname']
@@ -134,8 +152,19 @@ def players_page():
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
-    elif 'updateplayer' in request.form:
-        id = request.form['id']
+    elif 'findplayer' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.find_player(name, surname)
+    else:
+        return redirect(url_for('home_page'))
+
+@app.route('/update_player_info/<int:key>/', methods=['GET', 'POST'])
+def update_player_info_page(key = None):
+    page = Player_info(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_update_player_info(id = key)
+    elif 'updateplayer_info' in request.form:
         name = request.form['name']
         surname = request.form['surname']
         country = request.form['country']
@@ -146,9 +175,10 @@ def players_page():
         best_tournament_result = request.form['best_tournament_result']
         curr_rating = request.form['curr_rating']
         curr_ranking = request.form['curr_ranking']
-        return page.update_player(id, name, surname, country, club, best_rating, best_ranking, best_tournament_result, curr_rating, curr_ranking)
+        return page.update_player_info(key, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
     else:
         return redirect(url_for('home_page'))
+
 
 @app.route('/initdb')
 def initialize_database():

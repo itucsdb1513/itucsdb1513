@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Player Biographies{% endblock %}
+{% block content %}
+		<table>
+			<tr>
+        		<th> Name </th>
+        		<th> Surname </th>
+        		<th> Country </th>
+        		<th> Club </th>
+        		<th> Best Rating </th>
+        		<th> Best Ranking </th>
+        		<th> Best Tournament </th>
+        		<th> Best Tournament Result </th>
+        		<th> Current Rating </th>
+        		<th> Current Ranking </th>
+			</tr>
+			{% for  id, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking in player_info %}
+			<tr>
+        		<td><a href="{{ url_for('update_player_info_page', key=id) }}">{{ name }}</a></td>
+        		<td> {{surname}} </td>
+        		<td> {{country}} </td>
+        		<td> {{club}} </td>
+        		<td> {{best_rating}} </td>
+        		<td> {{best_ranking}}</td>
+        		<td> {{best_tournament}}</td>
+        		<td> {{best_tournament_result}}</td>
+        		<td> {{curr_rating}}</td>
+        		<td> {{curr_ranking}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}Players Biography{% endblock %}
+{% block content %}
+	<form id="addplayer" action="{{ url_for('update_player_info_page', key = player_info[0]) }}" method="post">
+		<table>
+			<tr>
+				<th>Name:</th>
+				<td>
+					<input type="text" name="name" value="{{ player_info[1] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname" value="{{ player_info[2] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Country:</th>
+				<td>
+					<input type="text" name="country" value = "{{player_info[3]}}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Club:</th>
+				<td>
+					<input type="text" name="club" value="{{ player_info[4] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Rating: </th>
+				<td>
+					<input type="text" name="best_rating" value="{{ player_info[5] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Ranking:</th>
+				<td>
+					<input type="text" name="best_ranking" value="{{ player_info[6] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament:</th>
+				<td>
+					<input type="text" name="best_tournament" value="{{ player_info[7] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament Result:</th>
+				<td>
+					<input type="text" name="best_tournament_result" value="{{ player_info[8] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Rating:</th>
+				<td>
+					<input type="text" name="curr_rating" value="{{ player_info[9] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Ranking:</th>
+				<td>
+					<input type="text" name="curr_ranking" value="{{ player_info[10] }}"/>
+				</td>
+			</tr>
+		</table>
+		<input value="Update Player" name="updateplayer_info" type="submit"/>
+	</form>
+{% endblock %}
