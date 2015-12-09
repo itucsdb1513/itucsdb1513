@@ -8,21 +8,37 @@ class Rules:
         self.dsn = dsn
         return
 
-    def open_page(self):
+    def open_page(self, sort = "id"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = "SELECT * FROM pieces"
+            query = """SELECT * FROM pieces
+                        ORDER BY %s""" % sort
             cursor.execute(query)
             rules = cursor.fetchall()
 
-            query = "SELECT * FROM rules_items"
+            query = """SELECT * FROM rules_items
+                        ORDER BY %s""" % sort
             cursor.execute(query)
             the_rules = cursor.fetchall()
 
-
-
         return render_template('rules.html', rules = rules, the_rules=the_rules)
+
+    def open_updatepieces(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM pieces WHERE id  = %s" % (id)
+            cursor.execute(query)
+            the_pieces = cursor.fetchone()
+        return render_template('updatepiecespage.html', the_pieces = the_pieces)
+
+    def open_updaterules(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM rules_items WHERE id  = %s" % (id)
+            cursor.execute(query)
+            uprules = cursor.fetchone()
+        return render_template('updaterulespage.html', uprules = uprules)
 
     def init_table(self):
         with dbapi2.connect(self.dsn) as connection:
@@ -101,55 +117,22 @@ class Rules:
             connection.commit()
         return redirect(url_for('rules_page'))
 
-    def delete_piece_with_id(self, id):
+    def update_pieces(self, id, piece_name, piece_rule, special_move):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
-            query = """DELETE FROM pieces WHERE id = '%s' """ % (id)
+            query = """UPDATE pieces
+                        SET piece_name = '%s', piece_rule = '%s',
+                            special_move = '%s'
+                        WHERE id = %s""" % (piece_name, piece_rule, special_move, id)
             cursor.execute(query)
-
-            connection.commit()
         return redirect(url_for('rules_page'))
-
-    def delete_rule_with_id(self, id):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-
-            query = """DELETE FROM rules_items WHERE id = '%s' """ % (id)
-            cursor.execute(query)
-
-            connection.commit()
-        return redirect(url_for('rules_page'))
-
-
-
 
     def update_rules(self, id, the_rule, made_by, date):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
             query = """UPDATE rules_items
                         SET the_rule = '%s', made_by = '%s',
                             date = %s
                         WHERE id = %s""" % (the_rule, made_by, date, id)
-
             cursor.execute(query)
-            connection.commit()
-
-
-        return redirect(url_for('rules_page'))
-
-    def update_pieces(self, id, piece_name, piece_rule, special_move):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-
-            query = """UPDATE pieces
-                        SET piece_name = '%s', piece_rule = '%s',
-                            special_move = %s
-                        WHERE id = %s""" % (piece_name, piece_rule, special_move, id)
-
-            cursor.execute(query)
-            connection.commit()
-
-
         return redirect(url_for('rules_page'))
