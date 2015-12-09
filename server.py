@@ -198,11 +198,23 @@ def initialize_database():
     return redirect(url_for('home_page'))
 
 
-
 @app.route('/rules', methods=['GET', 'POST'])
-def rules_page():
+@app.route('/rules/<int:key>/', methods=['GET', 'POST'])
+def rules_page(key = None):
     page = Rules(dsn = app.config['dsn'])
-    if request.method == 'GET':
+    if key == 1:
+        return page.open_page("piece_name")
+    elif key == 2:
+        return page.open_page("piece_rule")
+    elif key == 3:
+        return page.open_page("special_move")
+    elif key == 4:
+        return page.open_page("the_rule")
+    elif key == 5:
+        return page.open_page("made_by")
+    elif key == 6:
+        return page.open_page("date")
+    elif request.method == 'GET':
         try:
             return page.open_page()
         except:
@@ -221,33 +233,46 @@ def rules_page():
         return page.add_rule(the_rule, made_by, date)
     elif 'deletepiece' in request.form:
         piece_name = request.form['piece_name']
-        return page.delete_piece(piece_name)
-    elif 'deletepiecewithid' in request.form:
-        id = request.form['id']
-        return page.delete_piece_with_id(id)
+        piece_rule = request.form['piece_rule']
+        return page.delete_piece(piece_name, piece_rule)
     elif 'deleterule' in request.form:
         the_rule = request.form['the_rule']
         return page.delete_rule(the_rule)
-    elif 'deleterulewithid' in request.form:
-        id = request.form['id']
-        return page.delete_rule_with_id(id)
-    elif 'updaterules' in request.form:
-        id = request.form['id']
-        the_rule = request.form['the_rule']
-        made_by = request.form['made_by']
-        date = request.form['date']
-        return page.update_rules(id, the_rule, made_by, date)
-    elif 'updatepieces' in request.form:
-        id = request.form['id']
+    elif 'findpiece' in request.form:
         piece_name = request.form['piece_name']
         piece_rule = request.form['piece_rule']
-        special_move = request.form['special_move']
-        return page.update_pieces(id, piece_name, piece_rule, special_move)
+        return page.find_pieces(piece_name, piece_rule)
+    elif 'findrule' in request.form:
+        the_rule = request.form['the_rule']
+        return page.find_rules(the_rule)
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/updatepiecespage/<int:key>/', methods=['GET', 'POST'])
+def update_pieces_page(key = None):
+    page = Rules(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatepieces(id = key)
+    elif 'updatepieces' in request.form:
+        piece_name = request.form['piece_name']
+        piece_rule = request.form['piece_rule']
+        special_move = request.form['special_move']
+        return page.update_pieces(key, piece_name, piece_rule, special_move)
+    else:
+        return redirect(url_for('home_page'))
 
-
+@app.route('/updaterulespage/<int:key>/', methods=['GET', 'POST'])
+def update_rules_page(key = None):
+    page = Rules(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updaterules(id = key)
+    elif 'updaterules' in request.form:
+        the_rule = request.form['the_rule']
+        made_by = request.form['made_by']
+        date = request.form['date']
+        return page.update_rules(key, the_rule, made_by, date)
+    else:
+        return redirect(url_for('home_page'))
 
 
 @app.route('/count')
