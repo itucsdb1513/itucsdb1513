@@ -22,9 +22,9 @@
 	<table>
 		<tr>
 			<th>ID</th>
-			<th><a href="{{ url_for('rules_page', key=1) }}">Piece Name</a></th>
-    		<th><a href="{{ url_for('rules_page', key=2) }}">Piece Rule</a></th>
-    		<th><a href="{{ url_for('rules_page', key=3) }}">Special Move</a></th>
+			<th>Piece Name</th>
+    		<th>Piece Rule</th>
+    		<th>Special Move</th>
 
   		</tr>
 		{% for id, piece_name, piece_rule, special_move in rules %}
@@ -85,9 +85,9 @@
 	<table>
 		<tr>
 			<th>ID</th>
-			<th><a href="{{ url_for('rules_page', key=4) }}">The Rule</a></th>
-    		<th><a href="{{ url_for('rules_page', key=5) }}">Made By</a></th>
-    		<th><a href="{{ url_for('rules_page', key=6) }}">Date</a></th>
+			<th>The Rule</th>
+    		<th>Made By</th>
+    		<th>Date</th>
 
   		</tr>
 		{% for id, the_rule, made_by, date in the_rules %}
