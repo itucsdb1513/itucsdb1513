@@ -203,10 +203,18 @@ def rules_page(key = None):
         return page.add_rule(the_rule, made_by, date)
     elif 'deletepiece' in request.form:
         piece_name = request.form['piece_name']
-        return page.delete_piece(piece_name)
+        piece_rule = request.form['piece_rule']
+        return page.delete_piece(piece_name, piece_rule)
     elif 'deleterule' in request.form:
         the_rule = request.form['the_rule']
         return page.delete_rule(the_rule)
+    elif 'findpiece' in request.form:
+        piece_name = request.form['piece_name']
+        piece_rule = request.form['piece_rule']
+        return page.find_pieces(piece_name, piece_rule)
+    elif 'findrule' in request.form:
+        the_rule = request.form['the_rule']
+        return page.find_rules(the_rule)
     else:
         return redirect(url_for('home_page'))
 

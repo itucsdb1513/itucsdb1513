@@ -57,7 +57,8 @@ class Rules:
                         id serial PRIMARY KEY,
                         the_rule text NOT NULL,
                         made_by text NOT NULL,
-                        date integer NOT NULL);"""
+                        date integer NOT NULL),
+                        UNIQUE (the_rule));"""
             cursor.execute(query)
 
             query = """INSERT INTO pieces (piece_name, piece_rule, special_move)
@@ -97,11 +98,12 @@ class Rules:
             connection.commit()
         return redirect(url_for('rules_page'))
 
-    def delete_piece(self, piece_name):
+    def delete_piece(self, piece_name, piece_rule):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DELETE FROM pieces WHERE piece_name = '%s' """ % (piece_name)
+            query = """DELETE FROM pieces WHERE piece_name = '%s'
+                        AND piece_rule = '%s' """ % (piece_name, piece_rule)
             cursor.execute(query)
 
             connection.commit()
@@ -136,3 +138,26 @@ class Rules:
                         WHERE id = %s""" % (the_rule, made_by, date, id)
             cursor.execute(query)
         return redirect(url_for('rules_page'))
+
+    def find_pieces(self, piece_name, piece_rule):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM pieces
+                        WHERE piece_name LIKE '%s%%'
+                          AND piece_rule LIKE '%s%%'
+                        ORDER BY id """ % (piece_name, piece_rule)
+            cursor.execute(query)
+            the_pieces = cursor.fetchall()
+        return render_template('findpieces.html', the_pieces = the_pieces)
+
+    def find_rules(self, the_rule):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM rules_items
+                        WHERE the_rule LIKE '%s%%'
+                        ORDER BY id """ % (the_rule)
+            cursor.execute(query)
+            uprules = cursor.fetchall()
+        return render_template('findrules.html', uprules = uprules)
