@@ -26,10 +26,6 @@ nav li {
 	font-size: 80%;
 }
 
-table, th, td {
-    border: 1px solid black;
-}
-
 #firstname {
 	color: #E9601A;
 	text-decoration: underline;
