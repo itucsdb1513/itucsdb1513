@@ -73,6 +73,17 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
+    def delete_event(self, date, place):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """DELETE FROM events WHERE date = '%s'
+                        AND place = '%s' """ % (date, place)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('upcoming_events'))
+
     def find_event(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -80,7 +91,19 @@ class event:
             query = """SELECT * FROM events WHERE id = %s """ % (number)
             cursor.execute(query)
             events = cursor.fetchall()
-        return render_template('findlp.html', events = events)
+        return render_template('findevent.html', events = events)
+
+    def find_event_name(self, date, place):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM events
+                        WHERE date LIKE '%s%%'
+                          AND place LIKE '%s%%'
+                        ORDER BY number """ % (date, place)
+            cursor.execute(query)
+            events = cursor.fetchall()
+        return render_template('findevent.html', events = events)
 
 
 

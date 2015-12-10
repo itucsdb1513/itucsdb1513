@@ -80,6 +80,26 @@
 	</form>
 	</div>
 
+	<div id="divturkah">
+  <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
+    <table>
+      <tr>
+        <th>Date:</th>
+        <td>
+          <input type="text" name="date"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Place:</th>
+        <td>
+          <input type="text" name="place"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Delete Event" name="deleteevent1" type="submit"/>
+    <input value="Find Event" name="findevent1" type="submit"/>
+  </form>
+
 	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
