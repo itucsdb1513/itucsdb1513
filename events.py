@@ -36,7 +36,7 @@ class event:
                         date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
-                        player2 text NOT NUL)"""
+                        player2 text NOT NULL)"""
             cursor.execute(query)
 
             query = """INSERT INTO events (date, place, player1, player2)
