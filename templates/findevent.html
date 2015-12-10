@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Upcoming Events{% endblock %}
+{% block content %}
+		<table>
+			<tr>
+				<th>Number</th>
+				<th>Date</th>
+				<th>Place</th>
+				<th>Player1</th>
+				<th>Player2</th>
+			</tr>
+			{% for number, date, place, player1, player2 in events %}
+			<tr>
+				<td>{{ number }}</td>
+				<td>{{ date }}</td>
+				<td>{{ place }}</td>
+				<td>{{ player1 }}</td>
+				<td>{{ player2 }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endblock %}

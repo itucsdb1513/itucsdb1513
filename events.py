@@ -73,6 +73,15 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
+    def find_event(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM events WHERE id = %s """ % (number)
+            cursor.execute(query)
+            events = cursor.fetchall()
+        return render_template('findlp.html', events = events)
+
 
 
 

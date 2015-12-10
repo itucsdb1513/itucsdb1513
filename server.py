@@ -392,6 +392,9 @@ def upcoming_events():
     elif 'deleteevent' in request.form:
         number = request.form['number']
         return page.deleteevent(number)
+    elif 'findevent' in request.form:
+        number = request.form['number']
+        return page.find_event(number)
     else:
         return redirect(url_for('home_page'))
 
