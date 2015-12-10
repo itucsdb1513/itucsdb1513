@@ -455,11 +455,22 @@ def history():
     elif 'deletefact' in request.form:
         number = request.form['number']
         return page.deletefact(number)
+    elif 'deletefact1' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        return page.delete_fact(date, place)
     elif 'updaterfact' in request.form:
         date = request.form['date']
         place = request.form['place']
         fact = request.form['fact']
         return page.update_rules(date, place, fact)
+    elif 'findfact' in request.form:
+        number = request.form['number']
+        return page.findfact(number)
+    elif 'findfact1' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        return page.find_fact(date, place)
     else:
         return redirect(url_for('home_page'))
 

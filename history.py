@@ -67,12 +67,38 @@ class facts:
     def deletefact(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
             query = """DELETE FROM history WHERE number = '%s' """ % (number)
             cursor.execute(query)
-
             connection.commit()
         return redirect(url_for('history'))
+
+    def delete_fact(self, date, place):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM history WHERE date = '%s'
+                        AND place = '%s' """ % (date, place)
+            cursor.execute(query)
+            connection.commit()
+        return redirect(url_for('history'))
+
+    def findfact(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM history WHERE number = %s """ % (number)
+            cursor.execute(query)
+            history = cursor.fetchall()
+        return render_template('findfact.html', history = history)
+
+    def find_fact(self, date, place):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM history
+                        WHERE date LIKE '%s%%'
+                          AND place LIKE '%s%%'
+                        ORDER BY number """ % (date, place)
+            cursor.execute(query)
+            history = cursor.fetchall()
+        return render_template('findfact.html', history = history)
 
     def updatefact(self, date, place, fact):
         with dbapi2.connect(self.dsn) as connection:

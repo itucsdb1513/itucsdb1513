@@ -71,6 +71,7 @@
 			</tr>
 		</table>
 		<input value="Delete Fact" name="deletefact" type="submit"/>
+		<input value="Find Fact" name="findfact" type="submit"/>
 	</form>
 	</div>
 
@@ -97,10 +98,29 @@
 			</tr>
 		</table>
 		<input value="Update" name="updatefact" type="submit"/>
-		  </form>
-
+		</form>
 		</div>
 
+	<div>
+	<form id="delturkah" action="{{ url_for('history') }}" method="post">
+    <table>
+      <tr>
+        <th>Date:</th>
+        <td>
+          <input type="text" name="date"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Place:</th>
+        <td>
+          <input type="text" name="place"/>
+        </td>
+      </tr>
+    </table>
+    <input value="Delete Fact" name="deletefact1" type="submit"/>
+    <input value="Find Fact" name="findfact1" type="submit"/>
+  </form>
+  </div>
 
 
 	<form id="delturkah" action="{{ url_for('history') }}" method="post">

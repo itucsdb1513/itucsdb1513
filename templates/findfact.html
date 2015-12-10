@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}History of Chess{% endblock %}
+{% block content %}
+		<table>
+			<tr>
+				<th>Number</th>
+				<th>Date</th>
+				<th>Place</th>
+				<th>Fact</th>
+			</tr>
+			{% for number, date, place, fact in history %}
+			<tr>
+				<td>{{ number }}</td>
+				<td>{{ date }}</td>
+				<td>{{ place }}</td>
+				<td>{{ fact }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endblock %}
