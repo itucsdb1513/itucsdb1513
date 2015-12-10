@@ -205,7 +205,7 @@ def rules_page(key = None):
     if key == 1:
         return page.open_page("piece_name")
     elif key == 2:
-        return page.open_page("piece_rule")
+        return page.open_page("piece_move")
     elif key == 3:
         return page.open_page("special_move")
     elif key == 4:
@@ -214,6 +214,14 @@ def rules_page(key = None):
         return page.open_page("made_by")
     elif key == 6:
         return page.open_page("date")
+    elif key == 7:
+        return page.open_page("name")
+    elif key == 8:
+        return page.open_page("capture_direction")
+    elif key == 9:
+        return page.open_page("starting_place")
+    elif key == 10:
+        return page.open_page("can_start")
     elif request.method == 'GET':
         try:
             return page.open_page()
@@ -223,9 +231,15 @@ def rules_page(key = None):
         return page.init_table()
     elif 'addpiece' in request.form:
         piece_name = request.form['piece_name']
-        piece_rule = request.form['piece_rule']
+        piece_move = request.form['piece_move']
         special_move = request.form['special_move']
-        return page.add_piece(piece_name, piece_rule, special_move)
+        return page.add_piece(piece_name, piece_move, special_move)
+    elif 'addcapture' in request.form:
+        name = request.form['name']
+        capture_direction = request.form['capture_direction']
+        starting_place = request.form['starting_place']
+        can_start = request.form['can_start']
+        return page.add_capture(name, capture_direction, starting_place, can_start)
     elif 'addrule' in request.form:
         the_rule = request.form['the_rule']
         made_by = request.form['made_by']
@@ -233,18 +247,24 @@ def rules_page(key = None):
         return page.add_rule(the_rule, made_by, date)
     elif 'deletepiece' in request.form:
         piece_name = request.form['piece_name']
-        piece_rule = request.form['piece_rule']
-        return page.delete_piece(piece_name, piece_rule)
+        piece_move = request.form['piece_move']
+        return page.delete_piece(piece_name, piece_move)
     elif 'deleterule' in request.form:
         the_rule = request.form['the_rule']
         return page.delete_rule(the_rule)
+    elif 'deletecapture' in request.form:
+        name = request.form['name']
+        return page.delete_capture(name)
     elif 'findpiece' in request.form:
         piece_name = request.form['piece_name']
-        piece_rule = request.form['piece_rule']
-        return page.find_pieces(piece_name, piece_rule)
+        piece_move = request.form['piece_move']
+        return page.find_pieces(piece_name, piece_move)
     elif 'findrule' in request.form:
         the_rule = request.form['the_rule']
         return page.find_rules(the_rule)
+    elif 'findcapture' in request.form:
+        name = request.form['name']
+        return page.find_captures(name)
     else:
         return redirect(url_for('home_page'))
 
@@ -255,9 +275,9 @@ def update_pieces_page(key = None):
         return page.open_updatepieces(id = key)
     elif 'updatepieces' in request.form:
         piece_name = request.form['piece_name']
-        piece_rule = request.form['piece_rule']
+        piece_move = request.form['piece_move']
         special_move = request.form['special_move']
-        return page.update_pieces(key, piece_name, piece_rule, special_move)
+        return page.update_pieces(key, piece_name, piece_move, special_move)
     else:
         return redirect(url_for('home_page'))
 
@@ -271,6 +291,20 @@ def update_rules_page(key = None):
         made_by = request.form['made_by']
         date = request.form['date']
         return page.update_rules(key, the_rule, made_by, date)
+    else:
+        return redirect(url_for('home_page'))
+
+@app.route('/updatecapturespage/<int:key>/', methods=['GET', 'POST'])
+def update_captures_page(key = None):
+    page = Rules(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatecaptures(id = key)
+    elif 'updatecaptures' in request.form:
+        name = request.form['name']
+        capture_direction = request.form['capture_direction']
+        starting_place = request.form['starting_place']
+        can_start = request.form['can_start']
+        return page.update_captures(key, name, capture_direction, starting_place, can_start)
     else:
         return redirect(url_for('home_page'))
 

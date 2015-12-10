@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Update Rules</title>
+    <title>Update Captures</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
@@ -17,28 +17,34 @@
   		 <li><a href = "/count">Count</a></li>
 
 	</nav>
-	<form id="update" action="{{ url_for('update_rules_page', key=uprules[0]) }}" method="post">
+	<form id="update" action="{{ url_for('update_captures_page', key=upcaptures[0]) }}" method="post">
 		<table>
 			<tr>
-				<th>The Rule:</th>
+				<th>Piece Name:</th>
 				<td>
-					<input type="text" name="the_rule" value="{{ uprules[1] }}"/>
+					<input type="text" name="name" value="{{ upcaptures[1] }}"/>
 				</td>
 			</tr>
 			<tr>
-				<th>Made By:</th>
+				<th>Capture Direction:</th>
 				<td>
-					<input type="text" name="made_by" value="{{ uprules[2] }}"/>
+					<input type="text" name="capture_direction" value="{{ upcaptures[2] }}"/>
 				</td>
 			</tr>
 			<tr>
-				<th>Date:</th>
+				<th>Starting Point:</th>
 				<td>
-					<input type="text" name="date" value="{{ uprules[3] }}"/>
+					<input type="text" name="starting_place" value="{{ upcaptures[3] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Can it Start?:</th>
+				<td>
+					<input type="text" name="can_start" value="{{ upcaptures[4] }}"/>
 				</td>
 			</tr>
 		</table>
-		<input value="Update Rule" name="updaterules" type="submit"/>
+		<input value="Update Capture" name="updatecaptures" type="submit"/>
 	</form>
 
 	</body>
