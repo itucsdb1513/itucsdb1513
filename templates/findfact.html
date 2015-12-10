@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block title %}History of Chess{% endblock %}
 {% block content %}
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
 				<th>Number</th>
 				<th>Date</th>
@@ -17,4 +18,5 @@
 			</tr>
 			{% endfor %}
 		</table>
+		</div>
 {% endblock %}

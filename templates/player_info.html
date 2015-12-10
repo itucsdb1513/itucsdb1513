@@ -11,7 +11,8 @@
 	</form>
 
 
-        <table>
+        <div class="panel panel-default">
+	<table class="table">
         <tr>
         	<th> ID </th>
         	<th><a href="{{ url_for('players_page', key=1) }}"> Name</a> </th>
@@ -41,9 +42,11 @@
         	</tr>
         	{%endfor%}
         </table>
+        </div>
 
         <form id="addplayerinfo" action="{{ url_for('players_page') }}" method="post">
-        	<table>
+        	<div class="panel panel-default">
+	<table class="table">
         		<tr>
 				<th>Name: </th>
 				<td>
@@ -105,13 +108,15 @@
 				</td>
 			</tr>
 			</table>
+			</div>
 		<input value="Add Player" name="addplayer" type="submit"/>
 	</form>
 
 
 	<div id="divjav">
 	<form id="deljav" action="{{ url_for('players_page') }}" method="post">
-	<table>
+	<div class="panel panel-default">
+	<table class="table">
 		<tr>
 				<th>Name: </th>
 				<td>
@@ -125,11 +130,13 @@
 				</td>
 			</tr>
 			</table>
+			</div>
 		<input value="Delete Player" name="deleteplayer" type="submit"/>
 	</form>
 
 	<form id="deljav" action="{{ url_for('players_page') }}" method="post">
-	<table>
+	<div class="panel panel-default">
+	<table class="table">
 		<tr>
 				<th>ID:</th>
 				<td>
@@ -137,13 +144,15 @@
 				</td>
 		</tr>
 	</table>
+	</div>
 		<input value="Delete Player" name="deleteplayerwithid" type="submit"/>
 	</form>
 	</div>
 
 	<div id="findjav">
 	<form id="findjav" action="{{ url_for('players_page') }}" method="post">
-	<table>
+	<div class="panel panel-default">
+	<table class="table">
 		<tr>
 				<th>Name: </th>
 				<td>
@@ -157,6 +166,7 @@
 				</td>
 			</tr>
 			</table>
+			</div>
 		<input value="Find Player" name="findplayer" type="submit"/>
 	</form>
 

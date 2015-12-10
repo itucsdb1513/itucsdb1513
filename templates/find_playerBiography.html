@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block title %}Player Biographies{% endblock %}
 {% block content %}
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
         		<th> Name </th>
         		<th> Surname </th>
@@ -29,4 +30,5 @@
 			</tr>
 			{% endfor %}
 		</table>
+		</div>
 {% endblock %}

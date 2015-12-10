@@ -3,21 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <title>Upcoming Events</title>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
   	<nav>
-		<a href = "{{ url_for('home_page') }}">Home</a>
-  	 	<a href = "{{ url_for('localtour_page') }}">Local Tournaments</a>
-  		 <a href = "{{ url_for('rankings_page') }}">Rankings</a>
-  		 <a href = "{{ url_for('upcoming_events') }}">Upcoming Events</a>
-  		 <a href = "{{ url_for('history') }}">History</a>
-  		 <a href = "{{ url_for('rules_page') }}">Rules</a>
-  		 <a href = "/tournaments">Tournaments List</a>
-  		 <a href = "/count">Count</a>
+		<ul style="margin-left:250px;" class="nav nav-pills">
+  	 	 <li role="presentation" class="active"> <a style="text-decoration:none;" href = "{{ url_for('home_page') }}">Home</a></li>
+  	 	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rankings_page') }}">Rankings</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('upcoming_events') }}">Upcoming Events</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "/count">Count</a></li>
+  		</ul>
 	</nav>
 	<h1>Upcoming Events</h1>
-	<table>
+	<div class="panel panel-default">
+	<table class="table">
 		<tr>
 			<th>Number</th>
 			<th>Date</th>
@@ -35,9 +39,11 @@
 		</tr>
 		{% endfor %}
 	</table>
+	</div>
 
 	<form id="addira" action="{{ url_for('upcoming_events') }}" method="post">
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
 				<th>Date:</th>
 				<td>
@@ -63,13 +69,15 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		<input value="Add Event" name="addevent" type="submit"/>
 	</form>
 
 	<div id="divturkah">
 
 	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
 				<th>number:</th>
 				<td>
@@ -77,6 +85,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		<input value="Delete Event" name="deleteevent" type="submit"/>
 		<input value="Find Event" name="findevent" type="submit"/>
 	</form>
@@ -84,7 +93,8 @@
 
 	<div id="divturkah">
   <form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Date:</th>
         <td>
@@ -98,6 +108,7 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Delete Event" name="deleteevent1" type="submit"/>
     <input value="Find Event" name="findevent1" type="submit"/>
   </form>

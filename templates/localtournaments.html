@@ -8,7 +8,8 @@
   <h2>Local Players</h2>
   <p>Click on the name of player to update<br></p>
   <p>Find player by name or surname or both or id</p>
-  <table>
+  <div class="panel panel-default">
+	<table class="table">
     <tr>
       <th>ID</th>
         <th><a href="{{ url_for('localtour_page', key=1) }}">Name</a></th>
@@ -28,9 +29,11 @@
     </tr>
     {% endfor %}
   </table>
+  </div>
 
   <form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Name:</th>
         <td>
@@ -62,12 +65,14 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Add Player" name="addplayer" type="submit"/>
   </form>
 
   <div id="divturkah">
   <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Name:</th>
         <td>
@@ -81,12 +86,14 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Delete Player" name="deleteplayer" type="submit"/>
     <input value="Find Player" name="findplayer" type="submit"/>
   </form>
 
   <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>ID:</th>
         <td>
@@ -94,20 +101,22 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Delete Player" name="deleteplayerwithid" type="submit"/>
     <input value="Find Player" name="findplayerwithid" type="submit"/>
   </form>
   </div>
   </div>
-	
+
   <div style="background-color: #E9601A; width: 1px; margin-left:5px; margin-right:5px;"></div>
-	
+
   <div style="float:right;">
   <h2>Local Games</h2>
   <p>Click on the id of game to update<br></p>
   <p>1 = PlayerOne Wins, 2 = PlayerTwo Wins, 0 = Draw</p>
   <div style="display: flex;">
-    <table >
+   <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>ID</th>
           <th>PlayerOne</th>
@@ -123,10 +132,12 @@
       </tr>
       {% endfor %}
     </table>
+    </div>
   </div>
 
   <form id="addturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>PlayerOne:</th>
         <td>
@@ -158,12 +169,14 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Add Game" name="addgame" type="submit"/>
   </form>
 
   <div id="divturkah">
   <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Game ID:</th>
         <td>
@@ -171,11 +184,13 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Delete Game" name="deletegame" type="submit"/>
     <input value="Find Game" name="findgamebyid" type="submit"/>
   </form>
   <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Player ID:</th>
         <td>
@@ -183,12 +198,13 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Find Game" name="findgamebyplayer" type="submit"/>
   </form>
   </div>
   </div>
   </div>
-  
+
   <form id="delturkah" action="{{ url_for('localtour_page') }}" method="post">
     <input value="Initialize Table" name="initializeTable" type="submit"/>
   </form>

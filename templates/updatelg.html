@@ -2,7 +2,8 @@
 {% block title %}Local Tournaments{% endblock %}
 {% block content %}
 	<form id="addturkah" action="{{ url_for('updatelg_page', key=game[0]) }}" method="post">
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
 				<th>PlayerOne:</th>
 				<td>
@@ -36,6 +37,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		<input value="Update Game" name="updategame" type="submit"/>
 	</form>
 {% endblock %}

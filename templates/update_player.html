@@ -2,7 +2,8 @@
 {% block title %}Player Ranking{% endblock %}
 {% block content %}
 	<form id="addplayer" action="{{ url_for('update_ranking_page', key = player[0]) }}" method="post">
-		<table>
+		<div class="panel panel-default">
+	<table class="table">
 			<tr>
 				<th>Name:</th>
 				<td>
@@ -52,6 +53,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 		<input value="Update Player" name="updateplayer" type="submit"/>
 	</form>
 {% endblock %}

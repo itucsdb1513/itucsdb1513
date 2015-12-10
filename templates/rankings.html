@@ -11,7 +11,8 @@
 	</form>
 
 
-        <table>
+        <div class="panel panel-default">
+	<table class="table">
         <tr>
         	<th>ID </th>
         	<th><a href="{{ url_for('rankings_page', key=1) }}"> Name </a></th>
@@ -37,9 +38,11 @@
         	</tr>
         	{%endfor%}
         </table>
+        </div>
 
         <form id="addplayer" action="{{ url_for('rankings_page') }}" method="post">
-        	<table>
+        	<div class="panel panel-default">
+	<table class="table">
         		<tr>
 				<th>Name: </th>
 				<td>
@@ -89,12 +92,14 @@
 				</td>
 			</tr>
 			</table>
+			</div>
 		<input value="Add Player" name="addplayer" type="submit"/>
 	</form>
 
 	<div id="divjav">
 	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
-	<table>
+	<div class="panel panel-default">
+	<table class="table">
 		<tr>
 				<th>Name: </th>
 				<td>
@@ -108,12 +113,14 @@
 				</td>
 			</tr>
 			</table>
+			</div>
 		<input value="Delete Player" name="deleteplayer" type="submit"/>
 		<input value="Find Player" name="findplayer" type="submit"/>
 	</form>
 
 	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
-    <table>
+    <div class="panel panel-default">
+	<table class="table">
       <tr>
         <th>Player ID:</th>
         <td>
@@ -121,6 +128,7 @@
         </td>
       </tr>
     </table>
+    </div>
     <input value="Find Player" name="findplayerbyrating" type="submit"/>
   </form>
 
