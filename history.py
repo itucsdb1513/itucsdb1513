@@ -14,7 +14,7 @@ class facts:
             query = """CREATE TABLE IF NOT EXISTS history (
                         number serial PRIMARY KEY,
                         date text NOT NULL,
-                        place text NOT NULL,
+                        place text ,
                         fact text NOT NULL)"""
             cursor.execute(query)
 
@@ -33,14 +33,17 @@ class facts:
             query = """CREATE TABLE history (
                         number serial PRIMARY KEY,
                         date text NOT NULL,
-                        place text NOT NULL,
-                        fact text NOT NUL)"""
+                        place text ,
+                        fact text NOT NULL)"""
             cursor.execute(query)
 
             query = """INSERT INTO history (date, place, fact)
                         VALUES
                         ('6th century AD', 'India', 'Game generated'),
-                        ('15th century', 'Europe', 'Move of pieces changed')"""
+                        ('15th century', 'Europe', 'Move of pieces changed'),
+                        ('19th century', ,'Modern tournament play began'),
+                        ('1883', , 'Chess clock first used'),
+                        ('1886', , 'First world chess championship')"""
             cursor.execute(query)
 
             connection.commit()

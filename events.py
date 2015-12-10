@@ -42,7 +42,9 @@ class event:
             query = """INSERT INTO events (date, place, player1, player2)
                         VALUES
                         ('3.November', 'Tiran', 'Ira', 'Rei'),
-                        ('December', 'Istanbul', 'Javid', 'Ahmet')"""
+                        ('4.December', 'Istanbul', 'Javid', 'Ahmet'),
+                        ('10.December', 'Ankara', 'Mursit', 'Soner'),
+                        ('15.December', 'Istanbul', 'Mehmet', 'Elif')"""
             cursor.execute(query)
 
             connection.commit()
@@ -87,8 +89,7 @@ class event:
     def find_event(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
-            query = """SELECT * FROM events WHERE id = %s """ % (number)
+            query = """SELECT * FROM events WHERE number = %s """ % (number)
             cursor.execute(query)
             events = cursor.fetchall()
         return render_template('findevent.html', events = events)
