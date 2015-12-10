@@ -41,9 +41,9 @@ class facts:
                         VALUES
                         ('6th century AD', 'India', 'Game generated'),
                         ('15th century', 'Europe', 'Move of pieces changed'),
-                        ('19th century', ,'Modern tournament play began'),
-                        ('1883', , 'Chess clock first used'),
-                        ('1886', , 'First world chess championship')"""
+                        ('19th century', '..' ,'Modern tournament play began'),
+                        ('1883', '..' , 'Chess clock first used'),
+                        ('1886', '..', 'First world chess championship')"""
             cursor.execute(query)
 
             connection.commit()
