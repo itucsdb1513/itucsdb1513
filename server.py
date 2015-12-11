@@ -440,6 +440,21 @@ def upcoming_events():
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/update_event/<int:key>/', methods=['GET', 'POST'])
+def update_event(key = None):
+    page = event(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_update_event(id = key)
+    elif 'updateevent' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        player1 = request.form['player1']
+        player2 = request.form['player2']
+        return page.update_pieces(key, date, place, player1, player2)
+    else:
+        return redirect(url_for('home_page'))
+
+
 @app.route('/history', methods=['GET', 'POST'])
 def history():
     page = facts(dsn = app.config['dsn'])

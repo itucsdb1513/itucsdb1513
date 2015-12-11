@@ -10,7 +10,6 @@ class event:
     def open_page(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-
             query = """CREATE TABLE IF NOT EXISTS events (
                         number serial PRIMARY KEY,
                         date text NOT NULL,
