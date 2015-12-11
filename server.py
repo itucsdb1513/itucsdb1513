@@ -450,7 +450,7 @@ def update_event(key = None):
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.update_pieces(key, date, place, player1, player2)
+        return page.update_event(key, date, place, player1, player2)
     else:
         return redirect(url_for('home_page'))
 
