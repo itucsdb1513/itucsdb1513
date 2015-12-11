@@ -16,6 +16,7 @@ from rules import Rules
 from ranking import Ranking
 from history import facts
 from player_info import Player_info
+from benefit import Benefit
 
 app = Flask(__name__)
 
@@ -489,6 +490,46 @@ def history():
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/benefit', methods=['GET', 'POST'])
+def benefit_page():
+    page = Benefit(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'initializeTable2' in request.form:
+        return page.init_table2()
+    elif 'addbenefit' in request.form:
+        Benef = request.form['Benef']
+        Type = request.form['Type']
+        return page.addbenefit(Benef,Type)
+    elif 'addpeople' in request.form:
+        Name = request.form['Name']
+        HasBenefit = request.form['HasBenefit']
+        return page.addpeople(Name,HasBenefit)
+    elif 'deletebenefit' in request.form:
+        Benef = request.form['Benef']
+        return page.deletebenefit(Benef)
+    elif 'deletepeople' in request.form:
+        Name = request.form['Name']
+        return page.deletepeople(Name)
+    elif 'findbenefit' in request.form:
+        Benef = request.form['Benef']
+        return page.findbenefit(Benef)
+    elif 'findpeople' in request.form:
+        Name = request.form['Name']
+        return page.findpeople(Name)
+    elif 'updatebenefit' in request.form:
+        Benef = request.form['Benef']
+        new = request.form['new']
+        new2= request.form['new2']
+        return page.updatebenefit(Benef,new,new2)
+    elif 'updatepeople' in request.form:
+        Name = request.form['Name']
+        new = request.form['new']
+        return page.updatepeople(Name,new)
+    else:
+        return redirect(url_for('home_page'))
 
 
 

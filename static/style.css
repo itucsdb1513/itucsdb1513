@@ -91,3 +91,39 @@ br {
 #button {
   color: #0000ff;
 }
+#tablo1 {
+	margin-top: 20px;
+	margin-left: 20px;
+	display: inline-table;
+	border: 1px solid black;
+}
+
+tablo1, th, td {
+    border: 1px solid black;
+}
+tablo2, th, td {
+    border: 1px solid black;
+}
+sonucb, th, td {
+    border: 1px solid black;
+}
+
+
+#tablo2 {
+	margin-top: 20px;
+	margin-left: 20px;
+	display: inline-table;
+	border: 1px solid black;
+}
+
+#sonucb{
+	margin-top: 20px;
+	margin-left: 20px;
+
+
+}
+#baslab{
+	margin-top: 20px;
+	margin-left: 20px;
+
+}
