@@ -57,9 +57,9 @@ class Rules:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS pieces;
+            query = """DROP TABLE IF EXISTS pieces CASCADE;
                        DROP TABLE IF EXISTS rules_items;
-                       DROP TABLE IF EXISTS piece_captures"""
+                       DROP TABLE IF EXISTS piece_captures CASCADE"""
             cursor.execute(query)
 
             query = """CREATE TABLE pieces (
