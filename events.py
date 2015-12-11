@@ -52,6 +52,14 @@ class event:
 
 
 
+    def open_updateevent(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM events WHERE number  = %s" % (number)
+            cursor.execute(query)
+            event_up = cursor.fetchone()
+        return render_template('update_event.html', event_up = event_up)
+
     def addevent(self, date, place, player1, player2):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -84,6 +92,16 @@ class event:
             cursor.execute(query)
 
             connection.commit()
+        return redirect(url_for('upcoming_events'))
+
+    def update_event(self, number, date, place, player1, player2):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE events
+                        SET date = '%s', place = '%s',
+                            player1 = '%s', player2 = '%s'
+                        WHERE number = %s""" % (date, place, player1, player2, number)
+            cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
     def find_event(self, number):
