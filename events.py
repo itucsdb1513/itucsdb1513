@@ -6,6 +6,7 @@ from flask.helpers import url_for
 class event:
     def __init__(self, dsn):
         self.dsn = dsn;
+        return
 
     def open_page(self, sort = "number"):
         with dbapi2.connect(self.dsn) as connection:
