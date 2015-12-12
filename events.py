@@ -61,7 +61,7 @@ class event:
             event_up = cursor.fetchone()
         return render_template('update_event.html', event_up = event_up)
 
-    def addevent(self, date, place, player1, player2):
+    def addevent(self, date, place, player1, player2, championship):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
