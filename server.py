@@ -475,11 +475,6 @@ def history():
         date = request.form['date']
         place = request.form['place']
         return page.delete_fact(date, place)
-    elif 'update_fact' in request.form:
-        date = request.form['date']
-        place = request.form['place']
-        fact = request.form['fact']
-        return page.update_rules(date, place, fact)
     elif 'findfact' in request.form:
         number = request.form['number']
         return page.findfact(number)

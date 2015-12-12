@@ -100,7 +100,7 @@ class facts:
             history = cursor.fetchall()
         return render_template('findfact.html', history = history)
 
-    def open_updatefact(self, id):
+    def open_updatefact(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM history WHERE number  = %s" % (number)
@@ -118,14 +118,3 @@ class facts:
             cursor.execute(query)
         return redirect(url_for('history'))
 
-    def update_fact(self, date, place, fact):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-
-            query = """UPDATE history
-                        SET date = '%s', place = '%s',
-                            fact = %s
-                        WHERE id = %s""" % (date, place, fact)
-
-            cursor.execute(query)
-            connection.commit()
