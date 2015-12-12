@@ -28,16 +28,16 @@
     		<th>Place</th>
     		<th>Player 1</th>
     		<th>Player 2</th>
-    		<th>Championship</th>
+    		<td>Championship</td>
   		</tr>
-		{% for number, date, place, player1, player2, championship in events %}
+		{% for  number, date, place, player1,player2, champ in history %}
 		<tr>
 			<td>{{ number }}</td>
 			<td>{{ date }}</td>
 			<td>{{ place }}</td>
 			<td>{{ player1 }}</td>
 			<td>{{ player2 }}</td>
-			<td>{{ championship }}</td>
+			<td>{{ champ }}</td>
 			<td>
 				<a style=" text-decoration:none;" id="button" href="{{ url_for('update_event', key=number) }}" type="submit">Update Event</a>
 			</td>
@@ -76,7 +76,7 @@
 			<tr>
 				<th>Championship:</th>
 				<td>
-					<input type="text" name="championship"/>
+					<input type="text" name="champ"/>
 				</td>
 			</tr>
 		</table>
