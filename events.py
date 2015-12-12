@@ -128,6 +128,7 @@ class event:
 
             connection.commit()
         return redirect(url_for('upcoming_events'))
+
     def deletetour(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -191,7 +192,7 @@ class event:
             query = """SELECT * FROM tours WHERE number = %s """ % (number)
             cursor.execute(query)
             tours = cursor.fetchall()
-        return render_template('findevent.html', tours = tours)
+        return render_template('findtour.html', tours = tours)
 
     def find_event_name(self, date, place):
         with dbapi2.connect(self.dsn) as connection:
@@ -214,7 +215,7 @@ class event:
                         ORDER BY number """ % (cha, year)
             cursor.execute(query)
             tours = cursor.fetchall()
-        return render_template('findevent.html', tours = tours)
+        return render_template('findtour.html', tours = tours)
 
 
 
