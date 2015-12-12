@@ -499,6 +499,8 @@ def benefit_page():
         return page.init_table()
     elif 'initializeTable2' in request.form:
         return page.init_table2()
+    elif 'initializeTable3' in request.form:
+        return page.init_table3()
     elif 'addbenefit' in request.form:
         Benef = request.form['Benef']
         Type = request.form['Type']
@@ -516,9 +518,15 @@ def benefit_page():
     elif 'findbenefit' in request.form:
         Benef = request.form['Benef']
         return page.findbenefit(Benef)
+    elif 'findbenefitbytype' in request.form:
+        Type = request.form['Type']
+        return page.findbenefitbytype(Type)
     elif 'findpeople' in request.form:
         Name = request.form['Name']
         return page.findpeople(Name)
+    elif 'findpeoplebybenefit' in request.form:
+        HasBenefit = request.form['HasBenefit']
+        return page.findpeoplebybenefit(HasBenefit)
     elif 'updatebenefit' in request.form:
         Benef = request.form['Benef']
         new = request.form['new']
@@ -527,7 +535,28 @@ def benefit_page():
     elif 'updatepeople' in request.form:
         Name = request.form['Name']
         new = request.form['new']
-        return page.updatepeople(Name,new)
+        new2 = request.form['new2']
+        return page.updatepeople(Name,new,new2)
+    elif 'addrelation' in request.form:
+        ThePeople = request.form['ThePeople']
+        TheBenefit = request.form['TheBenefit']
+        duration = request.form['duration']
+        return page.addrelation(ThePeople,TheBenefit,duration)
+    elif 'deleterelation' in request.form:
+        ThePeople = request.form['ThePeople']
+        return page.deleterelation(ThePeople)
+    elif 'findrelation' in request.form:
+        ThePeople = request.form['ThePeople']
+        return page.findrelation(ThePeople)
+    elif 'findrelationbyduration' in request.form:
+        duration = request.form['duration']
+        return page.findrelationbyduration(duration)
+    elif 'updaterelation' in request.form:
+        ThePeople = request.form['ThePeople']
+        new = request.form['new']
+        new2= request.form['new2']
+        new3= request.form['new3']
+        return page.updaterelation(ThePeople,new,new2,new3)
     else:
         return redirect(url_for('home_page'))
 
