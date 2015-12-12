@@ -15,7 +15,8 @@ class event:
                         date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
-                        player2 text NOT NULL)"""
+                        player2 text NOT NULL,
+                        championship text NOT NULL)"""
             cursor.execute(query)
 
             query = "SELECT * FROM events"
@@ -35,15 +36,16 @@ class event:
                         date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
-                        player2 text NOT NULL)"""
+                        player2 text NOT NULL,
+                        championship text NOT NULL)"""
             cursor.execute(query)
 
-            query = """INSERT INTO events (date, place, player1, player2)
+            query = """INSERT INTO events (date, place, player1, player2, championship)
                         VALUES
-                        ('3.November', 'Tiran', 'Ira', 'Rei'),
-                        ('4.December', 'Istanbul', 'Javid', 'Ahmet'),
-                        ('10.December', 'Ankara', 'Mursit', 'Soner'),
-                        ('15.December', 'Istanbul', 'Mehmet', 'Elif')"""
+                        ('3.November', 'Tiran', 'Ira', 'Rei', 'Albanian'),
+                        ('4.December', 'Istanbul', 'Javid', 'Ahmet', 'Turkish'),
+                        ('10.December', 'Ankara', 'Mursit', 'Soner', 'European'),
+                        ('15.December', 'Istanbul', 'Mehmet', 'Elif', 'World')"""
             cursor.execute(query)
 
             connection.commit()
@@ -63,9 +65,9 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """INSERT INTO events (date, place, player1, player2)
+            query = """INSERT INTO events (date, place, player1, player2, championship)
                         VALUES
-                        ('%s', '%s', '%s', '%s')""" % (date, place, player1, player2)
+                        ('%s', '%s', '%s', '%s', '%s')""" % (date, place, player1, player2, championship)
             cursor.execute(query)
 
             connection.commit()
@@ -93,13 +95,13 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
-    def update_event(self, number, date, place, player1, player2):
+    def update_event(self, number, date, place, player1, player2, championship):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE events
                         SET date = '%s', place = '%s',
-                            player1 = '%s', player2 = '%s'
-                        WHERE number = %s""" % (date, place, player1, player2, number)
+                            player1 = '%s', player2 = '%s', championship = '%s'
+                        WHERE number = %s""" % (date, place, player1, player2, championship, number)
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 

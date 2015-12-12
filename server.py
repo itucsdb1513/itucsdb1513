@@ -423,7 +423,8 @@ def upcoming_events():
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.addevent(date, place, player1, player2)
+        championship = request.form['championship']
+        return page.addevent(date, place, player1, player2, championship)
     elif 'deleteevent' in request.form:
         number = request.form['number']
         return page.deleteevent(number)
@@ -451,7 +452,8 @@ def update_event(key = None):
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.update_event(key, date, place, player1, player2)
+        championship = request.form['championship']
+        return page.update_event(key, date, place, player1, player2, championship)
     else:
         return redirect(url_for('home_page'))
 
