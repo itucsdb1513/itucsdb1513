@@ -32,7 +32,7 @@
 		{% for  number, date, place, fact in history %}
 		<tr>
 			<td>{{ number }}</td>
-			<td>{{ date }}</td>
+			<td><a href="{{ url_for('updatefact_page', key=id) }}">{{ date }}</a></td>
 			<td>{{ place }}</td>
 			<td>{{ fact }}</td>
 		</tr>
@@ -109,7 +109,7 @@
 			</tr>
 		</table>
 		</div>
-		<input value="Update" name="updatefact" type="submit"/>
+		<input value="Update" name="update_fact" type="submit"/>
 		</form>
 		</div>
 

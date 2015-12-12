@@ -475,7 +475,7 @@ def history():
         date = request.form['date']
         place = request.form['place']
         return page.delete_fact(date, place)
-    elif 'updaterfact' in request.form:
+    elif 'update_fact' in request.form:
         date = request.form['date']
         place = request.form['place']
         fact = request.form['fact']
@@ -489,6 +489,20 @@ def history():
         return page.find_fact(date, place)
     else:
         return redirect(url_for('home_page'))
+
+@app.route('/updatefact/<int:key>/', methods=['GET', 'POST'])
+def updatefact_page(key = None):
+    page = facts(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatefact(id = key)
+    elif 'updatefact' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        fact = request.form['fact']
+        return page.fact_update(key, date, place, fact)
+    else:
+        return redirect(url_for('home_page'))
+
 
 @app.route('/benefit', methods=['GET', 'POST'])
 def benefit_page():

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+	<form id="addturkah" action="{{ url_for('updatefact_page', key=fact_up[0]) }}" method="post">
+		<div class="panel panel-default">
+	<table class="table">
+			<tr>
+				<th>Date:</th>
+				<td>
+					<input type="text" name="date" value="{{ fact_up[1] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Place:</th>
+				<td>
+					<input type="text" name="place" value="{{ fact_up[2] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Fact:</th>
+				<td>
+					<input type="text" name="fact" value="{{ fact_up[3] }}"/>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<input value="Update Fact" name="updatefact" type="submit"/>
+	</form>
+{% endblock %}
