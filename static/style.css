@@ -4,7 +4,7 @@ body {
   font-family: 'Droid Sans', 'Helvetica', 'sans';
   font-size: 12pt;
   margin: 2ex 2em;
-  background-image: url("Chess_board.jpg");
+  background-image: url("chess.jpg");
   background-repeat: no-repeat;
 }
 
@@ -52,7 +52,6 @@ nav li {
 	color: #E9601A;
 	margin-top: 25px;
 	display: inline-table;
-	background-color: lightblue;
 }
 
 
