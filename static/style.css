@@ -108,12 +108,21 @@ tablo1, th, td {
 tablo2, th, td {
     border: 1px solid black;
 }
+tablo3, th, td {
+    border: 1px solid black;
+}
 sonucb, th, td {
     border: 1px solid black;
 }
 
 
 #tablo2 {
+	margin-top: 20px;
+	margin-left: 20px;
+	display: inline-table;
+	border: 1px solid black;
+}
+#tablo3 {
 	margin-top: 20px;
 	margin-left: 20px;
 	display: inline-table;
