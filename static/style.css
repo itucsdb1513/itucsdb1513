@@ -5,7 +5,6 @@ body {
   font-size: 12pt;
   margin: 2ex 2em;
   background-image: url("chess.jpg");
-  background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4 {
