@@ -491,7 +491,7 @@ def history():
 def updatefact_page(key = None):
     page = facts(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_updatefact(id = key)
+        return page.open_updatefact(number = key)
     elif 'updatefact' in request.form:
         date = request.form['date']
         place = request.form['place']
