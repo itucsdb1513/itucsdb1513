@@ -127,5 +127,108 @@
 	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
 		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
+
+<div>
+<h1>Championships</h1>
+	<div class="panel panel-default">
+	<table class="table">
+		<tr>
+			<th>Number</th>
+			<th>Championship</th>
+    		<th>Year</th>
+    		<th>Total players</th>
+    		<th>Total games</th>
+  		</tr>
+		{% for  number, cha, year, players, games in tours %}
+		<tr>
+			<td>{{ number }}</td>
+			<td>{{ cha }}</td>
+			<td>{{ year }}</td>
+			<td>{{ players }}</td>
+			<td>{{ games }}</td>
+			<td>
+				<a style=" text-decoration:none;" id="button" href="{{ url_for('update_tour', key=number) }}" type="submit">Update Championship</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	</div>
+</div>
+
+<form id="addira" action="{{ url_for('upcoming_events') }}" method="post">
+		<div class="panel panel-default">
+	<table class="table">
+			<tr>
+				<th>Championship:</th>
+				<td>
+					<input type="text" name="cha"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Year:</th>
+				<td>
+					<input type="text" name="year"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Players:</th>
+				<td>
+					<input type="text" name="players"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Games:</th>
+				<td>
+					<input type="text" name="games"/>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<input value="Add Championship" name="addtour" type="submit"/>
+	</form>
+
+	<div id="divturkah">
+
+	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+		<div class="panel panel-default">
+	<table class="table">
+			<tr>
+				<th>number:</th>
+				<td>
+					<input type="text" name="number"/>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<input value="Delete Tour" name="deletetour" type="submit"/>
+		<input value="Find Event" name="findtour" type="submit"/>
+	</form>
+	</div>
+
+	<div id="divturkah">
+  <form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+    <div class="panel panel-default">
+	<table class="table">
+      <tr>
+        <th>Championship:</th>
+        <td>
+          <input type="text" name="cha"/>
+        </td>
+      </tr>
+      <tr>
+        <th>Year:</th>
+        <td>
+          <input type="text" name="year"/>
+        </td>
+      </tr>
+    </table>
+    </div>
+    <input value="Delete Event" name="deletetour1" type="submit"/>
+    <input value="Find Event" name="findtour1" type="submit"/>
+  </form>
+
+	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
+	</form>
   </body>
 </html>

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Championships{% endblock %}
+{% block content %}
+		<div class="panel panel-default">
+	<table class="table">
+		<tr>
+			<th>Number</th>
+			<th>Championship</th>
+    		<th>Year</th>
+    		<th>Total players</th>
+    		<th>Total games</th>
+  		</tr>
+		{% for  number, cha, year, players, games in tours %}
+		<tr>
+			<td>{{ number }}</td>
+			<td>{{ cha }}</td>
+			<td>{{ year }}</td>
+			<td>{{ players }}</td>
+			<td>{{ games }}</td>
+			</td>
+			</tr>
+			{% endfor %}
+		</table>
+		</div>
+{% endblock %}
+
