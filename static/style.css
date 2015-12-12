@@ -4,10 +4,13 @@ body {
   font-family: 'Droid Sans', 'Helvetica', 'sans';
   font-size: 12pt;
   margin: 2ex 2em;
+  background-image: url("Chess_board.jpg");
+  background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4 {
   color: #E9601A;
+  background-color: #ffffaa;
 }
 
 a {
@@ -49,6 +52,7 @@ nav li {
 	color: #E9601A;
 	margin-top: 25px;
 	display: inline-table;
+	background-color: lightblue;
 }
 
 

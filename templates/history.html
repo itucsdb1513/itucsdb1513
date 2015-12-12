@@ -32,7 +32,7 @@
 		{% for  number, date, place, fact in history %}
 		<tr>
 			<td>{{ number }}</td>
-			<td>{{ date }}</td>
+			<td><a href="{{ url_for('updatefact_page', key=number) }}">{{ date }}</a></td>
 			<td>{{ place }}</td>
 			<td>{{ fact }}</td>
 		</tr>
@@ -86,34 +86,7 @@
 	</div>
 
 
-<div>
-		  <form id="divrules" action="{{ url_for('history') }}" method="post" >
-		  <div class="panel panel-default">
-				<table class="table">
-				<th>New Date:</th>
-				<td>
-					<input type="text" name="date"/>
-				</td>
-			</tr>
-			<tr>
-				<th>New Place</th>
-				<td>
-					<input type="text" name="place"/>
-				</td>
-			</tr>
-			<tr>
-				<th>New Fact</th>
-				<td>
-					<input type="text" name="fact"/>
-				</td>
-			</tr>
-		</table>
-		</div>
-		<input value="Update" name="updatefact" type="submit"/>
-		</form>
-		</div>
-
-	<div>
+	<div id="divturkah">
 	<form id="delturkah" action="{{ url_for('history') }}" method="post">
     <div class="panel panel-default">
 				<table class="table">

@@ -423,7 +423,8 @@ def upcoming_events():
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.addevent(date, place, player1, player2)
+        champ = request.form['champ']
+        return page.addevent(date, place, player1, player2, champ)
     elif 'deleteevent' in request.form:
         number = request.form['number']
         return page.deleteevent(number)
@@ -451,7 +452,8 @@ def update_event(key = None):
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.update_event(key, date, place, player1, player2)
+        champ = request.form['champ']
+        return page.update_event(key, date, place, player1, player2, champ)
     else:
         return redirect(url_for('home_page'))
 
@@ -475,11 +477,6 @@ def history():
         date = request.form['date']
         place = request.form['place']
         return page.delete_fact(date, place)
-    elif 'updaterfact' in request.form:
-        date = request.form['date']
-        place = request.form['place']
-        fact = request.form['fact']
-        return page.update_rules(date, place, fact)
     elif 'findfact' in request.form:
         number = request.form['number']
         return page.findfact(number)
@@ -489,6 +486,20 @@ def history():
         return page.find_fact(date, place)
     else:
         return redirect(url_for('home_page'))
+
+@app.route('/updatefact/<int:key>/', methods=['GET', 'POST'])
+def updatefact_page(key = None):
+    page = facts(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatefact(number = key)
+    elif 'updatefact' in request.form:
+        date = request.form['date']
+        place = request.form['place']
+        fact = request.form['fact']
+        return page.fact_update(key, date, place, fact)
+    else:
+        return redirect(url_for('home_page'))
+
 
 @app.route('/benefit', methods=['GET', 'POST'])
 def benefit_page():

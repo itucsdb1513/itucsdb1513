@@ -76,7 +76,7 @@ class Rules:
 
                        CREATE TABLE piece_captures (
                         id serial PRIMARY KEY,
-                        name text NOT NULL REFERENCES pieces(piece_name),
+                        name text NOT NULL REFERENCES pieces(piece_name) ON DELETE RESTRICT,
                         capture_direction text NOT NULL,
                         starting_place text NOT NULL,
                         can_start text NOT NULL);"""
