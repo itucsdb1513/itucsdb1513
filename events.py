@@ -96,7 +96,7 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
-    def addetour(self, cha, year, players, games):
+    def addtour(self, cha, year, players, games):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
@@ -148,11 +148,11 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
-    def delete_tour(self, cha, year):
+    def delete_tour(self, cha):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """DELETE FROM tours WHERE cha = '%s'
-                        AND year = %s """ % (cha, year)
+                         """ % (cha)
             cursor.execute(query)
             connection.commit()
         return redirect(url_for('upcoming_events'))
@@ -174,7 +174,7 @@ class event:
             query = """UPDATE tours
                         SET cha = '%s', year = %s,
                             players = %s, games = %s
-                        WHERE number = %s""" % (cha, year, players, games, number)
+                        WHERE number = %s """ % (cha, year, players, games, number)
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
