@@ -51,7 +51,7 @@ class event:
 
             query = """CREATE TABLE tours (
                         number serial PRIMARY KEY,
-                        cha UNIQUE text NOT NULL,
+                        cha  text UNIQUE NOT NULL,
                         year integer NOT NULL,
                         players integer NOT NULL,
                         games integer NOT NULL)"""
