@@ -490,20 +490,46 @@ def upcoming_events():
         player2 = request.form['player2']
         champ = request.form['champ']
         return page.addevent(date, place, player1, player2, champ)
+    elif 'addtour' in request.form:
+        cha = request.form['cha']
+        year = request.form['year']
+        players = request.form['players']
+        games = request.form['games']
+        return page.addtour(cha, year, players, games)
     elif 'deleteevent' in request.form:
         number = request.form['number']
         return page.deleteevent(number)
+    elif 'deleteevent2' in request.form:
+        champ = request.form['champ']
+        return page.deleteevent_2(champ)
+    elif 'deletetour' in request.form:
+        number = request.form['number']
+        return page.deletetour(number)
     elif 'deleteevent1' in request.form:
         date = request.form['date']
         place = request.form['place']
         return page.delete_event(date, place)
+    elif 'deletetour1' in request.form:
+        cha = request.form['cha']
+        year = request.form['year']
+        return page.delete_tour(cha, year)
     elif 'findevent' in request.form:
         number = request.form['number']
-        return page.find_event(number)
+        return page.find_event(champ)
+    elif 'findevent2' in request.form:
+        champ = request.form['champ']
+        return page.find_event_2(champ)
+    elif 'findtour' in request.form:
+        number = request.form['number']
+        return page.find_tour(number)
     elif 'findevent1' in request.form:
         date = request.form['date']
         place = request.form['place']
         return page.find_event_name(date, place)
+    elif 'findtour1' in request.form:
+        cha = request.form['cha']
+        year = request.form['year']
+        return page.find_tour_name(cha, year)
     else:
         return redirect(url_for('home_page'))
 
@@ -519,6 +545,20 @@ def update_event(key = None):
         player2 = request.form['player2']
         champ = request.form['champ']
         return page.update_event(key, date, place, player1, player2, champ)
+    else:
+        return redirect(url_for('home_page'))
+
+@app.route('/update_tour/<int:key>/', methods=['GET', 'POST'])
+def update_tour(key = None):
+    page = event(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_update_tour(number = key)
+    elif 'updatetour' in request.form:
+        cha = request.form['cha']
+        year = request.form['year']
+        players = request.form['players']
+        games = request.form['games']
+        return page.update_tour(key, cha, year, players, games)
     else:
         return redirect(url_for('home_page'))
 
