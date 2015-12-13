@@ -611,7 +611,10 @@ def updatetour_page(key = None):
         return page.open_updatetour(number = key)
     elif 'updatetour' in request.form:
         cha = request.form['cha']
-        return page.tour_update(key, cha)
+        year = request.form['year']
+        players = request.form['players']
+        games = request.form['games']
+        return page.tour_update(key, cha, year, players, games)
     else:
         return redirect(url_for('home_page'))
 
