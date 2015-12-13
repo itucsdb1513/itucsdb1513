@@ -12,9 +12,10 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query1 = """SELECT * FROM events
+
+            query = """SELECT * FROM events
                 ORDER BY %s""" % sort
-            cursor.execute(query1)
+            cursor.execute(query)
             events = cursor.fetchall()
 
             query = """SELECT * FROM tours
