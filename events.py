@@ -173,7 +173,7 @@ class event:
             cursor = connection.cursor()
             query = """UPDATE tours
                         SET cha = '%s', year = %s,
-                            player = %s, games = %s
+                            players = %s, games = %s
                         WHERE number = %s""" % (cha, year, players, games, number)
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
