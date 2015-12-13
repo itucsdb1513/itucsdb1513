@@ -8,12 +8,12 @@ class Country:
         self.dsn = dsn
         return
 
-    def open_page(self, sort = "average"):
+    def open_page(self, sort = "id"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """SELECT * FROM countries_table
-                        ORDER BY %s DESC""" % sort
+                        ORDER BY %s""" % sort
             cursor.execute(query)
             countries = cursor.fetchall()
 
