@@ -8,16 +8,16 @@ class Ranking:
         self.dsn = dsn
         return
 
-    def open_page(self, sort = "rating"):
+    def open_page(self, sort = "id"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """SELECT * FROM worldplayers ORDER BY rating DESC"""
+            query = """SELECT * FROM worldplayers ORDER BY %s"""% sort
             cursor.execute(query)
             players = cursor.fetchall()
 
             query = """SELECT * FROM countries_table
-                        ORDER BY average DESC"""
+                        ORDER BY %s"""% sort
             cursor.execute(query)
             countries = cursor.fetchall()
         return render_template('rankings.html', players = players, countries = countries)
