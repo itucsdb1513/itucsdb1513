@@ -19,9 +19,9 @@ class event:
                         player1 text NOT NULL,
                         player2 text NOT NULL,
                         champ text NOT NULL references tours(cha)
-                        UNIQUE (date, player1, player2)
                         ON DELETE CASCADE
-                        ON UPDATE CASCADE)"""
+                        ON UPDATE CASCADE,
+                        UNIQUE (date, player1, player2))"""
             cursor.execute(query)
 
             query = """SELECT * FROM events
@@ -59,9 +59,9 @@ class event:
                         player1 text NOT NULL,
                         player2 text NOT NULL,
                         champ text NOT NULL references tours(cha)
-                        UNIQUE (date, player1, player2)
                         ON DELETE CASCADE
-                        ON UPDATE CASCADE);
+                        ON UPDATE CASCADE,
+                        UNIQUE (date, player1, player2));
 
                         CREATE TABLE tours (
                         number serial PRIMARY KEY,
