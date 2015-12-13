@@ -167,16 +167,6 @@ class event:
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
-    def fact_update(self, number, date, place, fact):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-            query = """UPDATE history
-                        SET date = '%s', place = '%s',
-                            fact = '%s'
-                        WHERE number = %s""" % (date, place, fact, number)
-            cursor.execute(query)
-        return redirect(url_for('history'))
-
 
     def tour_update(self, number, cha, year, players, games):
         with dbapi2.connect(self.dsn) as connection:
