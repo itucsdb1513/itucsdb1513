@@ -115,7 +115,7 @@ class event:
                         VALUES
                         ('%s', '%s', '%s', '%s', '%s')""" % (date, place, player1, player2, champ)
             cursor.execute(query)
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def addtour(self, cha, year, players, games):
@@ -126,7 +126,7 @@ class event:
                         VALUES
                         ('%s', %s, %s, %s)""" % (cha, year, players, games)
             cursor.execute(query)
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
 
@@ -137,7 +137,7 @@ class event:
             query = """DELETE FROM events WHERE number = '%s' """ % (number)
             cursor.execute(query)
 
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def deleteevent_2(self, champ):
@@ -179,15 +179,25 @@ class event:
             cursor.close()
         return redirect(url_for('upcoming_events'))
 
-    def update_event(self, number, date, place, player1, player2):
+    def update_event(self, number, date, place, player1, player2, champ):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE events
                         SET date = '%s', place = '%s', player1 = '%s',
-                            player2 = '%s'
-                        WHERE number = %s""" % (date, place, player1, player2, number)
+                            player2 = '%s' ,champ = '%s'
+                        WHERE number = %s""" % (date, place, player1, player2, champ, number)
             cursor.execute(query)
-        return redirect(url_for('upcoming_events'))
+
+            query = "SELECT date, place, player1, player2, champ FROM events"
+            cursor.execute(query)
+            event = cursor.fetchall()
+
+            query = "SELECT cha, year, players, games FROM tours"
+            cursor.execute(query)
+            tours = cursor.fetchall()
+
+            cursor.close()
+        return redirect(url_for('upcoming_events'), event=event, tours=tours)
 
 
     def tour_update(self, number, cha, year, players, games):
@@ -198,7 +208,17 @@ class event:
                             players = %s, games = %s
                         WHERE number = %s """ % (cha, year, players, games, number)
             cursor.execute(query)
-        return redirect(url_for('upcoming_events'))
+
+            query = "SELECT cha, year, players, games FROM tours"
+            cursor.execute(query)
+            tours = cursor.fetchall()
+
+            query = "SELECT date, place, player1, player2, champ FROM events"
+            cursor.execute(query)
+            event = cursor.fetchall()
+
+            cursor.close()
+        return redirect(url_for('upcoming_events'), tours = tours, event = event)
 
     def find_event(self, number):
         with dbapi2.connect(self.dsn) as connection:
@@ -206,6 +226,7 @@ class event:
             query = """SELECT * FROM events WHERE number = %s """ % (number)
             cursor.execute(query)
             events = cursor.fetchall()
+            cursor.close()
         return render_template('findevent.html', events = events)
 
     def find_event_2(self, champ):
@@ -214,6 +235,7 @@ class event:
             query = """SELECT * FROM events WHERE champ LIKE '%s%%' """ % (champ)
             cursor.execute(query)
             events = cursor.fetchall()
+            cursor.close()
         return render_template('findevent.html', events = events)
 
     def find_event_name(self, date, place):
@@ -226,6 +248,7 @@ class event:
                         ORDER BY number """ % (date, place)
             cursor.execute(query)
             events = cursor.fetchall()
+            cursor.close()
         return render_template('findevent.html', events = events)
 
     def find_tour(self, number):
@@ -234,6 +257,7 @@ class event:
             query = """SELECT * FROM tours WHERE number = %s """ % (number)
             cursor.execute(query)
             tours = cursor.fetchall()
+            cursor.close()
         return render_template('find_tour.html', tours = tours)
 
     def find_tour_name(self, cha):
@@ -244,4 +268,5 @@ class event:
                         ORDER BY number """ % (cha)
             cursor.execute(query)
             tours = cursor.fetchall()
+            cursor.close()
         return render_template('find_tour.html', tours = tours)
