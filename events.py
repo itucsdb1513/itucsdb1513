@@ -39,7 +39,7 @@ class event:
                         player1 text NOT NULL,
                         player2 text NOT NULL,
                         champ text NOT NULL,
-                        UNIQUE (player1, player2));
+                        UNIQUE (date, player1, player2));
 
                         CREATE TABLE tours (
                         number serial PRIMARY KEY,
