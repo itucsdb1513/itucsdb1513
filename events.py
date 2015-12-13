@@ -76,14 +76,14 @@ class event:
         return render_template('update_event.html', event_up = event_up)
 
 
-
     def open_updatetour(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM tours WHERE number  = %s" % (number)
             cursor.execute(query)
             tour_up = cursor.fetchone()
-        return render_template('update_tour.html', tour_up = tour_up)
+        return render_template('updatetour.html', tour_up = tour_up)
+
 
     def addevent(self, date, place, player1, player2, champ):
         with dbapi2.connect(self.dsn) as connection:
@@ -167,7 +167,15 @@ class event:
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
-
+    def fact_update(self, number, date, place, fact):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE history
+                        SET date = '%s', place = '%s',
+                            fact = '%s'
+                        WHERE number = %s""" % (date, place, fact, number)
+            cursor.execute(query)
+        return redirect(url_for('history'))
 
 
     def tour_update(self, number, cha, year, players, games):
