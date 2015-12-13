@@ -8,15 +8,31 @@ class event:
         self.dsn = dsn;
         return
 
-    def open_page(self, sort = "number"):
+     def open_page(self, sort = "number"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
+            query = """CREATE TABLE IF NOT EXISTS events (
+                        number serial PRIMARY KEY,
+                        date text UNIQUE NOT NULL,
+                        place text NOT NULL,
+                        player1 text NOT NULL,
+                        player2 text NOT NULL,
+                        champ text NOT NULL)"""
+            cursor.execute(query)
 
             query = """SELECT * FROM events
                 ORDER BY %s""" % sort
             cursor.execute(query)
             events = cursor.fetchall()
+
+            query = """CREATE TABLE IF NOT EXISTS tours (
+                        number serial PRIMARY KEY,
+                        cha text NOT NULL,
+                        year integer NOT NULL,
+                        players integer NOT NULL,
+                        games integer NOT NULL)"""
+            cursor.execute(query)
 
             query = """SELECT * FROM tours
                 ORDER BY %s""" % sort
