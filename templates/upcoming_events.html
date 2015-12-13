@@ -145,9 +145,6 @@
     <input value="Find Event" name="findevent1" type="submit"/>
   </form>
 
-	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
-	<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
-	</form>
 
 <div>
 <h1>Championships</h1>
@@ -166,7 +163,7 @@
 		{% for  number, cha, year, players, games in tours %}
 		<tr>
 			<td>{{ number }}</td>
-			<td><a href="{{ url_for('updatetour_page', key=number) }}">{{ cha }}</a></td>
+			<td><a href="{{ url_for('updatetour_page', key=number) }}"><mark>{{ cha }}</mark></a></td>
 			<td>{{ year }}</td>
 			<td>{{ players }}</td>
 			<td>{{ games }}</td>
@@ -242,9 +239,7 @@
     <input value="Find Tour" name="findtour1" type="submit"/>
   </form>
 
-	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
-	<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
-	</form>
+	
 
 
 	</form>
