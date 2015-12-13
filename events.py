@@ -238,4 +238,4 @@ class event:
                          ORDER BY number """ % (cha)
              cursor.execute(query)
              tours = cursor.fetchall()
-         return render_template('find_tour.html', tours = tours
+         return render_template('find_tour.html', tours = tours)
