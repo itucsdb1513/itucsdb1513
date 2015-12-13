@@ -7,18 +7,18 @@ class Country:
     def __init__(self, dsn):
         self.dsn = dsn
         return
-    
-    def open_page(self, sort = "id"):
+
+    def open_page(self, sort = "average"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """SELECT * FROM countries_table
-                        ORDER BY %s""" % sort
+                        ORDER BY %s DESC""" % sort
             cursor.execute(query)
             countries = cursor.fetchall()
 
         return render_template('countries.html', countries = countries)
-    
+
     def open_updatecountries(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -26,7 +26,7 @@ class Country:
             cursor.execute(query)
             countries = cursor.fetchone()
         return render_template('updatecountriespage.html', countries = countries)
-    
+
     def init_table(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -58,7 +58,7 @@ class Country:
 
             connection.commit()
         return redirect(url_for('countries_page'))
-    
+
     def add_country(self, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -70,7 +70,7 @@ class Country:
 
             connection.commit()
         return redirect(url_for('countries_page'))
-    
+
     def delete_country(self, country_name):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -79,7 +79,7 @@ class Country:
             connection.commit()
 
         return redirect(url_for('countries_page'))
-    
+
     def update_countries(self, id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -89,7 +89,7 @@ class Country:
                         WHERE id = %s""" % (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating, id)
             cursor.execute(query)
         return redirect(url_for('countries_page'))
-    
+
     def find_country(self, country_name):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()

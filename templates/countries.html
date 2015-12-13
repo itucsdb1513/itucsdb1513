@@ -1,3 +1,8 @@
+{%extends "layout.html"%}
+
+{%block title%}Rankings{%endblock%}
+
+{%block content%}
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,20 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body >
-  	<nav>
-		<ul style="margin-left:250px;" class="nav nav-pills">
-  	 	 <li role="presentation" class="active"> <a style="text-decoration:none;" href = "{{ url_for('home_page') }}">Home</a></li>
-  	 	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rankings_page') }}">Rankings</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('upcoming_events') }}">Upcoming Events</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
-    	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('countries_page') }}">Countries</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "/count">Count</a></li>
-  		</ul>
-
-	</nav>
+  	
 	<h1  style="margin-left:450px; margin-top: 25px;">Ratings and Countries</h1>
 	<div style="display: table;">
   	<div style="float:left; margin-right: 50px; margin-left: 100px;">
@@ -31,27 +23,25 @@
   <div class="panel-heading">FIDE Countries Rating</div>
 	<table class="table">
 		<tr>
-			<th>ID</th>
+			<th>FIDE Country Rank</th>
 			<th>Country</th>
     		<th>Average of Top 10 players</th>
     		<th>Grand Masters</th>
     		<th>International Masters</th>
     		<th>Total Titled</th>
     		<th>Total Number of Top 100 players</th>
-    		<th>FIDE Country Rank</th>
     		<th>Highest Ranked Player</th>
     		<th>Rating of the Highest Ranked Player</th>
   		</tr>
 		{% for id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating in countries %}
 		<tr>
-			<td>{{ id }}</td>
+			<td>{{ country_rank }}</td>
 			<td>{{ country_name }}</td>
 			<td>{{ average }}</td>
 			<td>{{ gm }}</td>
 			<td>{{ im }}</td>
 			<td>{{ total_titled }}</td>
 			<td>{{ total_top }}</td>
-			<td>{{ country_rank }}</td>
 			<td>{{ best_player}}</td>
 			<td>{{ highest_rating }}</td>
 			<td>
@@ -172,3 +162,4 @@
 
   </body>
 </html>
+{%endblock%}
