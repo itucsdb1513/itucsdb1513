@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Update EventRules</title>
+    <title>Update Event</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
@@ -22,9 +22,9 @@
   		</ul>
 
 	</nav>
-	<form id="update" action="{{ url_for('update_event_page', key=upevent[0]) }}" method="post">
+	<form id="addturkah" action="{{ url_for('update_event_page', key=upevent[0]) }}" method="post">
 		<div class="panel panel-default">
-  		<div class="panel-heading">Update Rule</div>
+  		<div class="panel-heading">Update Event</div>
 		<table class="table">
 			<tr>
 				<th>Date:</th>

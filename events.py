@@ -73,7 +73,7 @@ class event:
             query = "SELECT * FROM events WHERE number  = %s" % (number)
             cursor.execute(query)
             upevent = cursor.fetchone()
-        return render_template('updateeventspage.html', upevent = upevent)
+        return render_template('updateeventpage.html', upevent = upevent)
 
 
     def open_updatetour(self, number):
