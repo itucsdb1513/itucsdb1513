@@ -21,7 +21,6 @@
   		</ul>
 	</nav>
 	<h1  style="margin-left:450px; margin-top: 25px;">Rankings of Countries and Top Players </h1>
-	
 	<div style="display: table;">
   	<div style="float:left; margin-right: 50px; margin-left: 100px;">
 	<h2	id="subhead" >Player Ratings</h2>
@@ -36,14 +35,14 @@
 	<table class="table">
         <tr>
         	<th>ID </th>
-        	<th><a href="{{ url_for('rankings_page', key=1) }}"> Name </a></th>
-        	<th><a href="{{ url_for('rankings_page', key=2) }}"> Surname </a></th>
-        	<th><a href="{{ url_for('rankings_page', key=3) }}"> Country </a></th>
-        	<th><a href="{{ url_for('rankings_page', key=4) }}"> Club</a> </th>
-        	<th><a href="{{ url_for('rankings_page', key=5) }}"> Age</a> </th>
-        	<th><a href="{{ url_for('rankings_page', key=6) }}"> Rating</a> </th>
-        	<th><a href="{{ url_for('rankings_page', key=7) }}"> World Ranking</a> </th>
-        	<th><a href="{{ url_for('rankings_page', key=8) }}"> Gender</a> </th>
+        	<th> Name </th>
+        	<th> Surname </th>
+        	<th> Country </th>
+        	<th> Club </th>
+        	<th> Age </th>
+        	<th> Rating </th>
+        	<th> World Ranking </th>
+        	<th> Gender </th>
         </tr>
         	{% for id, name, surname,country, club, rating, ranking, age, gender in players %}
         	<tr>
@@ -57,8 +56,8 @@
         		<td> {{ranking}}</td>
         		<td> {{gender}}</td>
         		<td>
-				<a style=" text-decoration:none;" id="button" href="{{ url_for('update_ranking_page', key=id) }}" type="submit">Update</a>
-			</td>
+					<a style=" text-decoration:none;" id="button" href="{{ url_for('update_ranking_page', key=id) }}" type="submit">Update</a>
+				</td>
         	</tr>
         	{%endfor%}
         </table>
@@ -121,12 +120,13 @@
 			<button type="submit" name="addplayer" class="btn btn-default">Add Player</button>
 	</form>
 
-	<div id="divjav">
-	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
-	<div class="panel panel-default">
-	<div class="panel-heading">Delete or Find Player</div>
+	<div id="divrules">
+	<form id="delrules" action="{{ url_for('rankings_page') }}" method="post">
+
+		<div class="panel panel-default">
+  <div class="panel-heading">Delete or Find Player</div>
 	<table class="table">
-		<tr>
+			<tr>
 				<th>Name: </th>
 				<td>
 					<input type="text" name="name"/>
@@ -138,26 +138,13 @@
 					<input type="text" name="surname"/>
 				</td>
 			</tr>
-			</table>
-			</div>
-			<button type="submit" name="deleteplayer" class="btn btn-default">Delete Player</button>
+		</table>
+	</div>
+		<button type="submit" name="deleteplayer" class="btn btn-default">Delete Player</button>
 		<button type="submit" name="findplayer" class="btn btn-default">Find Player</button>
 	</form>
+	</div>
 
-	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
-    <div class="panel panel-default">
-	<table class="table">
-      <tr>
-        <th>Player ID:</th>
-        <td>
-          <input type="text" name="id"/>
-        </td>
-      </tr>
-    </table>
-    </div>
-    <input value="Find Player" name="findplayerbyrating" type="submit"/>
-  </form>
-  
   <div style="float:right; margin-left: 100px;">
 		<h2	id="subhead" >Countries Rating</h2>
 	<div class="panel panel-default">
@@ -192,7 +179,7 @@
 		{% endfor %}
 	</table>
 	</div>
-	
+
 	<form id="addingcountry" action="{{ url_for('countries_page') }}" method="post">
 		<div class="panel panel-default">
   <div class="panel-heading">Add Country</div>
@@ -256,12 +243,12 @@
 	</div>
 		<button type="submit" name="addcountry" class="btn btn-default">Add Country</button>
 	</form>
-	
-	<div id="divcountries">
-	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+
+	<div id="divrules">
+	<form id="delrules" action="{{ url_for('countries_page') }}" method="post">
 
 		<div class="panel panel-default">
-  <div class="panel-heading">Find Country</div>
+  <div class="panel-heading">Delete or Find Country</div>
 	<table class="table">
 			<tr>
 				<th>Country Name:</th>
@@ -272,31 +259,16 @@
 		</table>
 	</div>
 		<button type="submit" name="findcountry" class="btn btn-default">Find Country</button>
+		<button type="submit" name="deletecountry" class="btn btn-default">Delete Country</button>
 	</form>
 	</div>
 
 	<div id="divcountries">
 	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
 
-		<div class="panel panel-default">
-  <div class="panel-heading">Delete Country</div>
-	<table class="table">
-			<tr>
-				<th>Country Name:</th>
-				<td>
-					<input type="text" name="country_name"/>
-				</td>
-			</tr>
-		</table>
-	</div>
-		<button type="submit" name="deletecountry" class="btn btn-default">Delete Country</button>
-	</form>
-	</div>
-	
 	<form id="delrules" action="{{ url_for('countries_page') }}" method="post">
 		<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
 	</form>
 	</div>
-  
-  
-  
+
+
