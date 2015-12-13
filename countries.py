@@ -19,6 +19,7 @@ class Country:
 
         return render_template('countries.html', countries = countries)
 
+
     def open_updatecountries(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
