@@ -8,7 +8,7 @@ class event:
         self.dsn = dsn;
         return
 
-     def open_page(self, sort = "number"):
+    def open_page(self, sort = "number"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
