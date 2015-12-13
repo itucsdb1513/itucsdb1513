@@ -62,7 +62,14 @@ class event:
                        DROP TABLE IF EXISTS tours CASCADE"""
             cursor.execute(query)
 
-            query = """CREATE TABLE events (
+            query = """CREATE TABLE tours (
+                        number serial PRIMARY KEY,
+                        cha UNIQUE text NOT NULL,
+                        year integer NOT NULL,
+                        players integer NOT NULL,
+                        games integer NOT NULL);
+
+                        CREATE TABLE events (
                         number serial PRIMARY KEY,
                         date text NOT NULL,
                         place text NOT NULL,
@@ -71,28 +78,23 @@ class event:
                         champ text NOT NULL references tours(cha)
                         ON DELETE CASCADE
                         ON UPDATE CASCADE,
-                        UNIQUE (date, player1, player2));
-
-                        CREATE TABLE tours (
-                        number serial PRIMARY KEY,
-                        cha UNIQUE text NOT NULL,
-                        year integer NOT NULL,
-                        players integer NOT NULL,
-                        games integer NOT NULL);"""
+                        UNIQUE (date, player1, player2));"""
             cursor.execute(query)
 
-            query = """INSERT INTO events (date, place, player1, player2, champ)
+            query = """INSERT INTO tours (cha, year, players, games)
+                        VALUES
+                        ('World', 2016, 24, 72),
+                        ('European', 2017, 16, 36),
+                        ('Asian', 2016, 16, 36),
+                        ('Albanian', 2016, 16, 36),
+                        ('Turkish', 2016, 16, 36);
+
+                        INSERT INTO events (date, place, player1, player2, champ)
                         VALUES
                         ('3.November', 'Tiran', 'Ira', 'Rei', 'Albanian'),
                         ('4.December', 'Istanbul', 'Javid', 'Ahmet', 'Turkish'),
                         ('10.December', 'Ankara', 'Mursit', 'Soner', 'European'),
-                        ('15.December', 'Istanbul', 'Mehmet', 'Elif', 'World');
-
-                        INSERT INTO tours (cha, year, players, games)
-                        VALUES
-                        ('World', 2016, 24, 72),
-                        ('European', 2017, 16, 36),
-                        ('Asian', 2016, 16, 36)"""
+                        ('15.December', 'Istanbul', 'Mehmet', 'Elif', 'World');"""
             cursor.execute(query)
             connection.commit()
         return redirect(url_for('upcoming_events'))
