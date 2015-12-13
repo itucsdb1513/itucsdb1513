@@ -598,7 +598,7 @@ def update_event_page(key = None):
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.update_rules(key, date, place, player1, player2)
+        return page.update_event(key, date, place, player1, player2)
     else:
         return redirect(url_for('home_page'))
 
