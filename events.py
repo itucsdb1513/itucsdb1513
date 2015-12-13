@@ -214,17 +214,12 @@ class event:
             tours = cursor.fetchall()
         return render_template('find_tour.html', tours = tours)
 
-    def find_tour_name(self, cha, date):
+    def find_tour_name(self, cha):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """SELECT * FROM tours
                         WHERE cha LIKE '%s%%'
-                          OR year = %s
-                        ORDER BY number """ % (cha, year)
+                        ORDER BY number """ % (cha)
             cursor.execute(query)
             tours = cursor.fetchall()
         return render_template('find_tour.html', tours = tours)
-
-
-
-

@@ -581,10 +581,10 @@ def upcoming_events():
         return page.find_event_name(date, place)
     elif 'findtour1' in request.form:
         cha = request.form['cha']
-        year = request.form['year']
-        return page.find_tour_name(cha, year)
+        return page.find_tour_name(cha)
     else:
         return redirect(url_for('home_page'))
+
 
 @app.route('/update_event/<int:key>/', methods=['GET', 'POST'])
 def update_event(key = None):
