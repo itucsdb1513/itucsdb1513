@@ -54,15 +54,16 @@ class event:
                         cha UNIQUE text NOT NULL,
                         year integer NOT NULL,
                         players integer NOT NULL,
-                        games integer NOT NULL);
+                        games integer NOT NULL)"""
+            cursor.execute(query)
 
-                        CREATE TABLE events (
+            query = """CREATE TABLE events (
                         number serial PRIMARY KEY,
                         date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL);"""
+                        champ text NOT NULL)"""
             cursor.execute(query)
 
             query = """INSERT INTO tours (cha, year, players, games)
