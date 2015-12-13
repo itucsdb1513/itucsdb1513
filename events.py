@@ -42,13 +42,14 @@ class event:
                 ORDER BY %s""" % sort
             cursor.execute(query)
             tours = cursor.fetchall()
+
         return render_template('upcoming_events.html', events = events, tours = tours)
 
     def init_table(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS events CASCADE;
+            query = """DROP TABLE IF EXISTS events CASCADE,
                        DROP TABLE IF EXISTS tours CASCADE"""
             cursor.execute(query)
 

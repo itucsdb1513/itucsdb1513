@@ -10,8 +10,8 @@ class Benefit:
     def open_page(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-            
-            
+
+
             query = """CREATE TABLE IF NOT EXISTS benefit (
                         ID serial PRIMARY KEY,
                         Benef text UNIQUE NOT NULL,
