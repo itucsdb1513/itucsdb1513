@@ -49,7 +49,7 @@ class Ranking:
                         id serial PRIMARY KEY,
                         name text NOT NULL,
                         surname text NOT NULL,
-                        country text NOT NULL ,
+                        country text NOT NULL REFERENCES countries_table(country_name),
                         club text NOT NULL,
                         rating integer DEFAULT 0,
                         ranking integer DEFAULT 0,
@@ -58,19 +58,22 @@ class Ranking:
                         UNIQUE (name, surname))"""
             cursor.execute(query)
 
-            query = """INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
-                        VALUES
-                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2850, 1, 25, 'MALE'),
-                        ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN', 'SOCAR BAKU', 2739, 22, 28, 'MALE'),
-                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU', 2746, 20, 30, 'MALE');
-
-                        INSERT INTO countries_table (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+            query = """INSERT INTO countries_table (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
                         VALUES
                         ('RUSSIA', 2740, 231, 522, 2390, 24, 1, 'Vladimir Kramnik', 2796),
                         ('CHINA', 2714, 37, 31, 143, 7, 2, 'Liren Ding', 2776),
                         ('UKRAINE', 2690, 87, 198, 523, 9, 3, 'Pavel Eljanov', 2763),
                         ('AZERBAIJAN', 2645, 24, 22, 120, 3, 9, 'Shakhriyar Mamedyarov', 2748),
-                        ('NORWAY', 2564, 11, 31, 118, 1, 23, 'Magnus Carlsen', 2834)"""
+                        ('NORWAY', 2564, 11, 31, 118, 1, 23, 'Magnus Carlsen', 2834);
+
+
+
+
+                        INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
+                        VALUES
+                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2850, 1, 25, 'MALE'),
+                        ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN', 'SOCAR BAKU', 2739, 22, 28, 'MALE'),
+                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU', 2746, 20, 30, 'MALE')"""
             cursor.execute(query)
 
             connection.commit()
