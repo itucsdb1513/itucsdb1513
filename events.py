@@ -12,6 +12,29 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
+            query = """DROP TABLE IF EXISTS events"""
+            cursor.execute(query)
+
+            query = """DROP TABLE IF EXISTS tours"""
+            cursor.execute(query)
+
+
+
+            query = """CREATE TABLE IF NOT EXISTS tours (
+                        number serial PRIMARY KEY,
+                        cha text UNIQUE NOT NULL,
+                        year integer NOT NULL,
+                        players integer NOT NULL,
+                        games integer NOT NULL)"""
+            cursor.execute(query)
+            benefit = cursor.fetchall()
+
+            query = """SELECT * FROM tours
+                ORDER BY %s""" % sort
+            cursor.execute(query)
+            tours = cursor.fetchall()
+
+
             query = """CREATE TABLE IF NOT EXISTS events (
                         number serial PRIMARY KEY,
                         date text UNIQUE NOT NULL,
@@ -28,20 +51,6 @@ class event:
                 ORDER BY %s""" % sort
             cursor.execute(query)
             events = cursor.fetchall()
-
-            query = """CREATE TABLE IF NOT EXISTS tours (
-                        number serial PRIMARY KEY,
-                        cha text UNIQUE NOT NULL,
-                        year integer NOT NULL,
-                        players integer NOT NULL,
-                        games integer NOT NULL)"""
-            cursor.execute(query)
-            benefit = cursor.fetchall()
-
-            query = """SELECT * FROM tours
-                ORDER BY %s""" % sort
-            cursor.execute(query)
-            tours = cursor.fetchall()
 
         return render_template('upcoming_events.html', events = events, tours = tours)
 
