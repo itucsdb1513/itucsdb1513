@@ -18,7 +18,10 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL)"""
+                        champ text NOT NULL references tours(cha)
+                        UNIQUE (date, player1, player2)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE)"""
             cursor.execute(query)
 
             query = """SELECT * FROM events
@@ -28,11 +31,12 @@ class event:
 
             query = """CREATE TABLE IF NOT EXISTS tours (
                         number serial PRIMARY KEY,
-                        cha text NOT NULL,
+                        cha text UNIQUE NOT NULL,
                         year integer NOT NULL,
                         players integer NOT NULL,
                         games integer NOT NULL)"""
             cursor.execute(query)
+            benefit = cursor.fetchall()
 
             query = """SELECT * FROM tours
                 ORDER BY %s""" % sort
@@ -44,8 +48,8 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS events;
-                       DROP TABLE IF EXISTS tours"""
+            query = """DROP TABLE IF EXISTS events CASCADE;
+                       DROP TABLE IF EXISTS tours CASCADE"""
             cursor.execute(query)
 
             query = """CREATE TABLE events (
@@ -54,12 +58,14 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL,
-                        UNIQUE (date, player1, player2));
+                        champ text NOT NULL references tours(cha)
+                        UNIQUE (date, player1, player2)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE);
 
                         CREATE TABLE tours (
                         number serial PRIMARY KEY,
-                        cha text NOT NULL,
+                        cha UNIQUE text NOT NULL,
                         year integer NOT NULL,
                         players integer NOT NULL,
                         games integer NOT NULL);"""
