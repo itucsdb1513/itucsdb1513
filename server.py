@@ -20,7 +20,7 @@ from benefit import Benefit
 from countries import Country
 
 app = Flask(__name__)
-
+app.config['DEBUG'] = True
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
