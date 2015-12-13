@@ -27,7 +27,7 @@ class event:
                         players integer NOT NULL,
                         games integer NOT NULL)"""
             cursor.execute(query)
-            benefit = cursor.fetchall()
+            tours = cursor.fetchall()
 
             query = """SELECT * FROM tours
                 ORDER BY %s""" % sort
