@@ -453,7 +453,7 @@ def upcoming_events():
         return page.find_event(champ)
     elif 'findevent2' in request.form:
         champ = request.form['champ']
-        return page.find_event_2(number)
+        return page.find_event_2(champ)
     elif 'findtour' in request.form:
         number = request.form['number']
         return page.find_tour(number)
