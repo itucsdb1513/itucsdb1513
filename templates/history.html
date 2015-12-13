@@ -21,7 +21,7 @@
 	</nav>
 	<h1>History of Chess</h1>
 	<div class="panel panel-default">
-				<table class="table">
+		<table class="table">
 		<tr>
 			<th>Number</th>
 			<th>Date</th>
@@ -32,7 +32,7 @@
 		{% for  number, date, place, fact in history %}
 		<tr>
 			<td>{{ number }}</td>
-			<td><a href="{{ url_for('updatefact_page', key=number) }}">{{ date }}</a></td>
+			<td><a href="{{ url_for('updatefact_page', key=number) }}"><mark>{{ date }}</mark></a></td>
 			<td>{{ place }}</td>
 			<td>{{ fact }}</td>
 		</tr>
