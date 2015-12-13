@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Countries</title>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body >
+  	<nav>
+		<ul style="margin-left:250px;" class="nav nav-pills">
+  	 	 <li role="presentation" class="active"> <a style="text-decoration:none;" href = "{{ url_for('home_page') }}">Home</a></li>
+  	 	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rankings_page') }}">Rankings</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('upcoming_events') }}">Upcoming Events</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
+    	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('countries_page') }}">Countries</a></li>
+  		 <li role="presentation"><a style="text-decoration:none;" href = "/count">Count</a></li>
+  		</ul>
+
+	</nav>
+	<h1  style="margin-left:450px; margin-top: 25px;">Ratings and Countries</h1>
+	<div style="display: table;">
+  	<div style="float:left; margin-right: 50px; margin-left: 100px;">
+	<h2	id="subhead" >FIDE Countries Rating</h2>
+
+	<div class="panel panel-default">
+  <div class="panel-heading">FIDE Countries Rating</div>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>Country</th>
+    		<th>Average of Top 10 players</th>
+    		<th>Grand Masters</th>
+    		<th>International Masters</th>
+    		<th>Total Titled</th>
+    		<th>Total Number of Top 100 players</th>
+    		<th>FIDE Country Rank</th>
+    		<th>Highest Ranked Player</th>
+    		<th>Rating of the Highest Ranked Player</th>
+  		</tr>
+		{% for id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating in countries %}
+		<tr>
+			<td>{{ id }}</td>
+			<td>{{ country_name }}</td>
+			<td>{{ average }}</td>
+			<td>{{ gm }}</td>
+			<td>{{ im }}</td>
+			<td>{{ total_titled }}</td>
+			<td>{{ total_top }}</td>
+			<td>{{ country_rank }}</td>
+			<td>{{ best_player}}</td>
+			<td>{{ highest_rating }}</td>
+			<td>
+				<a style=" text-decoration:none;" id="button" href="{{ url_for('update_countries_page', key=id) }}" type="submit">Update</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	</div>
+
+	<form id="addingcountry" action="{{ url_for('countries_page') }}" method="post">
+		<div class="panel panel-default">
+  <div class="panel-heading">Add Country</div>
+	<table class="table">
+			<tr>
+				<th>Country: </th>
+				<td>
+					<input type="text" name="country_name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Average of Top 10 players:</th>
+				<td>
+					<input type="text" name="average"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Grand Masters:</th>
+				<td>
+					<input type="text" name="gm"/>
+				</td>
+			</tr>
+			<tr>
+				<th>International Masters:</th>
+				<td>
+					<input type="text" name="im"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Titled:</th>
+				<td>
+					<input type="text" name="total_titled"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Number of Top 100 players:</th>
+				<td>
+					<input type="text" name="total_top"/>
+				</td>
+			</tr>
+			<tr>
+				<th>FIDE Country Rank:</th>
+				<td>
+					<input type="text" name="country_rank"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Highest Ranked Player:</th>
+				<td>
+					<input type="text" name="best_player"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Rating of the Highest Ranked Player:</th>
+				<td>
+					<input type="text" name="highest_rating"/>
+				</td>
+			</tr>
+
+		</table>
+	</div>
+		<button type="submit" name="addcountry" class="btn btn-default">Add Country</button>
+	</form>
+
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+
+		<div class="panel panel-default">
+  <div class="panel-heading">Find Country</div>
+	<table class="table">
+			<tr>
+				<th>Country Name:</th>
+				<td>
+					<input type="text" name="country_name"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<button type="submit" name="findcountry" class="btn btn-default">Find Country</button>
+	</form>
+	</div>
+
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+
+		<div class="panel panel-default">
+  <div class="panel-heading">Delete Country</div>
+	<table class="table">
+			<tr>
+				<th>Country Name:</th>
+				<td>
+					<input type="text" name="country_name"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<button type="submit" name="deletecountry" class="btn btn-default">Delete Country</button>
+	</form>
+	</div>
+
+
+	<form id="delrules" action="{{ url_for('countries_page') }}" method="post">
+		<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+	</form>
+	</div>
+
+
+
+  </body>
+</html>

@@ -79,6 +79,18 @@ nav li {
 	color: #00CC00;
 	margin-top: 20px;
 }
+
+#divcountries{
+	color: #000000;
+	display: inline-table;
+}
+
+#delcountries{
+	color: #000000;
+	margin-top: 20px;
+}
+
+
 #thecolor {
 	color: #00CC00;
 }
