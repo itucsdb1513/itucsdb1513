@@ -212,7 +212,7 @@ class event:
             cursor = connection.cursor()
             query = """SELECT * FROM tours
                         WHERE cha LIKE '%s%%'
-                          AND year =% s
+                          AND year = %s
                         ORDER BY number """ % (cha, year)
             cursor.execute(query)
             tours = cursor.fetchall()

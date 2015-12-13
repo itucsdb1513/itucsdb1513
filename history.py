@@ -7,7 +7,7 @@ class facts:
     def __init__(self, dsn):
         self.dsn = dsn;
 
-    def open_page(self):
+    def open_page(self, sort = "number"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
@@ -18,7 +18,8 @@ class facts:
                         fact text NOT NULL)"""
             cursor.execute(query)
 
-            query = "SELECT * FROM history"
+            query = """SELECT * FROM history
+                         ORDER BY %s""" % sort
             cursor.execute(query)
             history = cursor.fetchall()
         return render_template('history.html', history = history)

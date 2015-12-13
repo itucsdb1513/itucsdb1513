@@ -495,8 +495,13 @@ def update_tour(key = None):
 @app.route('/history', methods=['GET', 'POST'])
 def history():
     page = facts(dsn = app.config['dsn'])
-    if request.method == 'GET':
-        return page.open_page()
+    if key == 1:
+        return page.open_page("date")
+    elif request.method == 'GET':
+        try:
+            return page.open_page()
+        except:
+            return page.init_table()
     elif 'initializeTable' in request.form:
         return page.init_table()
     elif 'addfact' in request.form:
