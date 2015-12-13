@@ -217,7 +217,7 @@ def countries_page(key = None):
         country_rank = request.form['country_rank']
         best_player = request.form['best_player']
         highest_rating = request.form['highest_rating']
-        return page.add_country(name, surname, country, club, rating, ranking, age, gender)
+        return page.add_country(country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
     elif 'deletecountry' in request.form:
         country_name = request.form['country_name']
         return page.delete_country(country_name)
