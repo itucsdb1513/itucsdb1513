@@ -40,7 +40,7 @@ class event:
             cursor.execute(query)
             events = cursor.fetchall()
 
-        return render_template('upcoming_events.html', events = events, tours = tours)
+        return render_template('upcoming_events.html', tours = tours , events = events)
 
     def init_table(self):
         with dbapi2.connect(self.dsn) as connection:
