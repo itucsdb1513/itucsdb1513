@@ -17,6 +17,7 @@ from ranking import Ranking
 from history import facts
 from player_info import Player_info
 from benefit import Benefit
+from countries import Country
 
 app = Flask(__name__)
 
@@ -180,6 +181,70 @@ def update_player_info_page(key = None):
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/countries', methods=['GET', 'POST'])
+@app.route('/countries/<int:key>/', methods=['GET', 'POST'])
+def countries_page(key = None):
+    page = Country(dsn = app.config['dsn'])
+    if key == 1:
+       return page.open_page("country_name")
+    elif key == 2:
+        return page.open_page("average")
+    elif key == 3:
+        return page.open_page("gm")
+    elif key == 4:
+        return page.open_page("im")
+    elif key == 5:
+        return page.open_page("total_titled")
+    elif key == 6:
+        return page.open_page("total_top")
+    elif key == 7:
+        return page.open_page("country_rank")
+    elif key == 8:
+        return page.open_page("best_player")
+    elif key == 9:
+        return page.open_page("highest_rating")
+    elif request.method == 'GET':
+        return page.open_page()
+    elif 'initializeTable' in request.form:
+        return page.init_table()
+    elif 'addcountry' in request.form:
+        country_name = request.form['country_name']
+        average = request.form['average']
+        gm = request.form['gm']
+        im = request.form['im']
+        total_titled = request.form['total_titled']
+        total_top = request.form['total_top']
+        country_rank = request.form['country_rank']
+        best_player = request.form['best_player']
+        highest_rating = request.form['highest_rating']
+        return page.add_country(name, surname, country, club, rating, ranking, age, gender)
+    elif 'deletecountry' in request.form:
+        country_name = request.form['country_name']
+        return page.delete_country(country_name)
+    elif 'findcountry' in request.form:
+        country_name = request.form['country_name']
+        return page.find_country(country_name)
+    else:
+        return redirect(url_for('home_page'))
+
+@app.route('/updatecountriespage/<int:key>/', methods=['GET', 'POST'])
+def update_countries_page(key = None):
+    page = Country(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatepieces(id = key)
+    elif 'updatecountries' in request.form:
+        country_name = request.form['country_name']
+        average = request.form['average']
+        gm = request.form['gm']
+        im = request.form['im']
+        total_titled = request.form['total_titled']
+        total_top = request.form['total_top']
+        country_rank = request.form['country_rank']
+        best_player = request.form['best_player']
+        highest_rating = request.form['highest_rating']
+        return page.update_countries(key, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+    else:
+        return redirect(url_for('home_page'))
 
 @app.route('/initdb')
 def initialize_database():

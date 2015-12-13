@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Local Tournaments{% endblock %}
+{% block content %}
+		<div class="panel panel-default">
+	<table class="table">
+			<tr>
+				<th>Country</th>
+    		<th>Average of Top 10 players</th>
+    		<th>Grand Masters</th>
+    		<th>International Masters</th>
+    		<th>Total Titled</th>
+    		<th>Total Number of Top 100 players</th>
+    		<th>FIDE Country Rank</th>
+    		<th>Highest Ranked Player</th>
+    		<th>Rating of the Highest Ranked Player</th>
+			</tr>
+			{% for id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating in countries %}
+			<tr>
+				<td>{{ country_name }}</td>
+			<td>{{ average }}</td>
+			<td>{{ gm }}</td>
+			<td>{{ im }}</td>
+			<td>{{ total_titled }}</td>
+			<td>{{ total_top }}</td>
+			<td>{{ country_rank }}</td>
+			<td>{{ best_player}}</td>
+			<td>{{ highest_rating }}</td>
+				<td>
+        			<a style=" text-decoration:none;" id="button" href="{{ url_for('update_countries_page', key=id) }}" type="submit">Update</a>
+        		</td>
+			</tr>
+			{% endfor %}
+		</table>
+		</div>
+{% endblock %}

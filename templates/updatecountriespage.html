@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}Countries{% endblock %}
+{% block content %}
+	<form id="addplayer" action="{{ url_for('update_countries_page', key = countries[0]) }}" method="post">
+		<div class="panel panel-default">
+	<table class="table">
+			tr>
+				<th>Country Name:</th>
+				<td>
+					<input type="text" name="country_name" value="{{ countries[1] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Average of Top 10 players:</th>
+				<td>
+					<input type="text" name="average" value="{{ countries[2] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Grand Masters:</th>
+				<td>
+					<input type="text" name="gm" value="{{ countries[3] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>International Masters:</th>
+				<td>
+					<input type="text" name="im" value="{{ countries[4] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Titled:</th>
+				<td>
+					<input type="text" name="total_titled" value="{{ countries[5] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Total Number of Top 100 players:</th>
+				<td>
+					<input type="text" name="total_top" value="{{ countries[6] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>FIDE country rank:</th>
+				<td>
+					<input type="text" name="country_rank" value="{{ countries[7] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Highest Ranked Player:</th>
+				<td>
+					<input type="text" name="best_player" value="{{ countries[8] }}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Rating of the Highest Ranked Player:</th>
+				<td>
+					<input type="text" name="highest_rating" value="{{ countries[9] }}"/>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<input value="Update Country" name="updatecountry" type="submit"/>
+	</form>
+{% endblock %}
