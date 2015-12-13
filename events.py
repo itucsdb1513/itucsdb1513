@@ -167,16 +167,6 @@ class event:
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
-    def fact_update(self, number, date, place, fact):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-            query = """UPDATE history
-                        SET date = '%s', place = '%s',
-                            fact = '%s'
-                        WHERE number = %s""" % (date, place, fact, number)
-            cursor.execute(query)
-        return redirect(url_for('history'))
-
 
     def tour_update(self, number, cha, year, players, games):
         with dbapi2.connect(self.dsn) as connection:
@@ -224,18 +214,12 @@ class event:
             tours = cursor.fetchall()
         return render_template('find_tour.html', tours = tours)
 
-    def find_tour_name(self, cha, date):
+    def find_tour_name(self, cha):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """SELECT * FROM tours
                         WHERE cha LIKE '%s%%'
-                          AND year = %s
-                        ORDER BY number """ % (cha, year)
+                        ORDER BY number """ % (cha)
             cursor.execute(query)
             tours = cursor.fetchall()
         return render_template('find_tour.html', tours = tours)
-
-
-
-
-

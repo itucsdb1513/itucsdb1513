@@ -8,18 +8,23 @@
   </head>
   <body>
   	<nav>
-		<ul style="margin-left:250px;" class="nav nav-pills">
+		<ul class="nav nav-pills">
   	 	 <li role="presentation" class="active"> <a style="text-decoration:none;" href = "{{ url_for('home_page') }}">Home</a></li>
-  	 	 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rankings_page') }}">Rankings</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('upcoming_events') }}">Upcoming Events</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
-  		 <li role="presentation"><a style="text-decoration:none;" href = "/count">Count</a></li>
+  	 	 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('localtour_page') }}">Local Tournaments</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('rankings_page') }}">Rankings</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('upcoming_events') }}">Upcoming Events</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('countries_page') }}">Countries</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('benefit_page') }}">Benefits</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "/count">Count</a></li>
   		</ul>
 	</nav>
 	<h1>Upcoming Events</h1>
+	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+	<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+	</form>
 	<div class="panel panel-default">
 	<table class="table">
 		<tr>
@@ -30,7 +35,7 @@
     		<th>Player 2</th>
     		<td>Championship</td>
   		</tr>
-		{% for  number, date, place, player1,player2, champ in history %}
+		{% for  number, date, place, player1,player2, champ in events %}
 		<tr>
 			<td>{{ number }}</td>
 			<td>{{ date }}</td>
@@ -117,7 +122,7 @@
 		<input value="Find Event" name="findevent2" type="submit"/>
 	</form>
 
-
+	<div id="divturkah">
   <form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
     <div class="panel panel-default">
 	<table class="table">
@@ -145,6 +150,9 @@
 
 <div>
 <h1>Championships</h1>
+<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+</form>
 	<div class="panel panel-default">
 	<table class="table">
 		<tr>
@@ -227,12 +235,6 @@
           <input type="text" name="cha"/>
         </td>
       </tr>
-      <tr>
-        <th>Year:</th>
-        <td>
-          <input type="text" name="year"/>
-        </td>
-      </tr>
     </table>
     </div>
     <input value="Delete Tour" name="deletetour1" type="submit"/>
@@ -241,6 +243,8 @@
 
 	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
 	<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+	</form>
+
 
 	</form>
   </body>
