@@ -20,7 +20,7 @@ from benefit import Benefit
 from countries import Country
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -217,7 +217,7 @@ def countries_page(key = None):
         country_rank = request.form['country_rank']
         best_player = request.form['best_player']
         highest_rating = request.form['highest_rating']
-        return page.add_country(country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+        return page.add_country(name, surname, country, club, rating, ranking, age, gender)
     elif 'deletecountry' in request.form:
         country_name = request.form['country_name']
         return page.delete_country(country_name)
@@ -231,7 +231,7 @@ def countries_page(key = None):
 def update_countries_page(key = None):
     page = Country(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_updatecountries(id = key)
+        return page.open_updatepieces(id = key)
     elif 'updatecountries' in request.form:
         country_name = request.form['country_name']
         average = request.form['average']
