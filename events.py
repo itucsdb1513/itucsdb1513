@@ -188,14 +188,6 @@ class event:
                         WHERE number = %s""" % (date, place, player1, player2, champ, number)
             cursor.execute(query)
 
-            query = "SELECT date, place, player1, player2, champ FROM events"
-            cursor.execute(query)
-            event = cursor.fetchall()
-
-            query = "SELECT cha, year, players, games FROM tours"
-            cursor.execute(query)
-            tours = cursor.fetchall()
-
             cursor.close()
         return redirect(url_for('upcoming_events'), event=event, tours=tours)
 
@@ -208,14 +200,6 @@ class event:
                             players = %s, games = %s
                         WHERE number = %s """ % (cha, year, players, games, number)
             cursor.execute(query)
-
-            query = "SELECT cha, year, players, games FROM tours"
-            cursor.execute(query)
-            tours = cursor.fetchall()
-
-            query = "SELECT date, place, player1, player2, champ FROM events"
-            cursor.execute(query)
-            event = cursor.fetchall()
 
             cursor.close()
         return redirect(url_for('upcoming_events'), tours = tours, event = event)
