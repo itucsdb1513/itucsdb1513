@@ -12,12 +12,12 @@ class Ranking:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """SELECT * FROM worldplayers ORDER BY %s"""% sort
+            query = """SELECT * FROM worldplayers ORDER BY rating DESC"""
             cursor.execute(query)
             players = cursor.fetchall()
 
             query = """SELECT * FROM countries_table
-                        ORDER BY %s"""% sort
+                        ORDER BY average DESC"""
             cursor.execute(query)
             countries = cursor.fetchall()
         return render_template('rankings.html', players = players, countries = countries)
@@ -49,7 +49,7 @@ class Ranking:
                         id serial PRIMARY KEY,
                         name text NOT NULL,
                         surname text NOT NULL,
-                        country text NOT NULL REFERENCES countries_table(country_name) ON UPDATE CASCADE ON DELETE RESTRICT,
+                        country text NOT NULL ,
                         club text NOT NULL,
                         rating integer DEFAULT 0,
                         ranking integer DEFAULT 0,
