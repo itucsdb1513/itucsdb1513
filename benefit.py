@@ -11,12 +11,6 @@ class Benefit:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             
-            query = """DROP TABLE IF EXISTS relation CASCADE"""
-            cursor.execute(query)
-            query = """DROP TABLE IF EXISTS people CASCADE"""
-            cursor.execute(query)
-            query = """DROP TABLE IF EXISTS benefit CASCADE"""
-            cursor.execute(query)
             
             query = """CREATE TABLE IF NOT EXISTS benefit (
                         ID serial PRIMARY KEY,
