@@ -89,6 +89,8 @@
 		<input value="Add Event" name="addevent" type="submit"/>
 	</form>
 
+	<div id="divturkah">
+
 	<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
 		<div class="panel panel-default">
 	<table class="table">
@@ -105,20 +107,7 @@
 	</form>
 	</div>
 
-<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
-		<div class="panel panel-default">
-	<table class="table">
-			<tr>
-				<th>Championship:</th>
-				<td>
-					<input type="text" name="champ"/>
-				</td>
-			</tr>
-		</table>
-		</div>
-		<input value="Delete Event" name="deleteevent2" type="submit"/>
-		<input value="Find Event" name="findevent2" type="submit"/>
-	</form>
+	<div id="divturkah">
 
   <form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
     <div class="panel panel-default">
@@ -140,6 +129,21 @@
     <input value="Delete Event" name="deleteevent1" type="submit"/>
     <input value="Find Event" name="findevent1" type="submit"/>
   </form>
+
+<form id="delturkah" action="{{ url_for('upcoming_events') }}" method="post">
+		<div class="panel panel-default">
+	<table class="table">
+			<tr>
+				<th>Championship:</th>
+				<td>
+					<input type="text" name="champ"/>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<input value="Delete Event" name="deleteevent2" type="submit"/>
+		<input value="Find Event" name="findevent2" type="submit"/>
+	</form>
 
 
 <div>
@@ -235,7 +239,7 @@
     <input value="Find Tour" name="findtour1" type="submit"/>
   </form>
 
-	
+
 
 
 	</form>
