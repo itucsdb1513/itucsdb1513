@@ -20,7 +20,6 @@ class event:
                         players integer NOT NULL,
                         games integer NOT NULL)"""
             cursor.execute(query)
-            tours = cursor.fetchall()
 
             query = """SELECT * FROM tours"""
             cursor.execute(query)
@@ -33,8 +32,7 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL
-                        UNIQUE (date, player1, player2))"""
+                        champ text NOT NULL)"""
             cursor.execute(query)
 
             query = """SELECT * FROM events"""
@@ -64,8 +62,7 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL
-                        UNIQUE (date, player1, player2));"""
+                        champ text NOT NULL);"""
             cursor.execute(query)
 
             query = """INSERT INTO tours (cha, year, players, games)
