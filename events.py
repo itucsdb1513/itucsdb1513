@@ -8,7 +8,7 @@ class event:
         self.dsn = dsn;
         return
 
-    def open_page(self, sort = "number"):
+    def open_page(self):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
@@ -29,8 +29,7 @@ class event:
             cursor.execute(query)
             tours = cursor.fetchall()
 
-            query = """SELECT * FROM tours
-                ORDER BY %s""" % sort
+            query = """SELECT * FROM tours"""
             cursor.execute(query)
             tours = cursor.fetchall()
 
@@ -47,8 +46,7 @@ class event:
                         UNIQUE (date, player1, player2))"""
             cursor.execute(query)
 
-            query = """SELECT * FROM events
-                ORDER BY %s""" % sort
+            query = """SELECT * FROM events"""
             cursor.execute(query)
             events = cursor.fetchall()
 
