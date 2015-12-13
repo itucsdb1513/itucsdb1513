@@ -219,12 +219,11 @@ class event:
             cursor = connection.cursor()
             query = """SELECT * FROM tours
                         WHERE cha LIKE '%s%%'
-                          AND year = %s
+                          OR year = %s
                         ORDER BY number """ % (cha, year)
             cursor.execute(query)
             tours = cursor.fetchall()
         return render_template('find_tour.html', tours = tours)
-
 
 
 
