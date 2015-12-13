@@ -588,18 +588,17 @@ def upcoming_events():
         return redirect(url_for('home_page'))
 
 
-@app.route('/update_event/<int:key>/', methods=['GET', 'POST'])
-def update_event(key = None):
+@app.route('/updateeventpage/<int:key>/', methods=['GET', 'POST'])
+def update_event_page(key = None):
     page = event(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_update_event(number = key)
+        return page.open_updaterules(number = key)
     elif 'updateevent' in request.form:
         date = request.form['date']
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        champ = request.form['champ']
-        return page.update_event(key, date, place, player1, player2, champ)
+        return page.update_rules(key, date, place, player1, player2)
     else:
         return redirect(url_for('home_page'))
 
