@@ -12,13 +12,6 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS events"""
-            cursor.execute(query)
-
-            query = """DROP TABLE IF EXISTS tours"""
-            cursor.execute(query)
-
-
 
             query = """CREATE TABLE IF NOT EXISTS tours (
                         number serial PRIMARY KEY,
@@ -36,7 +29,7 @@ class event:
 
             query = """CREATE TABLE IF NOT EXISTS events (
                         number serial PRIMARY KEY,
-                        date text UNIQUE NOT NULL,
+                        date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
