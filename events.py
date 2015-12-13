@@ -40,9 +40,7 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL references tours(cha)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                        champ text NOT NULL
                         UNIQUE (date, player1, player2))"""
             cursor.execute(query)
 
@@ -56,8 +54,8 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS events CASCADE,
-                       DROP TABLE IF EXISTS tours CASCADE"""
+            query = """DROP TABLE IF EXISTS events ;
+                       DROP TABLE IF EXISTS tours """
             cursor.execute(query)
 
             query = """CREATE TABLE tours (
@@ -73,9 +71,7 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL references tours(cha)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                        champ text NOT NULL
                         UNIQUE (date, player1, player2));"""
             cursor.execute(query)
 
