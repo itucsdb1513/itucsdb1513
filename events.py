@@ -74,6 +74,8 @@ class event:
             cursor.execute(query)
             event_up = cursor.fetchone()
         return render_template('update_event.html', event_up = event_up)
+    
+   
 
     def open_updatetour(self, number):
         with dbapi2.connect(self.dsn) as connection:
