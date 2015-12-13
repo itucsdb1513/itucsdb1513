@@ -191,7 +191,7 @@ class event:
          return redirect(url_for('upcoming_events'))
 
 
-     def tour_update(self, number, cha, year, players, games):
+    def tour_update(self, number, cha, year, players, games):
          with dbapi2.connect(self.dsn) as connection:
              cursor = connection.cursor()
              query = """UPDATE tours
