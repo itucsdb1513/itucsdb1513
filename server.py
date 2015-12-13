@@ -158,7 +158,7 @@ def update_countries1_page(key = None):
         country_rank = request.form['country_rank']
         best_player = request.form['best_player']
         highest_rating = request.form['highest_rating']
-        return page.update_countries(key, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+        return page.update_countriess(key, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
     else:
         return redirect(url_for('home_page'))
 

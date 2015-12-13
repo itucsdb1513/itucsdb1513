@@ -164,7 +164,7 @@ class Ranking:
             cursor.execute(query)
         return redirect(url_for('rankings_page'))
 
-    def update_countries(self, id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
+    def update_countriess(self, id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE countries_table
