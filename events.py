@@ -11,28 +11,15 @@ class event:
     def open_page(self, sort = "number"):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-            query = """CREATE TABLE IF NOT EXISTS events (
-                        number serial PRIMARY KEY,
-                        date text NOT NULL,
-                        place text NOT NULL,
-                        player1 text NOT NULL,
-                        player2 text NOT NULL,
-                        champ text NOT NULL)"""
-            cursor.execute(query)
 
-            query = "SELECT * FROM events"
+
+            query = """SELECT * FROM events
+                    ORDER BY %s""" % sort
             cursor.execute(query)
             events = cursor.fetchall()
 
-            query = """CREATE TABLE IF NOT EXISTS tours (
-                        number serial PRIMARY KEY,
-                        cha text NOT NULL,
-                        year integer NOT NULL,
-                        players integer NOT NULL,
-                        games integer NOT NULL)"""
-            cursor.execute(query)
-
-            query = "SELECT * FROM tours"
+            query = """SELECT * FROM tours
+                ORDER BY %s""" % sort
             cursor.execute(query)
             tours = cursor.fetchall()
         return render_template('upcoming_events.html', events = events, tours = tours)
@@ -73,9 +60,8 @@ class event:
                         VALUES
                         ('World', 2016, 24, 72),
                         ('European', 2017, 16, 36),
-                        ('Asian', 2016, 16, 36);"""
+                        ('Asian', 2016, 16, 36)"""
             cursor.execute(query)
-
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
@@ -95,7 +81,7 @@ class event:
             query = "SELECT * FROM tours WHERE number  = %s" % (number)
             cursor.execute(query)
             tour_up = cursor.fetchone()
-        return render_template('update_event.html', tour_up = tour_up)
+        return render_template('update_tour.html', tour_up = tour_up)
 
     def addevent(self, date, place, player1, player2, champ):
         with dbapi2.connect(self.dsn) as connection:
@@ -187,13 +173,7 @@ class event:
             events = cursor.fetchall()
         return render_template('findevent.html', events = events)
 
-    def find_tour(self, number):
-        with dbapi2.connect(self.dsn) as connection:
-            cursor = connection.cursor()
-            query = """SELECT * FROM tours WHERE number = %s """ % (number)
-            cursor.execute(query)
-            tours = cursor.fetchall()
-        return render_template('find_tour.html', tours = tours)
+
 
     def find_event_name(self, date, place):
         with dbapi2.connect(self.dsn) as connection:
@@ -206,6 +186,14 @@ class event:
             cursor.execute(query)
             events = cursor.fetchall()
         return render_template('findevent.html', events = events)
+
+    def find_tour(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM tours WHERE number = %s """ % (number)
+            cursor.execute(query)
+            tours = cursor.fetchall()
+        return render_template('find_tour.html', tours = tours)
 
     def find_tour_name(self, cha, date):
         with dbapi2.connect(self.dsn) as connection:
