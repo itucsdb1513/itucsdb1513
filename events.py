@@ -233,7 +233,8 @@ class event:
     def find_event_2(self, champ):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
-            query = """SELECT * FROM events WHERE champ LIKE '%s%%' """ % (champ)
+            query = """SELECT * FROM events
+                         WHERE champ ='%s' """ % (champ)
             cursor.execute(query)
             events = cursor.fetchall()
             cursor.close()
