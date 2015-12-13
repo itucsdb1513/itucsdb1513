@@ -157,7 +157,7 @@
 		{% for  number, cha, year, players, games in tours %}
 		<tr>
 			<td>{{ number }}</td>
-			<td><a href="{{ url_for('update_tour_page', key=number) }}">{{ cha }}</a></td>
+			<td><a href="{{ url_for('updatetour_page', key=number) }}">{{ cha }}</a></td>
 			<td>{{ year }}</td>
 			<td>{{ players }}</td>
 			<td>{{ games }}</td>
