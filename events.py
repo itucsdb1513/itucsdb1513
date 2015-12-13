@@ -174,7 +174,7 @@ class event:
             query = """UPDATE tours
                         SET cha = '%s', year = %s,
                             players = %s, games = %s
-                        WHERE number = %s""" % (cha, year, players, games, number)
+                        WHERE number = %s """ % (cha, year, players, games, number)
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
 
