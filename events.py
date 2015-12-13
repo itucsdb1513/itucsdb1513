@@ -147,7 +147,7 @@ class event:
             query = """DELETE FROM events WHERE champ = '%s' """ % (champ)
             cursor.execute(query)
 
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def deletetour(self, number):
@@ -156,7 +156,7 @@ class event:
 
             query = """DELETE FROM tours WHERE number = '%s' """ % (number)
             cursor.execute(query)
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def delete_event(self, date, place):
@@ -167,7 +167,7 @@ class event:
                         AND place = '%s' """ % (date, place)
             cursor.execute(query)
 
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def delete_tour(self, cha):
@@ -176,7 +176,7 @@ class event:
             query = """DELETE FROM tours WHERE cha = '%s'
                          """ % (cha)
             cursor.execute(query)
-            connection.commit()
+            cursor.close()
         return redirect(url_for('upcoming_events'))
 
     def update_event(self, number, date, place, player1, player2):
