@@ -14,7 +14,7 @@ class event:
 
 
             query = """SELECT * FROM events
-                    ORDER BY %s""" % sort
+                ORDER BY %s""" % sort
             cursor.execute(query)
             events = cursor.fetchall()
 
@@ -116,6 +116,16 @@ class event:
             connection.commit()
         return redirect(url_for('upcoming_events'))
 
+    def deleteevent_2(self, champ):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """DELETE FROM events WHERE champ = '%s' """ % (champ)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('upcoming_events'))
+
     def deletetour(self, number):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -173,7 +183,13 @@ class event:
             events = cursor.fetchall()
         return render_template('findevent.html', events = events)
 
-
+    def find_event_2(self, champ):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM events WHERE champ = %s """ % (champ)
+            cursor.execute(query)
+            events = cursor.fetchall()
+        return render_template('findevent.html', events = events)
 
     def find_event_name(self, date, place):
         with dbapi2.connect(self.dsn) as connection:

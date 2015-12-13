@@ -434,6 +434,9 @@ def upcoming_events():
     elif 'deleteevent' in request.form:
         number = request.form['number']
         return page.deleteevent(number)
+    elif 'deleteevent2' in request.form:
+        champ = request.form['champ']
+        return page.deleteevent_2(champ)
     elif 'deletetour' in request.form:
         number = request.form['number']
         return page.deletetour(number)
@@ -447,7 +450,10 @@ def upcoming_events():
         return page.delete_tour(cha, year)
     elif 'findevent' in request.form:
         number = request.form['number']
-        return page.find_event(number)
+        return page.find_event(champ)
+    elif 'findevent2' in request.form:
+        champ = request.form['champ']
+        return page.find_event_2(number)
     elif 'findtour' in request.form:
         number = request.form['number']
         return page.find_tour(number)
