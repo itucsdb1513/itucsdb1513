@@ -11,7 +11,6 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask.helpers import url_for
-from player import Player
 from rules import Rules
 from ranking import Ranking
 from history import facts
@@ -57,6 +56,24 @@ def rankings_page(key = None):
         return page.open_page("ranking")
     elif key == 8:
         return page.open_page("gender")
+    elif key == 9:
+        return page.open_page("country_name")
+    elif key == 10:
+        return page.open_page("average")
+    elif key == 11:
+        return page.open_page("gm")
+    elif key == 12:
+        return page.open_page("im")
+    elif key == 13:
+        return page.open_page("total_titled")
+    elif key == 14:
+        return page.open_page("total_top")
+    elif key == 15:
+        return page.open_page("country_rank")
+    elif key == 16:
+        return page.open_page("best_player")
+    elif key == 17:
+        return page.open_page("highest_rating")
     elif request.method == 'GET':
         return page.open_page()
     elif 'initializeTable' in request.form:
@@ -71,10 +88,27 @@ def rankings_page(key = None):
         age = request.form['age']
         gender = request.form['gender']
         return page.add_player(name, surname, country, club, rating, ranking, age, gender)
+    elif 'addcountry' in request.form:
+        country_name = request.form['country_name']
+        average = request.form['average']
+        gm = request.form['gm']
+        im = request.form['im']
+        total_titled = request.form['total_titled']
+        total_top = request.form['total_top']
+        country_rank = request.form['country_rank']
+        best_player = request.form['best_player']
+        highest_rating = request.form['highest_rating']
+        return page.add_country(country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
     elif 'deleteplayer' in request.form:
         name = request.form['name']
         surname = request.form['surname']
         return page.delete_player(name, surname)
+    elif 'deletecountry' in request.form:
+        country_name = request.form['country_name']
+        return page.delete_country(country_name)
+    elif 'findcountry' in request.form:
+        country_name = request.form['country_name']
+        return page.find_country(country_name)
     elif 'deleteplayerwithid' in request.form:
         id = request.form['id']
         return page.delete_player_with_id(id)
@@ -105,6 +139,26 @@ def update_ranking_page(key = None):
         return page.update_player(key, name, surname, country, club, rating, ranking, age, gender)
     else:
         return redirect(url_for('home_page'))
+
+@app.route('/updatecountriespage1/<int:key>/', methods=['GET', 'POST'])
+def update_countries1_page(key = None):
+    page = Ranking(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_updatecountries(id = key)
+    elif 'updatecountries' in request.form:
+        country_name = request.form['country_name']
+        average = request.form['average']
+        gm = request.form['gm']
+        im = request.form['im']
+        total_titled = request.form['total_titled']
+        total_top = request.form['total_top']
+        country_rank = request.form['country_rank']
+        best_player = request.form['best_player']
+        highest_rating = request.form['highest_rating']
+        return page.update_countries(key, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+    else:
+        return redirect(url_for('home_page'))
+
 
 @app.route('/worldplayers_info', methods=['GET', 'POST'])
 @app.route('/worldplayers_info/<int:key>/', methods=['GET', 'POST'])
