@@ -231,7 +231,7 @@ def countries_page(key = None):
 def update_countries_page(key = None):
     page = Country(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_updatepieces(id = key)
+        return page.open_updatecountries(id = key)
     elif 'updatecountries' in request.form:
         country_name = request.form['country_name']
         average = request.form['average']
