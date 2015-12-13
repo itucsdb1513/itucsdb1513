@@ -107,7 +107,6 @@ class event:
             tour_up = cursor.fetchone()
         return render_template('updatetour.html', tour_up = tour_up)
 
-
     def addevent(self, date, place, player1, player2, champ):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -205,21 +204,11 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE tours
-                        SET cha = '%s', year = %s,
-                            players = %s, games = %s
-                        WHERE number = %s """ % (cha, year, players, games, number)
+                        SET cha = '%s', year = %s, players =%s,
+                            games = %s
+                        WHERE number = %s""" % (cha, year, players, games, number)
             cursor.execute(query)
-
-            query = "SELECT cha, year, players, games FROM tours"
-            cursor.execute(query)
-            tours = cursor.fetchall()
-
-            query = "SELECT date, place, player1, player2, champ FROM events"
-            cursor.execute(query)
-            event = cursor.fetchall()
-
-            cursor.close()
-        return redirect(url_for('upcoming_events'), tours = tours, event = event)
+        return redirect(url_for('upcoming_events'))
 
     def find_event(self, number):
         with dbapi2.connect(self.dsn) as connection:
