@@ -567,7 +567,8 @@ def upcoming_events():
         return page.delete_event(date, place)
     elif 'deletetour1' in request.form:
         cha = request.form['cha']
-        return page.delete_tour(cha)
+        year = request.form['year']
+        return page.delete_tour(cha, year)
     elif 'findevent' in request.form:
         number = request.form['number']
         return page.find_event(champ)
@@ -588,17 +589,18 @@ def upcoming_events():
         return redirect(url_for('home_page'))
 
 
-@app.route('/updateeventpage/<int:key>/', methods=['GET', 'POST'])
-def update_event_page(key = None):
+@app.route('/update_event/<int:key>/', methods=['GET', 'POST'])
+def update_event(key = None):
     page = event(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_updateevent(number = key)
+        return page.open_update_event(number = key)
     elif 'updateevent' in request.form:
         date = request.form['date']
         place = request.form['place']
         player1 = request.form['player1']
         player2 = request.form['player2']
-        return page.update_event(key, date, place, player1, player2)
+        champ = request.form['champ']
+        return page.update_event(key, date, place, player1, player2, champ)
     else:
         return redirect(url_for('home_page'))
 

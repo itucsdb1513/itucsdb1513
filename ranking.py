@@ -49,7 +49,7 @@ class Ranking:
                         id serial PRIMARY KEY,
                         name text NOT NULL,
                         surname text NOT NULL,
-                        country text NOT NULL REFERENCES countries_table(country_name),
+                        country text NOT NULL REFERENCES countries_table(country_name) ON UPDATE CASCADE ON DELETE RESTRICT,
                         club text NOT NULL,
                         rating integer DEFAULT 0,
                         ranking integer DEFAULT 0,
@@ -64,16 +64,23 @@ class Ranking:
                         ('CHINA', 2714, 37, 31, 143, 7, 2, 'Liren Ding', 2776),
                         ('UKRAINE', 2690, 87, 198, 523, 9, 3, 'Pavel Eljanov', 2763),
                         ('AZERBAIJAN', 2645, 24, 22, 120, 3, 9, 'Shakhriyar Mamedyarov', 2748),
-                        ('NORWAY', 2564, 11, 31, 118, 1, 23, 'Magnus Carlsen', 2834);
-
-
-
+                        ('NORWAY', 2564, 11, 31, 118, 1, 23, 'Magnus Carlsen', 2834),
+                        ('USA', 2687, 89, 135, 685, 3, 4, 'Hikaru Nakamura', 2793),
+                        ('INDIA', 2664, 39, 88, 287, 4, 5, 'Viswanathan Anand', 2796),
+                        ('FRANCE', 2657, 49, 105, 396, 5, 6, 'Maxime Vachier-Lagrave', 2773),
+                        ('ARMENIA', 2651, 37, 27, 108, 5, 7, 'Levon Aronian', 2788),
+                        ('HUNGARY', 2645, 53, 117, 450, 6, 8, 'Richard Rapport', 2715),
+                        ('ISRAEL', 2636, 41, 53, 180, 2, 10, 'Boris Gelfand', 2731);
 
                         INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
                         VALUES
-                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2850, 1, 25, 'MALE'),
+                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2834, 1, 25, 'MALE'),
                         ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN', 'SOCAR BAKU', 2739, 22, 28, 'MALE'),
-                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU', 2746, 20, 30, 'MALE')"""
+                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU', 2746, 16, 30, 'MALE'),
+                        ('VISWANATHAN', 'ANAND', 'INDIA', 'BADEN BADEN', 2796, 3, 46, 'MALE'),
+                        ('VLADIMIR', 'KRAMNIK', 'RUSSIA', 'NAO Paris', 2796, 4, 40, 'MALE'),
+                        ('HIKARU', 'NAKAMURA', 'USA', 'Obiettivo Risarcimento', 2793, 5, 28, 'MALE'),
+                        ('LEVON', 'ARONIAN', 'ARMENIA', 'Mainz', 2788, 6, 33, 'MALE')"""
             cursor.execute(query)
 
             connection.commit()

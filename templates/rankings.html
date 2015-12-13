@@ -17,12 +17,13 @@
   		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('history') }}">History</a></li>
   		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('rules_page') }}">Rules</a></li>
   		 <li role="presentation"><a style="text-decoration:none;" href = "{{ url_for('players_page') }}">Player Info</a></li>
+  		 <li role="presentation" class="active"><a style="text-decoration:none;" href = "{{ url_for('benefit_page') }}">Benefits</a></li>
   		 <li role="presentation"><a style="text-decoration:none;" href = "/count">Count</a></li>
   		</ul>
 	</nav>
-	<h1  style="margin-left:450px; margin-top: 25px;">Rankings of Countries and Top Players </h1>
+	<h1  style="margin-left:50px; margin-top: 55px; margin-right: 500px; color:#008000;">Rankings of Countries and Top Players </h1>
 	<div style="display: table;">
-  	<div style="float:left; margin-right: 50px; margin-left: 100px;">
+  	<div style="float:left; margin-right: 10px; margin-left: 30px;">
 	<h2	id="subhead" >Player Ratings</h2>
 
 <form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
@@ -34,26 +35,24 @@
         <div class="panel-heading">Top Players</div>
 	<table class="table">
         <tr>
-        	<th>ID </th>
+      		<th> World Ranking </th>
         	<th> Name </th>
         	<th> Surname </th>
         	<th> Country </th>
         	<th> Club </th>
         	<th> Age </th>
         	<th> Rating </th>
-        	<th> World Ranking </th>
         	<th> Gender </th>
         </tr>
         	{% for id, name, surname,country, club, rating, ranking, age, gender in players %}
         	<tr>
-        		<td>{{id}} </td>
+				<td> {{ranking}}</td>
         		<td>{{name}} </td>
         		<td> {{surname}} </td>
         		<td> {{country}} </td>
         		<td> {{club}} </td>
         		<td> {{age}} </td>
         		<td> {{rating}}</td>
-        		<td> {{ranking}}</td>
         		<td> {{gender}}</td>
         		<td>
 					<a style=" text-decoration:none;" id="button" href="{{ url_for('update_ranking_page', key=id) }}" type="submit">Update</a>
@@ -120,8 +119,8 @@
 			<button type="submit" name="addplayer" class="btn btn-default">Add Player</button>
 	</form>
 
-	<div id="divrules">
-	<form id="delrules" action="{{ url_for('rankings_page') }}" method="post">
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
 
 		<div class="panel panel-default">
   <div class="panel-heading">Delete or Find Player</div>
@@ -246,8 +245,8 @@
 		<button type="submit" name="addcountry" class="btn btn-default">Add Country</button>
 	</form>
 
-	<div id="divrules">
-	<form id="delrules" action="{{ url_for('countries_page') }}" method="post">
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
 
 		<div class="panel panel-default">
   <div class="panel-heading">Delete or Find Country</div>
