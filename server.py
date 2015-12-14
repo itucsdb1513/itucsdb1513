@@ -615,7 +615,7 @@ def updatetour_page(key = None):
         year = request.form['year']
         players = request.form['players']
         games = request.form['games']
-        return page.fact_update(key, cha, year, players, games)
+        return page.tour_update(key, cha, year, players, games)
     else:
         return redirect(url_for('home_page'))
 
