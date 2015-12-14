@@ -593,7 +593,7 @@ def upcoming_events():
 def update_event_page(key = None):
     page = event(dsn = app.config['dsn'])
     if request.method == 'GET':
-        return page.open_update_event(number = key)
+        return page.open_updateevent(number = key)
     elif 'updateevent' in request.form:
         date = request.form['date']
         place = request.form['place']
