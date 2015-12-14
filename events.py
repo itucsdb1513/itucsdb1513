@@ -46,10 +46,10 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
-            query = """DROP TABLE IF EXISTS events"""
+            query = """DROP TABLE IF EXISTS events CASCADE"""
             cursor.execute(query)
 
-            query = """DROP TABLE IF EXISTS tours """
+            query = """DROP TABLE IF EXISTS tours CASCADE """
             cursor.execute(query)
 
             query = """CREATE TABLE tours (
@@ -66,7 +66,7 @@ class event:
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL)"""
+                        champ text NOT NULL REFERENCES tours(cha) ON DELETE RESTRICT)"""
             cursor.execute(query)
 
             query = """INSERT INTO tours (cha, year, players, games)
