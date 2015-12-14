@@ -589,7 +589,7 @@ def upcoming_events():
         return redirect(url_for('home_page'))
 
 
-@app.route('/updateeventspage/<int:key>/', methods=['GET', 'POST'])
+@app.route('/updateeventpage/<int:key>/', methods=['GET', 'POST'])
 def update_event_page(key = None):
     page = event(dsn = app.config['dsn'])
     if request.method == 'GET':
