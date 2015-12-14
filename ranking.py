@@ -184,6 +184,17 @@ class Ranking:
             cursor.execute(query)
             player = cursor.fetchall()
         return render_template('find_player.html', player = player)
+    
+    def find_player_by_country(self, country):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM worldplayers
+                        WHERE country LIKE '%s%%'
+                        ORDER BY rating DESC """ % (country)
+            cursor.execute(query)
+            player = cursor.fetchall()
+        return render_template('find_player.html', player = player)
+
 
     def find_country(self, country_name):
         with dbapi2.connect(self.dsn) as connection:

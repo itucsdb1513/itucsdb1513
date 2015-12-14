@@ -119,9 +119,9 @@ def rankings_page(key = None):
         name = request.form['name']
         surname = request.form['surname']
         return page.find_player(name, surname)
-    elif 'findplayerbyrating' in request.form:
-        rating = request.form['rating']
-        return page.find_player_by_rating(rating)
+    elif 'findplayerbycountry' in request.form:
+        search = request.form['country']
+        return page.find_player_by_country(search)
     else:
         return redirect(url_for('home_page'))
 

@@ -143,6 +143,24 @@
 		<button type="submit" name="findplayer" class="btn btn-default">Find Player</button>
 	</form>
 	</div>
+	
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
+
+		<div class="panel panel-default">
+  <div class="panel-heading"> Find Player by Country</div>
+	<table class="table">
+			<tr>
+				<th>Country: </th>
+				<td>
+					<input type="text" name="country"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<button type="submit" name="findplayerbycountry" class="btn btn-default">Find Player</button>
+	</form>
+	</div>
 	</div>
 	</div>
 
