@@ -29,11 +29,12 @@ class event:
 
             query = """CREATE TABLE IF NOT EXISTS events (
                         number serial PRIMARY KEY,
-                        date text UNIQUE NOT NULL,
+                        date text NOT NULL,
                         place text NOT NULL,
                         player1 text NOT NULL,
                         player2 text NOT NULL,
-                        champ text NOT NULL)"""
+                        champ text NOT NULL
+                        UNIQUE (date, player1, player2)"""
             cursor.execute(query)
 
             query = """SELECT * FROM events"""
