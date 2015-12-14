@@ -183,21 +183,11 @@ class event:
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE events
-                        SET date = '%s', place = '%s', player1 = '%s',
-                            player2 = '%s' ,champ = '%s'
+                        SET date = '%s', place = '%s', player1 = '%s', player2 = '%s',
+                            champ = '%s'
                         WHERE number = %s""" % (date, place, player1, player2, champ, number)
             cursor.execute(query)
-
-            query = "SELECT date, place, player1, player2, champ FROM events"
-            cursor.execute(query)
-            event = cursor.fetchall()
-
-            query = "SELECT cha, year, players, games FROM tours"
-            cursor.execute(query)
-            tours = cursor.fetchall()
-
-            cursor.close()
-        return redirect(url_for('upcoming_events'), event=event, tours=tours)
+        return redirect(url_for('upcoming_events'))
 
 
     def tour_update(self, number, cha, year, players, games):
