@@ -167,7 +167,7 @@
   <div style="float:right; margin-left: 100px;">
 		<h2	id="subhead" >Countries Rating</h2>
 		<div id="divcountries">
-	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
 
 		<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
 	</form>
@@ -205,7 +205,7 @@
 	</table>
 	</div>
 
-	<form id="addingcountry" action="{{ url_for('countries_page') }}" method="post">
+	<form id="addingcountry" action="{{ url_for('rankings_page') }}" method="post">
 		<div class="panel panel-default">
   <div class="panel-heading">Add Country</div>
 	<table class="table">
@@ -270,7 +270,7 @@
 	</form>
 
 	<div id="divcountries">
-	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
 
 		<div class="panel panel-default">
   <div class="panel-heading">Delete or Find Country</div>
