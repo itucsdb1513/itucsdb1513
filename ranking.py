@@ -20,7 +20,12 @@ class Ranking:
                         ORDER BY average DESC"""
             cursor.execute(query)
             countries = cursor.fetchall()
-        return render_template('rankings.html', players = players, countries = countries)
+
+
+            query = """SELECT * FROM player_info ORDER BY id"""
+            cursor.execute(query)
+            player_info = cursor.fetchall()
+        return render_template('rankings.html', players = players, countries = countries, player_info = player_info)
 
 
 
@@ -29,7 +34,8 @@ class Ranking:
             cursor = connection.cursor()
 
             query = """DROP TABLE IF EXISTS worldplayers CASCADE;
-                       DROP TABLE IF EXISTS countries_table CASCADE"""
+                       DROP TABLE IF EXISTS countries_table CASCADE;
+                       DROP TABLE IF EXISTS player_info CASCADE"""
             cursor.execute(query)
 
             query = """CREATE TABLE countries_table (
@@ -55,7 +61,23 @@ class Ranking:
                         ranking integer DEFAULT 0,
                         age integer DEFAULT 0,
                         gender text NOT NULL,
-                        UNIQUE (name, surname))"""
+                        UNIQUE (name, surname));
+
+
+                        CREATE TABLE player_info (
+                        id serial PRIMARY KEY,
+                        name text NOT NULL,
+                        surname text NOT NULL,
+                        country text NOT NULL REFERENCES countries_table(country_name) ON UPDATE CASCADE ON DELETE RESTRICT,
+                        club text NOT NULL,
+                        best_rating integer DEFAULT 0,
+                        best_ranking integer DEFAULT 0,
+                        best_tournament text NOT NULL,
+                        best_tournament_result text NOT NULL,
+                        curr_rating integer DEFAULT 0,
+                        curr_ranking integer DEFAULT 0,
+                        UNIQUE(name, surname) REFERENCES worldplayers(name, surname)ON UPDATE CASCADE ON DELETE RESTRICT)
+                        """
             cursor.execute(query)
 
             query = """INSERT INTO countries_table (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
@@ -80,7 +102,15 @@ class Ranking:
                         ('VISWANATHAN', 'ANAND', 'INDIA', 'BADEN BADEN', 2796, 3, 46, 'MALE'),
                         ('VLADIMIR', 'KRAMNIK', 'RUSSIA', 'NAO Paris', 2796, 4, 40, 'MALE'),
                         ('HIKARU', 'NAKAMURA', 'USA', 'Obiettivo Risarcimento', 2793, 5, 28, 'MALE'),
-                        ('LEVON', 'ARONIAN', 'ARMENIA', 'Mainz', 2788, 6, 33, 'MALE')"""
+                        ('LEVON', 'ARONIAN', 'ARMENIA', 'Mainz', 2788, 6, 33, 'MALE');
+
+                        INSERT INTO player_info (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+                        VALUES
+                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2850 , 1, 'MonteCarlo', 'Champion', 2850, 1),
+                        ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN','SOCAR BAKU', 2760, 8, 'Lenaries','finalist', 2739, 22),
+                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU',2755, 12,'Australian Open', 'Finalist' ,2746, 20)
+
+                        """
             cursor.execute(query)
 
             connection.commit()
@@ -110,6 +140,18 @@ class Ranking:
             connection.commit()
         return redirect(url_for('rankings_page'))
 
+    def add_player_info(self, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO player_info (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+                        VALUES
+                        ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('rankings_page'))
+
     def delete_player(self, name, surname):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -127,6 +169,15 @@ class Ranking:
             cursor.execute(query)
             connection.commit()
 
+        return redirect(url_for('rankings_page'))
+
+    def delete_player_info(self, name, surname):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM player_info WHERE name = '%s'
+                        AND surname = '%s' """ % (name, surname)
+            cursor.execute(query)
+            connection.commit()
         return redirect(url_for('rankings_page'))
 
     def delete_player_with_id(self, id):
@@ -155,6 +206,14 @@ class Ranking:
             countries = cursor.fetchone()
         return render_template('updatecountriespage.html', countries = countries)
 
+    def open_update_player_info(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM player_info WHERE id  = %s" % (id)
+            cursor.execute(query)
+            player_info = cursor.fetchone()
+        return render_template('update_biography.html', player_info = player_info)
+
     def update_player(self, id, name, surname, country, club, rating, ranking, age, gender):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -174,6 +233,20 @@ class Ranking:
             cursor.execute(query)
         return redirect(url_for('rankings_page'))
 
+    def update_player_info(self, id, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE player_info
+                        SET name = '%s', surname = '%s', country = '%s', club = '%s', best_rating = '%s',
+                             best_ranking = '%s', best_tournament = '%s', best_tournament_result = '%s',
+                             curr_rating = '%s', curr_ranking = '%s'
+                        WHERE id = %s""" % (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking, id)
+
+            cursor.execute(query)
+
+        return redirect(url_for('rankings_page'))
+
     def find_player(self, name, surname):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -184,7 +257,7 @@ class Ranking:
             cursor.execute(query)
             player = cursor.fetchall()
         return render_template('find_player.html', player = player)
-    
+
     def find_player_by_country(self, country):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -206,4 +279,15 @@ class Ranking:
             cursor.execute(query)
             countries = cursor.fetchall()
         return render_template('findcountries.html', countries = countries)
+
+    def find_player_info(self, name, surname):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM player_info
+                        WHERE name LIKE '%s%%'
+                          AND surname LIKE '%s%%'
+                        ORDER BY id """ % (name, surname)
+            cursor.execute(query)
+            player_info = cursor.fetchall()
+        return render_template('find_playerBiography.html', player_info = player_info)
 
