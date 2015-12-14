@@ -75,15 +75,21 @@ class event:
                         ('European', 2017, 16, 36),
                         ('Asian', 2016, 16, 36),
                         ('Albanian', 2016, 16, 36),
+                        ('English', 2016, 20, 68),
+                        ('Italian', 2016, 14, 32),
                         ('Turkish', 2016, 16, 36)"""
             cursor.execute(query)
 
             query = """INSERT INTO events (date, place, player1, player2, champ)
                         VALUES
                         ('3.November', 'Tiran', 'Ira', 'Rei', 'Albanian'),
+                        ('16.May', 'Munchen', 'Kim', 'Rus', 'World'),
                         ('4.December', 'Istanbul', 'Javid', 'Ahmet', 'Turkish'),
                         ('10.December', 'Ankara', 'Mursit', 'Soner', 'European'),
-                        ('15.December', 'Istanbul', 'Mehmet', 'Elif', 'World')"""
+                        ('10.January', 'London', 'Jack', 'John', 'English'),
+                        ('23.February', 'Rome', 'Anna', 'Maria', 'Italian'),
+                        ('19.June', 'Madrid', 'Juan', 'Ken', 'European'),
+                        ('15.May', 'Berlin', 'Mehmet', 'Elif', 'World')"""
             cursor.execute(query)
             connection.commit()
         return redirect(url_for('upcoming_events'))
