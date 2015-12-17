@@ -102,6 +102,18 @@ def rankings_page(key = None):
         best_player = request.form['best_player']
         highest_rating = request.form['highest_rating']
         return page.add_country(country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+    elif 'addplayer_info' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        best_rating = request.form['best_rating']
+        best_ranking = request.form['best_ranking']
+        best_tournament = request.form['best_tournament']
+        best_tournament_result = request.form['best_tournament_result']
+        curr_rating = request.form['curr_rating']
+        curr_ranking = request.form['curr_ranking']
+        return page.add_player_info(name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
     elif 'deleteplayer' in request.form:
         name = request.form['name']
         surname = request.form['surname']
@@ -109,6 +121,10 @@ def rankings_page(key = None):
     elif 'deletecountry' in request.form:
         country_name = request.form['country_name']
         return page.delete_country(country_name)
+    elif 'deleteplayer_info' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.delete_player(name, surname)
     elif 'findcountry' in request.form:
         country_name = request.form['country_name']
         return page.find_country(country_name)
@@ -119,9 +135,13 @@ def rankings_page(key = None):
         name = request.form['name']
         surname = request.form['surname']
         return page.find_player(name, surname)
-    elif 'findplayerbyrating' in request.form:
-        rating = request.form['rating']
-        return page.find_player_by_rating(rating)
+    elif 'findplayerbycountry' in request.form:
+        search = request.form['country']
+        return page.find_player_by_country(search)
+    elif 'findplayer_info' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        return page.find_player_info(name, surname)
     else:
         return redirect(url_for('home_page'))
 
@@ -162,6 +182,25 @@ def update_countries1_page(key = None):
     else:
         return redirect(url_for('home_page'))
 
+@app.route('/update_player_info1/<int:key>/', methods=['GET', 'POST'])
+def update_player_info_page1(key = None):
+    page = Ranking(dsn = app.config['dsn'])
+    if request.method == 'GET':
+        return page.open_update_player_info(id = key)
+    elif 'updateplayer_info' in request.form:
+        name = request.form['name']
+        surname = request.form['surname']
+        country = request.form['country']
+        club = request.form['club']
+        best_rating = request.form['best_rating']
+        best_ranking = request.form['best_ranking']
+        best_tournament = request.form['best_tournament']
+        best_tournament_result = request.form['best_tournament_result']
+        curr_rating = request.form['curr_rating']
+        curr_ranking = request.form['curr_ranking']
+        return page.update_player_info(key, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+    else:
+        return redirect(url_for('home_page'))
 
 @app.route('/worldplayers_info', methods=['GET', 'POST'])
 @app.route('/worldplayers_info/<int:key>/', methods=['GET', 'POST'])

@@ -143,11 +143,35 @@
 		<button type="submit" name="findplayer" class="btn btn-default">Find Player</button>
 	</form>
 	</div>
+
+	<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
+
+		<div class="panel panel-default">
+  <div class="panel-heading"> Find Player by Country</div>
+	<table class="table">
+			<tr>
+				<th>Country: </th>
+				<td>
+					<input type="text" name="country"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<button type="submit" name="findplayerbycountry" class="btn btn-default">Find Player</button>
+	</form>
+	</div>
 	</div>
 	</div>
 
   <div style="float:right; margin-left: 100px;">
 		<h2	id="subhead" >Countries Rating</h2>
+		<div id="divcountries">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
+
+		<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+	</form>
+	</div>
 	<div class="panel panel-default">
   <div class="panel-heading">FIDE Countries Rating</div>
   <table class="table">
@@ -181,7 +205,7 @@
 	</table>
 	</div>
 
-	<form id="addingcountry" action="{{ url_for('countries_page') }}" method="post">
+	<form id="addingcountry" action="{{ url_for('rankings_page') }}" method="post">
 		<div class="panel panel-default">
   <div class="panel-heading">Add Country</div>
 	<table class="table">
@@ -246,7 +270,7 @@
 	</form>
 
 	<div id="divcountries">
-	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
+	<form id="delcountries" action="{{ url_for('rankings_page') }}" method="post">
 
 		<div class="panel panel-default">
   <div class="panel-heading">Delete or Find Country</div>
@@ -264,13 +288,159 @@
 	</form>
 	</div>
 
-	<div id="divcountries">
-	<form id="delcountries" action="{{ url_for('countries_page') }}" method="post">
 
-		<button type="submit" name="initializeTable" class="btn btn-default">Initialize Table</button>
+	</div>
+
+	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
+		<input value="Initialize Table" name="initializeTable" type="submit"/>
 	</form>
-	</div>
-	</div>
+	
+
+
+        <div class="panel panel-default">
+	<table class="table">
+        <tr>
+        	<th> ID </th>
+        	<th> Name </th>
+        	<th> Surname </th>
+        	<th> Country </th>
+        	<th> Club </th>
+        	<th> Best Rating </th>
+        	<th>Best Ranking </th>
+        	<th> Best Tournament </th>
+        	<th> Best tournament Result </th>
+        	<th> Current Rating </th>
+        	<th>Current Ranking </th>
+        </tr>
+        	{% for id, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, current_rating, current_ranking in player_info %}
+        	<tr>
+        		<td>{{id}} </td>
+        		<td><a href="{{ url_for('update_player_info_page1', key=id) }}">{{name}} </a></td>
+        		<td> {{surname}} </td>
+        		<td> {{country}} </td>
+        		<td> {{club}} </td>
+        		<td> {{best_rating}} </td>
+        		<td> {{best_ranking}} </td>
+        		<td> {{best_tournament}} </td>
+        		<td> {{best_tournament_result}} </td>
+        		<td> {{current_rating}}</td>
+        		<td> {{current_ranking}}</td>
+        	</tr>
+        	{%endfor%}
+        </table>
+        </div>
+
+        <form id="addplayerinfo" action="{{ url_for('rankings_page') }}" method="post">
+        	<div class="panel panel-default">
+	<table class="table">
+        		<tr>
+				<th>Name: </th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname:</th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Country:</th>
+				<td>
+					<input type="text" name="country"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Club:</th>
+				<td>
+					<input type="text" name="club"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Rating: </th>
+				<td>
+					<input type="text" name="best_rating"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Ranking:</th>
+				<td>
+					<input type="text" name="best_ranking"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament:</th>
+				<td>
+					<input type="text" name="best_tournament"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Best Tournament Result:</th>
+				<td>
+					<input type="text" name="best_tournament_result"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Rating:</th>
+				<td>
+					<input type="text" name="curr_rating"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Current Ranking:</th>
+				<td>
+					<input type="text" name="curr_ranking"/>
+				</td>
+			</tr>
+			</table>
+			</div>
+		<input value="Add Player" name="addplayer_info" type="submit"/>
+	</form>
+
+
+	<div id="divjav">
+	<form id="deljav" action="{{ url_for('rankings_page') }}" method="post">
+	<div class="panel panel-default">
+	<table class="table">
+		<tr>
+				<th>Name: </th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname: </th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+			</table>
+			</div>
+		<input value="Delete Player" name="deleteplayer_info" type="submit"/>
+	</form>
+
+
+	<div id="findjav">
+	<form id="findjav" action="{{ url_for('rankings_page') }}" method="post">
+	<div class="panel panel-default">
+	<table class="table">
+		<tr>
+				<th>Name: </th>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Surname: </th>
+				<td>
+					<input type="text" name="surname"/>
+				</td>
+			</tr>
+			</table>
+			</div>
+		<input value="Find Player" name="findplayer_info" type="submit"/>
+	</form>
 
 </body>
 </html>
