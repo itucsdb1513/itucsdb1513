@@ -5,11 +5,11 @@ Welcome to Hellooooo's documentation!
 
 :Members:
 
-   * Member 1
-   * Member 2
-   * Member 3
-   * Member 4
-   * Member 5
+   * Ahmet Turk
+   * Javid Nuriyev
+   * Ira Shyti
+   * Mursit Sezen
+   * Ahmet Gulum
 
 **project description goes here (a few paragraphs)**
 
