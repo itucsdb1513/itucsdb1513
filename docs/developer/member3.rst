@@ -219,3 +219,157 @@ SQL statement for updating an event :
                         WHERE number = %s""" % (date, place, player1, player2, champ, number)
             cursor.execute(query)
         return redirect(url_for('upcoming_events'))
+
+
+Championships Table
+-------------------
+This table shows the chess championships in the world. It has five attributes which are number, championship, year,
+players, games. The primary key of this table is number which is serially generated. Championship is a foreign key for the
+upcoming events table and because of this it is unique. Year shows the year the championship will happen. Players refers to
+the total number of chess players to that championship and games is for the total number of games that will occur in the
+championship.
+
+
++--------------+---------+----------+-------------+-----------+
+| Attribuite   | Type    | Not Null | Primary key | Reference |
++==============+=========+==========+=============+===========+
+| number       | serial  | 1        | Yes         | No        |
++--------------+---------+----------+-------------+-----------+
+| championship | text    | 1        | No          | Ye        |
++--------------+---------+----------+-------------+-----------+
+| year         | integer | 1        | No          | No        |
++--------------+---------+----------+-------------+-----------+
+| players      | integer | 1        | No          | No        |
++--------------+---------+----------+-------------+-----------+
+| games        | integer | 1        | No          | No        |
++--------------+---------+----------+-------------+-----------+
+
+
+**SQL statement for initializing the upcoming events table : **
+
+.. code-block:: python
+
+
+   query = """CREATE TABLE tours (
+                        number serial PRIMARY KEY,
+                        cha  text UNIQUE NOT NULL,
+                        year integer NOT NULL,
+                        players integer NOT NULL,
+                        games integer NOT NULL)"""
+            cursor.execute(query)
+
+
+Initialize table
+++++++++++++++++
+User can initialize the championships table to its initiall values by pressing the initialize table button.
+When the table is initialized it shows the information for seven different championships.
+
+**SQL statement for initializing the upcoming events table : **
+
+.. code-block:: python
+
+   query = """INSERT INTO tours (cha, year, players, games)
+                        VALUES
+                        ('World', 2016, 24, 72),
+                        ('European', 2017, 16, 36),
+                        ('Asian', 2016, 16, 36),
+                        ('Albanian', 2016, 16, 36),
+                        ('English', 2016, 20, 68),
+                        ('Italian', 2016, 14, 3),
+                        ('Turkish', 2016, 16, 36)"""
+            cursor.execute(query)
+
+
+Add Championship
+++++++++++++++++
+The users can add an new championship on the table by entering all the values that are required since none of them can be
+NULL. User should take in considerance that if a championship already exists on the table, no other championship with same
+name can be added in the table.
+
+SQL statement for adding a championship :
+
+.. code-block:: python
+
+   def addtour(self, cha, year, players, games):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO tours (cha, year, players, games)
+                        VALUES
+                        ('%s', %s, %s, %s)""" % (cha, year, players, games)
+            cursor.execute(query)
+            cursor.close()
+        return redirect(url_for('upcoming_events'))
+
+
+Find Championship
++++++++++++++++++
+There are two ways by which a user can find a championship, either by its number on the table or by the name of the
+ championship.
+
+ SQL statement for finding championship by the number on the table :
+
+.. code-block:: python
+
+   def find_tour(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM tours WHERE number = %s """ % (number)
+            cursor.execute(query)
+            tours = cursor.fetchall()
+            cursor.close()
+        return render_template('find_tour.html', tours = tours)
+
+ SQL statement for finding event by championship name :
+
+.. code-block:: python
+
+   def find_tour_name(self, cha):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM tours
+                        WHERE cha LIKE '%s%%'
+                        ORDER BY number """ % (cha)
+            cursor.execute(query)
+            tours = cursor.fetchall()
+            cursor.close()
+        return render_template('find_tour.html', tours = tours)
+
+
+Deleting Championship
++++++++++++++++++++++
+There are also two ways for deleting a championship, which are same ways used to find it. The user should take in
+considerance that this table is connected with the upcoming events table by a foreing key. The foreign key restricts
+the user to delete a championship if in the events table there is any event part of this championship. If there is no such
+event in the upcoming events table, than the user can delete the championship.
+
+ SQL statement for deleting championship by the number on the table :
+
+.. code-block:: python
+
+   def deletetour(self, number):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """DELETE FROM tours WHERE number = '%s' """ % (number)
+            cursor.execute(query)
+            cursor.close()
+        return redirect(url_for('upcoming_events'))
+
+
+
+ SQL statement for deleting championship by its name :
+
+.. code-block:: python
+
+   def delete_tour(self, cha):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM tours WHERE cha = '%s'
+                         """ % (cha)
+            cursor.execute(query)
+            cursor.close()
+        return redirect(url_for('upcoming_events'))
+
+
+
