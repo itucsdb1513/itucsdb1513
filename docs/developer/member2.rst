@@ -184,8 +184,139 @@ SQL statement for updating a player :
         return redirect(url_for('rankings_page'))
 
 
+Countries Rating Table
+----------------------
+In this table countries are listed according to the average FIDE rating of Top-10 chess players of that country.
+It has ten attributes. One of the attributes is not displayed on the page, this attribute is ID of countries. ID is serially generated nd it is a primary key of this table at the same time.
+gm(Grand Masters) column shows the quantity of grand masters in this country, similarly im (International Masters) column shows the quantity of international masters in that country.
+total_titled(Total Titled) shows the total number of titled players by FIDE in that country and the total_top (Total Number of Top 100 players) is  showing how many players representing this country are in FIDE Top-100.
 
++----------------+---------+----------+-------------+-----------+
+| Attribute      | Type    | Not Null | Primary key | Reference |
++================+=========+==========+=============+===========+
+| id             | serial  | 1        | Yes         | No        |
++----------------+---------+----------+-------------+-----------+
+| country_name   | integer | 1        | No          | Yes       |
++----------------+---------+----------+-------------+-----------+
+| average        | integer | 1        | No          | Yes       |
++----------------+---------+----------+-------------+-----------+
+| gm             | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| im             | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| total_titled   | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| total_top      | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| country_rank   | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| best_player    | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
+| highest_rating | integer | 1        | No          | No        |
++----------------+---------+----------+-------------+-----------+
 
+**SQL statement for creating the countries table : **
 
+.. code-block:: python
 
+            query = """CREATE TABLE countries_table (
+                        id serial PRIMARY KEY,
+                        country_name text UNIQUE NOT NULL,
+                        average integer DEFAULT 0,
+                        gm integer DEFAULT 0,
+                        im integer DEFAULT 0,
+                        total_titled integer DEFAULT 0,
+                        total_top integer DEFAULT 0,
+                        country_rank integer DEFAULT 0,
+                        best_player text UNIQUE NOT NULL,
+                        highest_rating integer DEFAULT 0);"""
+            cursor.execute(query)
+            
+Add Country
++++++++++++
+Country can be added to the table by filling the fields and cliccking on 'Add Country' button
 
+**SQL statement for adding a country to the countries table : **
+.. code-block:: python
+
+    def add_country(self, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO countries_table (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+                        VALUES
+                        ('%s', %s, %s, %s, %s, %s, %s, '%s', %s )""" % (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating)
+            cursor.execute(query)
+
+            connection.commit()
+        return redirect(url_for('rankings_page'))
+
+Find Country
+++++++++++++
+Country and its data can be found by typing the name of the country and clicking on 'Find Country' table. After that the country that a user is searching for is displayed on a new page.
+
+**SQL statement for finding a country in the countries table : **
+
+.. code-block:: python
+
+    def find_country(self, country_name):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM countries_table
+                        WHERE country_name LIKE '%s%%'
+                        ORDER BY id """ % (country_name)
+            cursor.execute(query)
+            countries = cursor.fetchall()
+     return render_template('findcountries.html', countries = countries)
+     
+     
+Deleting Country
+++++++++++++++++
+Country can be deleted by typing the name of the country to the corresponding field and clicking 'Delete Country'. However, if the country to be deleted is referenced in the Player Rankings table(worldplayers) then this country can not be deleted as there are players representing this country.
+
+**SQL statement for deleting countries from the table :**
+
+.. code-block:: python
+
+    def delete_country(self, country_name):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM countries_table WHERE country_name = '%s'""" % (country_name)
+            cursor.execute(query)
+            connection.commit()
+
+    return redirect(url_for('rankings_page'))
+
+Update Country
+++++++++++++++
+Country data can be updated by clicking on the 'Update' button next to each country. Update here affects other tables that reference countries table so it is needed to be attentive while updating.
+After we click on the button new page is opened where we can update the country data.
+
+**SQL statement for opening update page for countries :**
+
+.. code-block:: python
+
+    def open_updatecountries(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM countries_table WHERE id  = %s" % (id)
+            cursor.execute(query)
+            countries = cursor.fetchone()
+    return render_template('updatecountriespage.html', countries = countries)
+
+**SQL statement for updating countries :**   
+
+.. code-block:: python
+
+    def update_countriess(self, id, country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE countries_table
+                        SET country_name = '%s', average = %s, gm = %s, im = %s, total_titled = %s, total_top = %s,
+                            country_rank = %s, best_player = '%s', highest_rating = %s
+                        WHERE id = %s""" % (country_name, average, gm, im, total_titled, total_top, country_rank, best_player, highest_rating, id)
+            cursor.execute(query)
+   return redirect(url_for('rankings_page'))
+
+ 
