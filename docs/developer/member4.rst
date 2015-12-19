@@ -29,6 +29,12 @@ Movement Table
 
 .. code-block:: python
 
+   class Rules:
+
+      def init_table(self):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
              query = """CREATE TABLE pieces (
                         id serial PRIMARY KEY,
                         piece_name text UNIQUE NOT NULL,
@@ -46,6 +52,12 @@ Initializing the Table
   **SQL statement for initializing the Movement Table **
 
 .. code-block:: python
+
+   class Rules:
+
+      def init_table(self):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
 
          query = """INSERT INTO pieces (piece_name, piece_move, special_move)
                         VALUES
@@ -70,6 +82,8 @@ Adding Piece
 
 .. code-block:: python
 
+   class Rules:
+
       def add_piece(self, piece_name, piece_move, special_move):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -91,7 +105,9 @@ Find Piece
 
 .. code-block:: python
 
-     def find_pieces(self, piece_name, piece_move):
+   class Rules:
+
+      def find_pieces(self, piece_name, piece_move):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
@@ -99,6 +115,7 @@ Find Piece
                         WHERE piece_name LIKE '%s%%'
                           AND piece_move LIKE '%s%%'
                         ORDER BY id """ % (piece_name, piece_move)
+
             cursor.execute(query)
             the_pieces = cursor.fetchall()
         return render_template('findpieces.html', the_pieces = the_pieces)
@@ -112,14 +129,16 @@ Delete Piece
 
 .. code-block:: python
 
-    def delete_piece(self, piece_name, piece_move):
+   class Rules:
+
+      def delete_piece(self, piece_name, piece_move):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """DELETE FROM pieces WHERE piece_name = '%s'
                         AND piece_move = '%s' """ % (piece_name, piece_move)
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
         return redirect(url_for('rules_page'))
 
@@ -133,10 +152,13 @@ Update Piece
 
 .. code-block:: python
 
-    def open_updatepieces(self, id):
+   class Rules:
+
+      def open_updatepieces(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM pieces WHERE id  = %s" % (id)
+
             cursor.execute(query)
             the_pieces = cursor.fetchone()
         return render_template('updatepiecespage.html', the_pieces = the_pieces)
@@ -145,13 +167,16 @@ Update Piece
 
 .. code-block:: python
 
-    def update_pieces(self, id, piece_name, piece_move, special_move):
+   class Rules:
+
+      def update_pieces(self, id, piece_name, piece_move, special_move):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE pieces
                         SET piece_name = '%s', piece_move = '%s',
                             special_move = '%s'
                         WHERE id = %s""" % (piece_name, piece_move, special_move, id)
+
             cursor.execute(query)
         return redirect(url_for('rules_page'))
 
@@ -187,12 +212,19 @@ Capture and Place Table
 
 .. code-block:: python
 
+   class Rules:
+
+      def init_table(self):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
             query = """CREATE TABLE piece_captures (
                         id serial PRIMARY KEY,
                         name text NOT NULL REFERENCES pieces(piece_name) ON DELETE RESTRICT,
                         capture_direction text NOT NULL,
                         starting_place text NOT NULL,
                         can_start text NOT NULL);"""
+
             cursor.execute(query)
             connection.commit()
 
@@ -205,6 +237,12 @@ Initializing the Table
 
 .. code-block:: python
 
+   class Rules:
+
+      def init_table(self):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
          query = """INSERT INTO piece_captures (name, capture_direction, starting_place, can_start)
                         VALUES
                         ('King', 'H, V, D', 'E1', 'No'),
@@ -213,8 +251,8 @@ Initializing the Table
                         ('Knight', 'L, jump', 'B1, G1', 'Yes'),
                         ('Pawn', 'D', 'A2,B2,...H2', 'Yes'),
                         ('Queen', 'H, V, D', 'D1','No')"""
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
 
 Adding Piece
@@ -227,15 +265,17 @@ Adding Piece
 
 .. code-block:: python
 
-    def add_capture(self, name, capture_direction, starting_place, can_start):
+   class Rules:
+
+      def add_capture(self, name, capture_direction, starting_place, can_start):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """INSERT INTO piece_captures (name, capture_direction, starting_place, can_start)
                         VALUES
                         ('%s', '%s', '%s', '%s')""" % (name, capture_direction, starting_place, can_start)
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
         return redirect(url_for('rules_page'))
 
@@ -248,13 +288,16 @@ Find Piece
 
 .. code-block:: python
 
-    def find_captures(self, name):
+   class Rules:
+
+      def find_captures(self, name):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """SELECT * FROM piece_captures
                         WHERE name LIKE '%s%%'
                         ORDER BY id """ % (name)
+
             cursor.execute(query)
             upcaptures = cursor.fetchall()
         return render_template('findcaptures.html', upcaptures = upcaptures)
@@ -270,13 +313,15 @@ Delete Piece
 
 .. code-block:: python
 
-    def delete_capture(self, name):
+   class Rules:
+
+      def delete_capture(self, name):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """DELETE FROM piece_captures WHERE name = '%s' """ % (name)
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
         return redirect(url_for('rules_page'))
 
@@ -290,10 +335,13 @@ Update Piece
 
 .. code-block:: python
 
-    def open_updatecaptures(self, id):
+   class Rules:
+
+      def open_updatecaptures(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM piece_captures WHERE id  = %s" % (id)
+
             cursor.execute(query)
             upcaptures = cursor.fetchone()
         return render_template('updatecapturespage.html', upcaptures = upcaptures)
@@ -302,13 +350,16 @@ Update Piece
 
 .. code-block:: python
 
-    def update_captures(self, id, name, capture_direction, starting_place, can_start):
+   class Rules:
+
+      def update_captures(self, id, name, capture_direction, starting_place, can_start):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE piece_captures
                         SET name = '%s', capture_direction = '%s',
                             starting_place = '%s', can_start = '%s'
                         WHERE id = %s""" % (name, capture_direction, starting_place, can_start, id)
+
             cursor.execute(query)
         return redirect(url_for('rules_page'))
 
@@ -342,11 +393,18 @@ Rule History Table
 
 .. code-block:: python
 
+   class Rules:
+
+      def init_table(self):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
             query = """CREATE TABLE rules_items (
                         id serial PRIMARY KEY,
                         the_rule text UNIQUE NOT NULL,
                         made_by text NOT NULL,
                         date text NOT NULL);"""
+
             cursor.execute(query)
             connection.commit()
 
@@ -359,6 +417,8 @@ Initializing the Table
 
 .. code-block:: python
 
+   class Rules:
+
          query = """INSERT INTO rules_items (the_rule, made_by, date)
                         VALUES
                         ('Queen, Bishop', 'Hooper&Whyld', '15th century'),
@@ -369,6 +429,7 @@ Initializing the Table
                         ('Threefold Repetition', 'Unknown', '19th century'),
                         ('Fifty-move Rule', 'Unknown', '20th century'),
                         ('The board', 'Hooper&Whyld', '1992');"""
+
             cursor.execute(query)
             connection.commit()
 
@@ -381,15 +442,17 @@ Adding Rule
 
 .. code-block:: python
 
-    def add_rule(self, the_rule, made_by, date):
+   class Rules:
+
+      def add_rule(self, the_rule, made_by, date):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """INSERT INTO rules_items (the_rule, made_by, date)
                         VALUES
                         ('%s', '%s', '%s')""" % (the_rule, made_by, date)
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
         return redirect(url_for('rules_page'))
 
@@ -402,13 +465,16 @@ Find Rule
 
 .. code-block:: python
 
-    def find_rules(self, the_rule):
+   class Rules:
+
+      def find_rules(self, the_rule):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """SELECT * FROM rules_items
                         WHERE the_rule LIKE '%s%%'
                         ORDER BY id """ % (the_rule)
+
             cursor.execute(query)
             uprules = cursor.fetchall()
         return render_template('findrules.html', uprules = uprules)
@@ -422,13 +488,15 @@ Delete Rule
 
 .. code-block:: python
 
-    def delete_rule(self, the_rule):
+   class Rules:
+
+      def delete_rule(self, the_rule):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
 
             query = """DELETE FROM rules_items WHERE the_rule = '%s' """ % (the_rule)
-            cursor.execute(query)
 
+            cursor.execute(query)
             connection.commit()
         return redirect(url_for('rules_page'))
 
@@ -443,10 +511,13 @@ Update Rule
 
 .. code-block:: python
 
-    def open_updaterules(self, id):
+   class Rules:
+
+      def open_updaterules(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM rules_items WHERE id  = %s" % (id)
+
             cursor.execute(query)
             uprules = cursor.fetchone()
         return render_template('updaterulespage.html', uprules = uprules)
@@ -455,13 +526,16 @@ Update Rule
 
 .. code-block:: python
 
-    def update_rules(self, id, the_rule, made_by, date):
+   class Rules:
+
+      def update_rules(self, id, the_rule, made_by, date):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
             query = """UPDATE rules_items
                         SET the_rule = '%s', made_by = '%s',
                             date = '%s'
                         WHERE id = %s""" % (the_rule, made_by, date, id)
+
             cursor.execute(query)
         return redirect(url_for('rules_page'))
 
