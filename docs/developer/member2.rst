@@ -65,7 +65,7 @@ When the table is initialized it shows 7 players starting with the top player Ma
 **SQL statement for initializing the Player Rankings table (worldplayers table) : **
 .. code-block:: python
 
-      query = """INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
+         query = """INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
                         VALUES
                         ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2834, 1, 25, 'MALE'),
                         ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN', 'SOCAR BAKU', 2739, 22, 28, 'MALE'),
@@ -75,8 +75,8 @@ When the table is initialized it shows 7 players starting with the top player Ma
                         ('HIKARU', 'NAKAMURA', 'USA', 'Obiettivo Risarcimento', 2793, 5, 28, 'MALE'),
                         ('LEVON', 'ARONIAN', 'ARMENIA', 'Mainz', 2788, 6, 33, 'MALE');"""
 
-      cursor.execute(query)
-      connection.commit()
+         cursor.execute(query)
+         connection.commit()
 
 Add Player
 ++++++++++
