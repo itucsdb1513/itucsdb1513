@@ -21,10 +21,22 @@ Membership is not required for our site. It is thought to be a sharing platform 
 
 Work Sharing
 ------------
-Ira Shyti
+**Ira Shyti**
    - Upcoming Events table.
    - Championships table.
    - History of chess table.
+
+**Javid Nuriyev**
+   - Player Rankings table
+   - Countries table
+   - Player Info table
+
+.. literalinclude:: ../server.py
+    :language: python
+    :lines: 12-40
+    :emphasize-lines: 2
+
+
 
 Contents:
 
