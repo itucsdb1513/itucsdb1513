@@ -104,7 +104,7 @@ Find Player
 Player can be retrieved from the Player Rankings table in two ways. One of them is to find a player by name and surname
 and the other method is to list players by countries.
 
-*SQL statement for finding player by name and surname :*
+**SQL statement for finding player by name and surname :**
 .. code-block:: python
 
      def find_player(self, name, surname):
@@ -118,7 +118,7 @@ and the other method is to list players by countries.
             player = cursor.fetchall()
       return render_template('find_player.html', player = player)
 
-SQL statement for finding players by country:
+**SQL statement for finding players by country:**
 .. code-block:: python
 
     def find_player_by_country(self, country):
