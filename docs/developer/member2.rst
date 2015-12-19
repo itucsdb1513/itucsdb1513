@@ -63,6 +63,7 @@ The Player Rankings table can be initialized by pressing the *initialize table* 
 When the table is initialized it shows 7 players starting with the top player Magnus Carlsen.
 
 **SQL statement for initializing the Player Rankings table (worldplayers table) : **
+
 .. code-block:: python
 
          query = """INSERT INTO worldplayers (name, surname, country, club, rating, ranking, age, gender)
@@ -105,6 +106,7 @@ Player can be retrieved from the Player Rankings table in two ways. One of them 
 and the other method is to list players by countries.
 
 **SQL statement for finding player by name and surname :**
+
 .. code-block:: python
 
      def find_player(self, name, surname):
@@ -119,6 +121,7 @@ and the other method is to list players by countries.
       return render_template('find_player.html', player = player)
 
 **SQL statement for finding players by country:**
+
 .. code-block:: python
 
     def find_player_by_country(self, country):
