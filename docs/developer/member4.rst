@@ -451,7 +451,7 @@ Update Rule
             uprules = cursor.fetchone()
         return render_template('updaterulespage.html', uprules = uprules)
 
- **SQL statement for updating a rule : **
+**SQL statement for updating a rule :**
 
 .. code-block:: python
 
