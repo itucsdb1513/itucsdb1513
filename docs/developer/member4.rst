@@ -85,9 +85,9 @@ Adding Piece
 Find Piece
 ++++++++++
 * Pieces can be retrieved from the Movement table in two ways. One of them is to find a piece by piece name and piece move
-  and the other method is just pushing *Find Piece* and it lists all pieces in the table.
+  and the other method is just clicking *Find Piece* button and it lists all pieces in the table.
 
-  **SQL statement for finding piece by piece and piece move : **
+  **SQL statement for finding piece by piece name and piece move : **
 
 .. code-block:: python
 
@@ -125,7 +125,7 @@ Delete Piece
 
 Update Piece
 ++++++++++++
-* Each piece's data can be updated thanks to the buttons located on thr right-side to each piece in the Movement table. After that new page is opened.
+* Each piece's data can be updated thanks to the buttons located on the right-side to each piece in the Movement table. After that new page is opened.
 * After *Update* button is pressed new data can be entered into the fields that are desired to be changed
   and *Update* button is pushed which completes this operation.
 
@@ -158,7 +158,7 @@ Update Piece
 
 Capture and Place Table
 -----------------------
-* In this table pieces are listed with their capture direction and starting point.
+* In this table pieces are listed with their capture directions and starting points.
 * On the website this table is under the header *Capture and Place Table*; however, in the database it is named as *piece_captures*.
 * The table has five columns. The primary key of the table is the id of the piece and it is generated serially.
 * The table has a foreign key. The *name* attribute is referenced from *piece_name* attribute of Movement table.
@@ -282,7 +282,7 @@ Delete Piece
 
 Update Piece
 ++++++++++++
-* Each piece's data can be updated thanks to the buttons located on thr right-side to each piece in the Capture Table. After that new page is opened.
+* Each piece's data can be updated thanks to the buttons located on the right-side to each piece in the Capture Table. After that new page is opened.
 * After *Update* button is pressed new data can be entered into the fields that are desired to be changed
   and *Update* button is pushed which completes this operation.
 
@@ -313,12 +313,12 @@ Update Piece
         return redirect(url_for('rules_page'))
 
 
-Capture and Place Table
------------------------
+Rule History Table
+------------------
 * In this table piece rules are listed with their founder and date.
 * On the website this table is under the header *Rule History Table*; however, in the database it is named as *rule_items*.
 * The table has four columns. The primary key of the table is the id of the piece and it is generated serially.
-* *the_rule* attributes are unique in this table as each rule can occur only once in the rule history table.
+* *the_rule* attribute is unique in this table as each rule can occur only once in the rule history table.
 * This table is seperated from other two tables. It has no references to other tables.
 
 +-----------+--------+----------+-------------+-----------+
@@ -352,7 +352,7 @@ Capture and Place Table
 
 Initializing the Table
 ++++++++++++++++++++++
-* The Capture Table can be initialized by pressing the *Initialize Table* button that is below of the tables.
+* The Rule History Table can be initialized by pressing the *Initialize Table* button that is below of the tables.
 * When the table is initialized it shows 8 rules.
 
   **SQL statement for initializing the Rules History Table **
@@ -434,7 +434,7 @@ Delete Rule
 
 Update Rule
 +++++++++++
-* Each rule's data can be updated thanks to the buttons located on thr right-side to each piece in the Rule History Table.
+* Each rule's data can be updated thanks to the buttons located on the right-side to each rule in the Rule History Table.
   After that new page is opened.
 * After *Update* button is pressed new data can be entered into the fields that are desired to be changed
   and *Update* button is pushed which completes this operation.
