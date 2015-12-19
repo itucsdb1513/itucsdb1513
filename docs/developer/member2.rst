@@ -4,7 +4,7 @@ Player Ratings Table
 --------------------
 This table shows the rankings of top players according to FIDE. On the website this table is under the header Player Tables but in the database it is named worldplayers
 The table has nine columns columns but ID is not displayed on the page to the users so only eight columns are displayed. The primary key of the table is the id of the player and it is generated serially.
-The couple of name and surname is unique in this table as each player can occur only once in the rankings table. 
+The couple of name and surname is unique in this table as each player can occur only once in the rankings table.
 There is also a foreign key in this table which is countries column.
 
 +-----------+---------+----------+-------------+-----------+
@@ -39,7 +39,7 @@ There is also a foreign key in this table which is countries column.
    - *rating* is the FIDE rating of the player
    - *ranking* is the ranking of the player according to FIDE
    - *gender* is a gender of the player
-   
+
    **SQL statement for initializing the local players table : **
 
 .. code-block:: python
@@ -56,7 +56,7 @@ There is also a foreign key in this table which is countries column.
                         gender text NOT NULL,
                         UNIQUE (name, surname));"""
              cursor.execute(query)
-             
+
 Initializing the Table
 ++++++++++++++++++++++
 The Player Rankings table can be initialized by pressing the *initialize table* button that is above the table.
@@ -74,10 +74,10 @@ When the table is initialized it shows 7 players starting with the top player Ma
                         ('VLADIMIR', 'KRAMNIK', 'RUSSIA', 'NAO Paris', 2796, 4, 40, 'MALE'),
                         ('HIKARU', 'NAKAMURA', 'USA', 'Obiettivo Risarcimento', 2793, 5, 28, 'MALE'),
                         ('LEVON', 'ARONIAN', 'ARMENIA', 'Mainz', 2788, 6, 33, 'MALE');"""
-                        
+
       cursor.execute(query)
       connection.commit()
-      
+
 Add Player
 ++++++++++
 Players can be added to the ranking table by filling the fields below the ranking table and clicking 'Add Player'.
@@ -98,13 +98,13 @@ The pair of name and surname in the Player Rankings table is unique as a result 
 
             connection.commit()
          return redirect(url_for('rankings_page'))
-          
+
 Find Player
 +++++++++++
 Player can be retrieved from the Player Rankings table in two ways. One of them is to find a player by name and surname
 and the other method is to list players by countries.
 
-SQL statement for finding player by name and surname :
+*SQL statement for finding player by name and surname :*
 .. code-block:: python
 
      def find_player(self, name, surname):
@@ -119,7 +119,7 @@ SQL statement for finding player by name and surname :
       return render_template('find_player.html', player = player)
 
 SQL statement for finding players by country:
-.. code-block:: python      
+.. code-block:: python
 
     def find_player_by_country(self, country):
         with dbapi2.connect(self.dsn) as connection:
@@ -130,7 +130,7 @@ SQL statement for finding players by country:
             cursor.execute(query)
             player = cursor.fetchall()
     return render_template('find_player.html', player = player)
-    
+
 Delete Player
 +++++++++++++
 Player can be deleted from the rankings table unless the player is not a member of the player_info table
@@ -149,7 +149,7 @@ SQL statement for deleting a player by name and surname from the table :
             connection.commit()
 
     return redirect(url_for('rankings_page'))
-    
+
 Update Player
 +++++++++++++
 Each player's data can be updated thanks to the buttons located on thr right-side to each player in the Player Rankings table. After that new page is opened.
@@ -158,7 +158,7 @@ After 'Update' button is pressed new data can be entered into the fields that ar
 SQL statement for opening the  update player page :
 
 .. code-block:: python
-    
+
     def open_update_player(self, id):
         with dbapi2.connect(self.dsn) as connection:
             cursor = connection.cursor()
@@ -166,7 +166,7 @@ SQL statement for opening the  update player page :
             cursor.execute(query)
             player = cursor.fetchone()
             return render_template('update_player.html', player = player)
-            
+
 SQL statement for updating a player :
 
 .. code-block:: python
@@ -184,6 +184,5 @@ SQL statement for updating a player :
 
 
 
-      
 
-   
+
