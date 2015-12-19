@@ -1,5 +1,5 @@
-Welcome to Hellooooo's documentation!
-=====================================
+Welcome to Chess's documentation!
+=================================
 
 :Team: CHESS
 
