@@ -141,7 +141,7 @@ Update Piece
             the_pieces = cursor.fetchone()
         return render_template('updatepiecespage.html', the_pieces = the_pieces)
 
-  **SQL statement for updating a piece : **
+  **SQL statement for updating a piece :**
 
 .. code-block:: python
 
@@ -298,7 +298,7 @@ Update Piece
             upcaptures = cursor.fetchone()
         return render_template('updatecapturespage.html', upcaptures = upcaptures)
 
-  **SQL statement for updating a capture : **
+  **SQL statement for updating a capture :**
 
 .. code-block:: python
 
@@ -451,7 +451,7 @@ Update Rule
             uprules = cursor.fetchone()
         return render_template('updaterulespage.html', uprules = uprules)
 
-  **SQL statement for updating a rule : **
+  **SQL statement for updating a rule :**
 
 .. code-block:: python
 
