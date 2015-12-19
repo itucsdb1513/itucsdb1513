@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# itucsdb documentation build configuration file, created by
+# Chess documentation build configuration file, created by
 # sphinx-quickstart on Mon Aug 18 15:56:05 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -44,8 +44,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Hellooooo'
-copyright = '2015, Team Name'
+project = 'Chess'
+copyright = '2015, itucsdb1513'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -177,7 +177,7 @@ html_use_index = False
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Hellooooodoc'
+htmlhelp_basename = 'Chess'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -197,8 +197,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'Hellooooo.tex', 'Hellooooo Documentation',
-   'Team Name', 'manual'),
+  ('index', 'Chess.tex', 'Chess Documentation',
+   'itucsdb1513', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -227,8 +227,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'Hellooooo', 'Hellooooo Documentation',
-     ['Team Name'], 1)
+    ('index', 'Chess', 'Chess Documentation',
+     ['itucsdb1513'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -241,8 +241,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Hellooooo', 'Hellooooo Documentation',
-   'Team Name', 'Hellooooo', 'One line description of project.',
+  ('index', 'Chess', 'Chess Documentation',
+   'itucsdb1513', 'Chess', 'One line description of project.',
    'Miscellaneous'),
 ]
 
