@@ -21,15 +21,29 @@ Membership is not required for our site. It is thought to be a sharing platform 
 
 Work Sharing
 ------------
-**Ira Shyti**
-   - Upcoming Events table.
-   - Championships table.
-   - History of chess table.
+**Ahmet Türk**
+   - Local Players table
+   - Local Games table
 
 **Javid Nuriyev**
    - Player Rankings table
    - Countries table
    - Player Info table
+
+**Ira Shyti**
+   - Upcoming Events table
+   - Championships table
+   - History of chess table
+
+**Murşit Sezen**
+   - Movement table
+   - Capture and Place table
+   - Rule History table
+
+**Ahmet Gülüm**
+   - Benefit table
+   - Relation table
+   - People table
 
 .. literalinclude:: ../server.py
     :language: python
