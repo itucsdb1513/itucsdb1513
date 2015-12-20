@@ -231,7 +231,7 @@ total_titled(Total Titled) shows the total number of titled players by FIDE in t
                         best_player text UNIQUE NOT NULL,
                         highest_rating integer DEFAULT 0);"""
             cursor.execute(query)
-            
+
 Add Country
 +++++++++++
 Country can be added to the table by filling the fields and cliccking on 'Add Country' button
@@ -269,8 +269,8 @@ Country and its data can be found by typing the name of the country and clicking
             cursor.execute(query)
             countries = cursor.fetchall()
      return render_template('findcountries.html', countries = countries)
-     
-     
+
+
 Deleting Country
 ++++++++++++++++
 Country can be deleted by typing the name of the country to the corresponding field and clicking 'Delete Country'. However, if the country to be deleted is referenced in the Player Rankings table(worldplayers) then this country can not be deleted as there are players representing this country.
@@ -305,7 +305,7 @@ After we click on the button new page is opened where we can update the country 
             countries = cursor.fetchone()
     return render_template('updatecountriespage.html', countries = countries)
 
-**SQL statement for updating countries :**   
+**SQL statement for updating countries :**
 
 .. code-block:: python
 
@@ -319,4 +319,157 @@ After we click on the button new page is opened where we can update the country 
             cursor.execute(query)
    return redirect(url_for('rankings_page'))
 
- 
+Player Info Table
+-----------------
+In this table detailed information about every player listed in the rankings table. There are eleven columns. The ID is a primary key.
+Furthermore, there should be an entry per player so for this purpose name, surname pair is unique in this table to avoid duplicate appearance of the players.
+There is also a foreign key pointing to the wPlayer Rankigs table(worldplayers).
++------------------------+---------+----------+-------------+-----------+
+| Attribute              | Type    | Not Null | Primary key | Reference |
++========================+=========+==========+=============+===========+
+| id                     | serial  | 1        | Yes         | No        |
++------------------------+---------+----------+-------------+-----------+
+| name                   | integer | 1        | No          | Yes       |
++------------------------+---------+----------+-------------+-----------+
+| surname                | integer | 1        | No          | Yes       |
++------------------------+---------+----------+-------------+-----------+
+| country                | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| club                   | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| best_rating            | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| best_ranking           | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| best_torunament        | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| best_tournament_result | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| curr_rating            | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+| curr_ranking           | integer | 1        | No          | No        |
++------------------------+---------+----------+-------------+-----------+
+
+**SQL statement for creating the countries table : **
+
+.. code-block:: python
+
+          CREATE TABLE player_info (
+                        id serial PRIMARY KEY,
+                        name text NOT NULL,
+                        surname text NOT NULL,
+                        country text NOT NULL REFERENCES countries_table(country_name) ON UPDATE CASCADE ON DELETE RESTRICT,
+                        club text NOT NULL,
+                        best_rating integer DEFAULT 0,
+                        best_ranking integer DEFAULT 0,
+                        best_tournament text NOT NULL,
+                        best_tournament_result text NOT NULL,
+                        curr_rating integer DEFAULT 0,
+                        curr_ranking integer DEFAULT 0,
+                        UNIQUE(name, surname) REFERENCES worldplayers(name, surname)ON UPDATE CASCADE ON DELETE RESTRICT)
+                        """
+            cursor.execute(query)
+
+Initialize Player Info
+++++++++++++++++++++++
+The player info table can be initialize by clicking on the button 'Initialize table'
+
+**SQL statement for initializing player info table :**
+
+.. code-block:: python
+
+           query = """INSERT INTO player_info (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+                        VALUES
+                        ('MAGNUS', 'CARLSEN', 'NORWAY', 'OS BADEN BADEN', 2850 , 1, 'MonteCarlo', 'Champion', 2850, 1),
+                        ('TEYMOUR', 'RADJABOV', 'AZERBAIJAN','SOCAR BAKU', 2760, 8, 'Lenaries','finalist', 2739, 22),
+                        ('SHAKHRIYAR', 'MAMMADYAROV', 'AZERBAIJAN', 'SOCAR BAKU',2755, 12,'Australian Open', 'Finalist' ,2746, 20)"""
+             cursor.execute(query)
+
+
+
+Add Player Info
++++++++++++++++
+As the player info table points to the rankings table there can be added only players that already exist in the player rankings table by filling the data in the fields on the page and clicking the 'Add Player' button.
+
+**SQL statement for adding a player to the player_info table :**
+
+.. code-block:: python
+
+    def add_player_info(self, name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO player_info (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+                        VALUES
+                        ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')""" % (name, surname, country, club, best_rating, best_ranking, best_tournament, best_tournament_result, curr_rating, curr_ranking)
+            cursor.execute(query)
+
+            connection.commit()
+    return redirect(url_for('rankings_page'))
+
+Find Player Info
+++++++++++++++++
+The info about each player can be specifically retrieved by typing the name and surname of the required player and clicking the 'Find player' button.
+
+**SQL statement for finding a player from the player_info table :**
+
+.. code-block:: python
+
+    def find_player_info(self, name, surname):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM player_info
+                        WHERE name LIKE '%s%%'
+                          AND surname LIKE '%s%%'
+                        ORDER BY id """ % (name, surname)
+            cursor.execute(query)
+            player_info = cursor.fetchall()
+    return render_template('find_playerBiography.html', player_info = player_info)
+
+Deleting Player Info
+++++++++++++++++++++
+The info of a player can be deleted whenever there is necessity by typing the name and surname of the player whose info is to be deleted and clicking the 'Delete Player' button.
+
+**SQL statement for deleting a player from the player_info table :**
+.. code-block:: python
+
+       def delete_player_info(self, name, surname):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM player_info WHERE name = '%s'
+                        AND surname = '%s' """ % (name, surname)
+            cursor.execute(query)
+            connection.commit()
+        return redirect(url_for('rankings_page'))
+
+Update Player Info
+++++++++++++++++++
+The info of each player can be updated. The new page opens in which new data can be entered and after clicking the button the cahnges can be noticed in the table.
+
+**SQL statement for opening a page for updating the player info :**
+
+.. code-block:: python
+
+    def open_update_player_info(self, id):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM player_info WHERE id  = %s" % (id)
+            cursor.execute(query)
+            player_info = cursor.fetchone()
+    return render_template('update_biography.html', player_info = player_info)
+
+**SQL statement for updating the player info :**
+
+.. code-block:: python
+
+    def update_player(self, id, name, surname, country, club, rating, ranking, age, gender):
+        with dbapi2.connect(self.dsn) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE worldplayers
+                        SET name = '%s', surname = '%s', country = '%s', club = '%s', rating = '%s', ranking = '%s', age = '%s', gender = '%s'
+                        WHERE id = %s""" % (name, surname, country, club, rating, ranking, age, gender, id)
+            cursor.execute(query)
+    return redirect(url_for('rankings_page'))
+
+
+
