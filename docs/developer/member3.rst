@@ -244,6 +244,12 @@ championship.
 | games        | integer | 1        | No          | No        |
 +--------------+---------+----------+-------------+-----------+
 
+   - *number* is the primary key
+   - *championship* (cha) holds the name of championship
+   - *year* is the year the championship will happen
+   - *players* is the total number of players in that championship
+   - *games* total number of games that will be played
+
 
 **SQL statement for initializing the upcoming events table :**
 
@@ -374,7 +380,7 @@ event in the upcoming events table, than the user can delete the championship.
 
 
 Update Championship
--------------------
++++++++++++++++++++
 The user can update a championshi by clicking on its name. The user shouldtake inconsiderance that he/she cannot changethe
  name of a championship that has an event in the upcoming events table.
 
