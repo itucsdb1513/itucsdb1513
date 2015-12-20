@@ -76,7 +76,7 @@ class Ranking:
                         best_tournament_result text NOT NULL,
                         curr_rating integer DEFAULT 0,
                         curr_ranking integer DEFAULT 0,
-                        UNIQUE(name, surname) REFERENCES worldplayers(name, surname)ON UPDATE CASCADE ON DELETE RESTRICT)
+                        FOREIGN KEY (name, surname) REFERENCES worldplayers(name, surname) ON UPDATE CASCADE ON DELETE CASCADE  );
                         """
             cursor.execute(query)
 
