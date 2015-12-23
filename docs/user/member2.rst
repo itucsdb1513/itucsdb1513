@@ -263,6 +263,134 @@ One important fact about delete in this table is to remember that country table 
 For this reason it is impossible to delete a country which is already used by other table.
 
 
+3. Player Info Table
+====================
+In the Player Info table  detailed information about players is provided. This table references the players from the rankings list.
+That means that only the players existing in the rankings table can exist in the Player Info table.
+
+
++------------------------+---------+------------------------------------------------+-+
+| Attribute              | Type    | Explanation                                    | |
++========================+=========+================================================+=+
+| Name                   | string  | Name of the player                             | |
++------------------------+---------+------------------------------------------------+-+
+| Surname                | string  | Surname of the player                          | |
++------------------------+---------+------------------------------------------------+-+
+| Country                | string  | Country player represents                      | |
++------------------------+---------+------------------------------------------------+-+
+| Club                   | string  | Club player represents                         | |
++------------------------+---------+------------------------------------------------+-+
+| Best Rating            | integer | Best rating ever of the player                 | |
++------------------------+---------+------------------------------------------------+-+
+| Best Ranking           | integer | Highest position in FIDE ranking during career | |
++------------------------+---------+------------------------------------------------+-+
+| Best Tournament        | string  | Tournament at which best performance was shown | |
++------------------------+---------+------------------------------------------------+-+
+| Best Tournament Result | string  | Result at the tournament with best performance | |
++------------------------+---------+------------------------------------------------+-+
+| Current Rating         | integer | Current FIDE rating                            | |
++------------------------+---------+------------------------------------------------+-+
+| Current Ranking        | integer | Current FIDE world ranking                     | |
++------------------------+---------+------------------------------------------------+-+
+
+
+To acces the player info table from home page user should click on the "Player Info" tab on the bar.
+
+
+.. figure:: jav_picture/main_p.png
+      :scale: 50 %
+      :alt: player info
+
+
+After the page is accessed we can see the table which is shown below.
+
+
+.. figure:: jav_picture/player_info_table.png
+      :scale: 50 %
+      :alt: player info
+|
+      *Displaying Player Info Table*
+
+There are 4 operations that can be carried on this table. Those are Add, Update, Delete, Search.
+
+
+3.1 Add Player Info
+-------------------
+It is possible to add a player info by filling the boxes right below the Player Info table.
+After the data is entered user has to click "Add Player" button.
+
+**Important Note:**
+It is very important to keep in mind that the player info table references both player rankings table and countries table. That means that members of both other tables are used in this table.
+For the sake of information being coherent and making sense it is only possible to add a player that already exists in the player ranking table and also the country has to exist in countries table.
+Otherwise player info can not be added.
+
+
+.. figure:: jav_picture/add_player_info.png
+      :scale: 50 %
+      :alt: player info
+|
+      *Adding Player Info*
+
+3.2 Update Player Info
+----------------------
+If the user wishes to update the existing player info then it is enough to just click on the name of the player in the table and a new page will open.
+
+.. figure:: jav_picture/update_player_info.png
+      :scale: 50 %
+      :alt: open update player info page
+|
+      *Choosing object to update*
+
+After the user clicks o the name of the player whose player info is desired to be modified anew page opens where all player info data is displayed.
+User can modify data by modifying the contents of the boxes and clicking on the button "Update Player".
+
+
+.. figure:: jav_picture/update_player_info2.png
+      :scale: 50 %
+      :alt: update player info page
+|
+      *Updating info of the player*
+
+**Important Note:**
+Because the player info table references two other tables when updating the data it is important to remember that.
+
+3.3 Search Player Info
+----------------------
+A user can search for a player info by typing the name and surname of the player into a special box.
+After the name and surname of the player whose info is of interest the user clicks on th "Find Player" button.
+
+
+.. figure:: jav_picture/find_player_info.png
+      :scale: 50 %
+      :alt: find player info page
+|
+      *Searching info of the player*
+
+
+After this step a new page is opened at which the requested player's player info is shown.
+
+.. figure:: jav_picture/find_page_player_info.png
+      :scale: 50 %
+      :alt: find player info page
+|
+      *Displaying searched player's info*
+
+
+3.4 Delete Player Info
+----------------------
+A user can delete player info from a table. To do that a user only needs to enter the name and surname of the player and click on the button "Delete Player"
+
+.. figure:: jav_picture/delete_player_info.png
+      :scale: 50 %
+      :alt: delete player info
+|
+      *Deleting player's info*
+
+After this operation a player whose name and surname was entered ito the box disappears from the Player Info table.
+
+
+
+
 
 
 
