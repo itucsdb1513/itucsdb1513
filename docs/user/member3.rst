@@ -2,7 +2,7 @@ Parts Implemented by Ira Shyti
 ==============================
 
 The user canacces the "Upcoming events" table and the "Championships" table by clicking the *upcoming events* button on the
-top of the home page.
+top of the home page. The *History* table can be accessed by pressing the history button.
 
 Upcoming events
 ---------------
@@ -17,13 +17,14 @@ The user can add an event by entering all the information that is required. The 
 should be completed since in the SQL code they are defined as not NULL. Another thing that should be considered also is that
 can not add an event of the same date with any event that is already on the table. Another restriction is also the fact that
 the championship attribute is referenced by the *championship*table, so the user can not add any event of a championship that
-is not pasrt od the *championship* table.
+is not pasrt of the championship table.
 
 .. figure:: Ira_pics/add_event.JPG
+      :align:   center
       :scale: 50 %
       :alt: Add event
 
-      *This is the the *add event* table*
+      *This is the add event table*
 
 
 
@@ -36,14 +37,19 @@ the championship that the events is part of. When choosing to find an event by i
 championship will be shown.
 
 .. figure:: Ira_pics/find_ev_nr.JPG
+      :align:   center
       :scale: 50 %
       :alt: Find or delte event by number
 
+
 .. figure:: Ira_pics/find_ev_name.JPG
+      :align:   center
       :scale: 50 %
       :alt: Find or delte event by date and place
 
+
 .. figure:: Ira_pics/find_ev_ch.JPG
+      :align:   center
       :scale: 50 %
       :alt: Find or delte event by championship
 
@@ -62,4 +68,26 @@ Championships table
 The *championship* table has five columns. The table shows nformation of the championship, when will it take place, the
 number of total players that will participate, and the number of tatal games that will be played.The primary key of the
 table is the number attribute. This tables *championship* attribute is a foreign key to the *upcoming events* table.
+
+Add championship
+++++++++++++++++
+
+Find or delte championship
+++++++++++++++++++++++++++
+
+Update championshiop
+++++++++++++++++++++
+
+
+History table
+-------------
+
+Add fact
+++++++++
+
+Find or delte fact
+++++++++++++++++++
+
+Update fact
++++++++++++
 
