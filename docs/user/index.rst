@@ -1,16 +1,17 @@
 User Guide
 ==========
 
-**explain how your application works from the user perspective, use
-screenshots whereever appropriate**
+For our project every user has access to all of the data. All the users can make the add, find, delte and update operations on
+each table. The users should take in considerance some rules while making those operations.
+At the top of the *home* page, the user finds the links to all the tables, which are shown as buttons.
 
-**to add a picture, use the following example**::
-
-   .. figure:: picture.png
+.. figure:: jav_picture/main.png
+      :align:   center
       :scale: 50 %
-      :alt: map to buried treasure
+      :alt: Main
 
-      This is the caption of the figure (a simple paragraph).
+      *This is the main page*
+
 
 .. toctree::
 
@@ -19,4 +20,3 @@ screenshots whereever appropriate**
    member3
    member4
    member5
-   
