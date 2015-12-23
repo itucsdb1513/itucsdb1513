@@ -2,6 +2,11 @@ Parts Implemented by Javid Nuriyev
 ==================================
 Player Ratings Table
 --------------------
+
+..figure:: player_ranking.png
+   :figclass: align-center
+
+   The genaral view of leagues page
 This table shows the rankings of top players according to FIDE. On the website this table is under the header Player Tables but in the database it is named worldplayers
 The table has nine columns columns but ID is not displayed on the page to the users so only eight columns are displayed. The primary key of the table is the id of the player and it is generated serially.
 The couple of name and surname is unique in this table as each player can occur only once in the rankings table.

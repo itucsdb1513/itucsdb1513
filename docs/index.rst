@@ -52,6 +52,11 @@ Work Sharing
 
 
 
+.. figure:: chess.jpg
+   :scale: 30 %
+   :alt: map to buried treasure
+
+
 Contents:
 
 .. toctree::
