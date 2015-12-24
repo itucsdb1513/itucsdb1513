@@ -111,6 +111,7 @@ table is the number attribute. This tables *championship* attribute is a foreign
 | games        | integer | number of games            |
 +--------------+---------+----------------------------+
 
+
 Add championship
 ++++++++++++++++
 A user can add a championship in the table by filling the *add championship* table. All informations must be filled since none
@@ -229,4 +230,5 @@ button. The updated fact will be shown in the history table.
       :align:   center
       :scale: 50 %
       :alt: Update fact
+      
       *Update fact*
