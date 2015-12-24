@@ -317,8 +317,8 @@ When the table is initialized it shows 7 relation.
                          ('Berke','Farsightedness','Temporary')"""
             cursor.execute(query)
 
-Adding People
-+++++++++++++
+Adding Relation
++++++++++++++++
 A relation can be added to relation table by filling the fields name,benefit,duration and clicking 'Add Relation'.
 While adding a new relation,the user should take into consideration that benefit and people in new relation
 must exist in benefit and people table.
@@ -377,6 +377,7 @@ must exist in benefit and people table
                             ThePeople='%s'
                              WHERE ThePeople = '%s' """ % (new,new2,new3,ThePeople)
             cursor.execute(query)
+
 
 
 

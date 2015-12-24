@@ -123,9 +123,11 @@ To update a benefit , the user should type new name and new type of benefit, the
 |
 
 People Table
+
+
 .. figure:: gulum_picture/peopletable.png
       :scale: 50 %
-      :alt:
+      :alt: Main
 
 +-----------+--------+-------------------------+-+
 | Attribute | Type   | Explanation             | |
@@ -225,9 +227,10 @@ To update a person , the user should type name of the person, new name and new b
 |
 
 Relation Table
+
 .. figure:: gulum_picture/relationtable.png
       :scale: 50 %
-      :alt:
+      :alt: Main
 
 +-----------+--------+-------------------------+-+
 | Attribute | Type   | Explanation             | |
@@ -328,6 +331,7 @@ To update a relation , the user should type name of the person, new name , new b
       :scale: 50 %
       :alt: Update Relation
 |
+
 
 
 
