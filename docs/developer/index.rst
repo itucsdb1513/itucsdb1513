@@ -89,6 +89,16 @@ ER diagram of the database entities created in this part of the project :
 Mursit Sezen's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+There 3 tables in the rules of chess database. Relation between tables are shown in the below E/R Diagram.
+
+.. figure:: mursit_picture/ER.jpeg
+      :scale: 50 %
+      :alt: Main
+
+      *E/R Diagram for Rules page*
+
+You can find details of the tables in this section under table names.
+
 Ahmet Gulum's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
