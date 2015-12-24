@@ -1,6 +1,14 @@
 Developer Guide
 ===============
 
+.. toctree::
+
+   Ira Shyti
+   Javid Nuriyev
+   Mursit Sezen
+   Ahmet Gulum
+   Ahmet Turk
+
 Database Design
 ---------------
 
@@ -97,7 +105,7 @@ There 3 tables in the rules of chess database. Relation between tables are shown
 
       *E/R Diagram for Rules page*
 
-You can find details of the tables in this section under table names.
+You can find details of the tables and database connections in developer guide section of Mursit's, under table names.
 
 Ahmet Gulum's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,10 +154,4 @@ The codes shown below were used to implement the database connections of the pro
 
     app.run(host='0.0.0.0', port=port, debug=debug)
 
-.. toctree::
 
-   Ahmet Turk
-   Ira Shyti
-   Javid Nuriyev
-   Mursit Sezen
-   Ahmet Gulum
