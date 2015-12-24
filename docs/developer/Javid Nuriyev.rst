@@ -325,6 +325,7 @@ Player Info Table
 In this table detailed information about every player listed in the rankings table. There are eleven columns. The ID is a primary key.
 Furthermore, there should be an entry per player so for this purpose name, surname pair is unique in this table to avoid duplicate appearance of the players.
 There is also a foreign key pointing to the wPlayer Rankigs table(worldplayers).
+
 +------------------------+---------+----------+-------------+-----------+
 | Attribute              | Type    | Not Null | Primary key | Reference |
 +========================+=========+==========+=============+===========+

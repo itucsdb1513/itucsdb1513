@@ -54,8 +54,6 @@ Work Sharing
    *Home Page*
 
 
-Contents:
-
 .. toctree::
    :maxdepth: 1
 
