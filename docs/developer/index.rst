@@ -24,8 +24,8 @@ Developers have to login to hub.jazz in order to access database. The project is
 
 The code is also hosted on github.
 
-1. Ira Shyti's database connections and E-R diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ira Shyti's database connections and E-R diagram
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 E-R diagram for *upcoming events* and *championships* tables. The tables are connected with each other because the
 championship attribute of *championships* table is a foreign key to the championship attribute of the *upcoming events*
 table.
@@ -48,11 +48,11 @@ E-R diagram for *history* table. This is a simple table. It does nothaveany fore
       *E-R diagram of history table*
 
 
-2. Javid Nuriyev's database connections and E-R diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Javid Nuriyev's database connections and E-R diagram
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.1 Database Design
-"""""""""""""""""""
+Database Design
+"""""""""""""""
 
 In this part of the project there are 3 tables implemented. Those are Player Rankings table, Countries Rankings Table, and Player Info Table.
 The Player Rankings Table is created with the postgreSQL code in elephantSQL.
@@ -74,8 +74,9 @@ Furthermore, the country can not be deleted if it is referenced by info of the p
 Also it is important to mention that foreign key here is a name, surname pair which is unique in this table and it points to the name, surname pair of the players in worldplayers table.
 
 Codes are explained in details in the developer guide section.
-2.2 ER Diagram
-""""""""""""""
+
+ER Diagram
+""""""""""
 
 ER diagram of the database entities created in this part of the project :
 
@@ -85,14 +86,14 @@ ER diagram of the database entities created in this part of the project :
 
       *Entity/Relation diagram*
 
-3. Mursit Sezen's database connections and E-R diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mursit Sezen's database connections and E-R diagram
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4. Ahmet Gulum's database connections and E-R diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ahmet Gulum's database connections and E-R diagram
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5. Ahmet Turk's database connections and E-R diagram
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ahmet Turk's database connections and E-R diagram
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
