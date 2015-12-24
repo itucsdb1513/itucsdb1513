@@ -257,7 +257,7 @@ Initializing the Table
 
 Adding Piece
 ++++++++++++
-* Pieces can be added to the capture table by filling the fields below the capture table and clicking 'Add Piece'.
+* Pieces can be added to the capture table by filling the fields below the capture table and clicking *Add Capture*.
 * Every user can add an piece into the table. User should give values for all the attributes since none of them can be empty.
 * However, when a user wants to add a new piece, the user should consider that the piece has to be in the Movement table because of foreign key.
 
@@ -305,7 +305,7 @@ Find Piece
 
 Delete Piece
 ++++++++++++
-* Piece can be deleted by typing the name of the piece to the corresponding field and clicking *Delete Piece* button.
+* Piece can be deleted by typing the name of the piece to the corresponding field and clicking *Delete Capture* button.
 * However, if the piece to be deleted is referenced in the Movement Table then this piece can not be deleted;
   since the piece is also placed in the Movement Table.
 

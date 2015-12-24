@@ -1,7 +1,7 @@
 Welcome to Chess's documentation!
 =================================
 
-:Team: CHESS
+:Team: itucsdb1513
 
 :Members:
 

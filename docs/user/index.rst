@@ -15,8 +15,8 @@ At the top of the *home* page, the user finds the links to all the tables, which
 
 .. toctree::
 
-   member1
-   member2
-   member3
-   member4
-   member5
+   Ahmet Turk
+   Ira Shyti
+   Javid Nuriyev
+   Mursit Sezen
+   Ahmet Gulum
