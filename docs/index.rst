@@ -45,16 +45,12 @@ Work Sharing
    - Relation table
    - People table
 
-.. literalinclude:: ../server.py
-    :language: python
-    :lines: 12-40
-    :emphasize-lines: 2
-
-
 
 .. figure:: chess.jpg
-   :scale: 30 %
-   :alt: map to buried treasure
+   :scale: 50 %
+   :alt: Main
+   
+   *Home Page*
 
 
 Contents:
