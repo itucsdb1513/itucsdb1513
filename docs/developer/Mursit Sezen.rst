@@ -1,5 +1,20 @@
 Parts Implemented by Murşit Sezen
 =================================
+
+Database Design
+---------------
+
+There 3 tables in the rules of chess database. Relation between tables are shown in the below E/R Diagram.
+
+.. figure:: mursit_picture/ER.jpeg
+      :scale: 50 %
+      :alt: Main
+
+      *E/R Diagram for Rules page*
+
+You can find details of the tables in this section under table names.
+
+
 Movement Table
 --------------
 * This table shows the pieces of the chess game. On the website this table is under the header *Movement of the Pieces*;
