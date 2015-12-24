@@ -4,7 +4,7 @@ Developer Guide
 Database Design
 ---------------
 
-.. literalinclude:: ../server.py
+.. literalinclude:: ../../server.py
     :language: python
     :lines: 12-40
     :emphasize-lines: 2
