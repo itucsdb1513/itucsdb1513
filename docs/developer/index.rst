@@ -4,7 +4,7 @@ Developer Guide
 Database Design
 ---------------
 
-.. literalinclude:: ../../server.py
+.. literalinclude:: itucsdb1513/server.py
     :language: python
     :lines: 12-40
     :emphasize-lines: 2
