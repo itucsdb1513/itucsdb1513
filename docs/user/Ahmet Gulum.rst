@@ -19,6 +19,13 @@ Benefits Page
       *This is the benefits page*
 
 
+Benefit Table
+
+.. figure:: gulum_picture/benefittable.png
+      :scale: 50 %
+      :alt: Main
+
+
 +-----------+--------+---------------------+-+
 | Attribute | Type   | Explanation         | |
 +===========+========+=====================+=+
@@ -30,15 +37,14 @@ Benefits Page
 +-----------+--------+---------------------+-+
 
 
-On the screenshot shown above the player rankings data is displayed.
 In this table there are 2 columns displayed to the user. Id column is not displayed.
 
 There are five operations that can be carried on the table. Those are:
-|  - Add Benefit
-|  - Find Benefit
-|  - Find Benefit by Type
-|  - Delete Benefit
-|  - Update Benefit
+  - Add Benefit
+  - Find Benefit
+  - Find Benefit by Type
+  - Delete Benefit
+  - Update Benefit
 
 Add Benefit
 -----------
@@ -55,7 +61,7 @@ After the user fills the fields and clicks on the "Add Benefit" the benefit is a
 
 Delete Benefit
 --------------
-The benefit can be deleted from the table by name.
+A benefit can be deleted from the table by name.
 After entering the name to be deleted , "Delete Benefit" button is clicked.
 
 
@@ -67,7 +73,7 @@ After entering the name to be deleted , "Delete Benefit" button is clicked.
 Find Benefit
 ------------
 
-The benefit can be searched by typing name of it which the user wants to display.
+A benefit can be searched by typing name of it which the user wants to display.
 After the name is typed into the field, the "Find Benefit" button should be clicked to perform the action.
 Search results will be shown below of the benefits page under the search results 1.
 
@@ -116,7 +122,10 @@ To update a benefit , the user should type new name and new type of benefit, the
       :alt: updating benefit
 |
 
-
+People Table
+.. figure:: gulum_picture/peopletable.png
+      :scale: 50 %
+      :alt:
 
 +-----------+--------+-------------------------+-+
 | Attribute | Type   | Explanation             | |
@@ -133,11 +142,11 @@ To update a benefit , the user should type new name and new type of benefit, the
 In this table there are 2 columns displayed to the user. Peopleid column is not displayed.
 
 There are five operations that can be carried on the table. Those are:
-|  - Add People
-|  - Find People
-|  - Find People by Benefit
-|  - Delete People
-|  - Update People
+  - Add People
+  - Find People
+  - Find People by Benefit
+  - Delete People
+  - Update People
 
 Add People
 ----------
@@ -214,6 +223,12 @@ To update a person , the user should type name of the person, new name and new b
       :scale: 50 %
       :alt: updating people
 |
+
+Relation Table
+.. figure:: gulum_picture/relationtable.png
+      :scale: 50 %
+      :alt:
+
 +-----------+--------+-------------------------+-+
 | Attribute | Type   | Explanation             | |
 +===========+========+=========================+=+
@@ -232,11 +247,11 @@ To update a person , the user should type name of the person, new name and new b
 In this table there are 3 columns displayed to the user. Peopleid column is not displayed.
 
 There are five operations that can be carried on the table. Those are:
-|  - Add Relation
-|  - Find Relation
-   - Find Relation by duration
-|  - Delete Relation
-|  - Update Relation
+  - Add Relation
+  - Find Relation
+  - Find Relation by duration
+  - Delete Relation
+  - Update Relation
 
 Add Relation
 ------------
@@ -309,9 +324,10 @@ Update Relation
 
 To update a relation , the user should type name of the person, new name , new benefit and new duration, then click "Update Relation".
 
-.. figure:: gulum_picture/updateprelation.png
+.. figure:: gulum_picture/updaterelation.png
       :scale: 50 %
       :alt: Update Relation
 |
+
 
 

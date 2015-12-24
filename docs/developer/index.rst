@@ -109,6 +109,14 @@ You can find details of the tables and database connections in developer guide s
 
 Ahmet Gulum's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+There 3 tables in the benefits database. Relation between tables are shown in the below E/R Diagram.
+
+.. figure:: gulum_picture/er.png
+      :scale: 50 %
+      :alt: Main
+
+      *E/R Diagram for Benefits Page*
+
 
 Ahmet Turk's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
