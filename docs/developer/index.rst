@@ -26,7 +26,26 @@ The code is also hosted on github.
 
 1. Ira Shyti's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E-R diagram for *upcoming events* and *championships* tables. The tables are connected with each other because the 
+championship attribute of *championships* table is a foreign key to the championship attribute of the *upcoming events* 
+table.
 
+.. figure:: Ira_pics/cha_er.jpeg
+      :align:   center
+      :scale: 50 %
+      :alt: E-R diagram
+
+      *E-R diagram of upcoming events and championships tables*
+      
+     
+E-R diagram for *history* table. This is a simple table. It does nothaveany foreign key.
+    
+.. figure:: Ira_pics/hist_er.jpeg
+      :align:   center
+      :scale: 50 %
+      :alt: E-R diagram of history
+
+      *E-R diagram of history table*
 
 2. Javid Nuriyev's database connections and E-R diagram
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
