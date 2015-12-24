@@ -10,8 +10,8 @@ When the user clicks at "Rankings" bar in the main page, rankings of the players
 
       *This is the main page*
 
-1. Player Rankings
-==================
+Player Rankings
++++++++++++++++
 Click at the Rankings bar
 
 .. figure:: jav_picture/ranking.png
@@ -55,8 +55,8 @@ There are five operations that can be carried on the table. Those are:
 |  4. Delete Player
 |  5. Update Player
 
-1.1 Add Player
---------------
+Add Player
+----------
 
 At the same page where the table is displayed below the table there are fields which should be filled.
 If the user wants to add a player to the table the user should fill the fields shown below and click on the button "Add Player".
@@ -69,8 +69,8 @@ If the user wants to add a player to the table the user should fill the fields s
 
 After the user fills the fields and clicks on the "Add Player" the added player is added to the table and displayed in it.
 
-1.2 Update Player
------------------
+Update Player
+-------------
 
 To update the data of the player there are "Update" buttons to the right of each player in the player rankings table. these buttons can be noticed in the image of the player rankings table illustrated above.
 When the user wants to update the data of the player in the ranking table it is enough to click on the corresponding "Update" button.
@@ -95,8 +95,8 @@ The page mentioned above is illustrated in the figure below.
 If the record existing also in another table, i.e. referenced by other table, is wanted to be updated then it is also updated in other tables.
 
 
-1.3 Find Player
----------------
+Find Player
+-----------
 The player can be searched by typing name and surname of the player which the user wants to display.
 After the name and surname is typed into the fields the "Find Player" button should be clicked to perform the action.
 The fields where the name and the surname of the player should be written are located below the Player Rankings table nd the Add player fields as shown below.
@@ -116,8 +116,8 @@ After the player name and surname is typed into the fields and the button is cli
        *Displaying found player*
 
 
-1.4 Find Players by Country
----------------------------
+Find Players by Country
+-----------------------
 Other than searching specific player by writing the name and surname players can be listed by the country they represent.
 For this purpose there is a field for writing the country name and searching players according to that.
 After entering the country name the "Find Player" button is clicked
@@ -136,8 +136,8 @@ After the country is entered and the button is clicked a new page opens which li
 |
        *Displaying players*
 
-1.5 Delete Player
------------------
+Delete Player
+-------------
 The player can be deleted from the list. To delete a player from the list a user just needs to write the name ad surname of the player to be deleted ito the necessary box.
 After entering the name and the surname of the player to be deleted "Delete Player" button is clicked.
 
@@ -151,8 +151,8 @@ A player can be deleted only if it is not referenced by other tables, i.e. a pla
       *Removing players from table*
 
 
-2. Countries Rankings
-=====================
+Countries Rankings
+++++++++++++++++++
 If the user wants to access the countries rankings table the user should click on the "Ranking" at the bar when at home page.
 The countries ranking table is located below the players ranking table. This table contains 9 columns which are displayed to the user and there is also one column ID which is used for background operations.
 The countries table is referenced by other tables, i.e. it is used by other tables as well.
@@ -190,8 +190,8 @@ The attributes of the table are:
 
 There are 4 functions that can operate this table those are Add, Update, Find, Delete.
 
-2.1 Add Country
----------------
+Add Country
+-----------
 At the same page with the table displaying countries there are boxes for entering the data. These boxes are located right below the table and they are for entering the data that will be used for adding a new country to the table.
 After filling the boxes the user has to click the button "Add Country".
 
@@ -203,8 +203,8 @@ After filling the boxes the user has to click the button "Add Country".
 
 After the user enters the data and clicks the button a new country is added to the table and it can be seen at the Countries Ranking table.
 
-2.2 Update Country
-------------------
+Update Country
+--------------
 There are "Update" buttons next to each country in the table. If the user wats to modify some data components of some specific country then the user must click on the "Update" button standing next to the country which user aims to modify.
 
 .. figure:: jav_picture/country_update_button.png
@@ -227,8 +227,8 @@ After the data is modified and updated the changes take place in the table displ
 **Important Note:**
 It is important to mention that the countries table is referenced by other tables, i.e. the members of this table are used by other tables as well, so while updating the countries table if the name of a country is changed it will also change in other tables that have this country.
 
-2.3 Find Country
-----------------
+Find Country
+------------
 There is a box below the table for searching a country. If a user wants to search a country the user has to write a country name into the box and click "Find Country".
 
 .. figure:: jav_picture/find_country.png
@@ -245,8 +245,8 @@ After the name of the country is written and button is clicked result is shown o
 |
       *Display found country*
 
-2.4 Delete Country
-------------------
+Delete Country
+--------------
 Country can be deleted from the table if the user wishes that.
 Removal of country from the table can be done by entering the name of the country to the field below the table and and clicking the "Delete Country" button.
 
@@ -263,8 +263,8 @@ One important fact about delete in this table is to remember that country table 
 For this reason it is impossible to delete a country which is already used by other table.
 
 
-3. Player Info Table
-====================
+Player Info Table
++++++++++++++++++
 In the Player Info table  detailed information about players is provided. This table references the players from the rankings list.
 That means that only the players existing in the rankings table can exist in the Player Info table.
 
@@ -314,8 +314,8 @@ After the page is accessed we can see the table which is shown below.
 There are 4 operations that can be carried on this table. Those are Add, Update, Delete, Search.
 
 
-3.1 Add Player Info
--------------------
+Add Player Info
+---------------
 It is possible to add a player info by filling the boxes right below the Player Info table.
 After the data is entered user has to click "Add Player" button.
 
@@ -331,8 +331,8 @@ Otherwise player info can not be added.
 |
       *Adding Player Info*
 
-3.2 Update Player Info
-----------------------
+Update Player Info
+------------------
 If the user wishes to update the existing player info then it is enough to just click on the name of the player in the table and a new page will open.
 
 .. figure:: jav_picture/update_player_info.png
@@ -354,8 +354,8 @@ User can modify data by modifying the contents of the boxes and clicking on the 
 **Important Note:**
 Because the player info table references two other tables when updating the data it is important to remember that.
 
-3.3 Search Player Info
-----------------------
+Search Player Info
+------------------
 A user can search for a player info by typing the name and surname of the player into a special box.
 After the name and surname of the player whose info is of interest the user clicks on th "Find Player" button.
 
@@ -376,8 +376,8 @@ After this step a new page is opened at which the requested player's player info
       *Displaying searched player's info*
 
 
-3.4 Delete Player Info
-----------------------
+Delete Player Info
+------------------
 A user can delete player info from a table. To do that a user only needs to enter the name and surname of the player and click on the button "Delete Player"
 
 .. figure:: jav_picture/delete_player_info.png
