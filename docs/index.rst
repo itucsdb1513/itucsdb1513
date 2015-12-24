@@ -47,9 +47,10 @@ Work Sharing
 
 
 .. figure:: chess.jpg
+   :align: center
    :scale: 50 %
-   :alt: Main
-   
+   :alt: Main page
+
    *Home Page*
 
 
